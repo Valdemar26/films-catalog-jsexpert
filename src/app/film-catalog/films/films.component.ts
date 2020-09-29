@@ -1,22 +1,28 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FilmService } from '../film.service';
+import { Component, OnInit } from '@angular/core';
+
+import { FilmService } from '../services/film.service';
+import { FilmInterface } from '../interfaces/film.interface';
+
 
 @Component({
-  selector: '.films',
+  selector: 'exp-films',
   templateUrl: './films.component.html',
   styleUrls: ['./films.component.scss']
 })
 export class FilmsComponent implements OnInit {
 
-  description: string = 'Middle card description';
+  public filmsList: FilmInterface[];
 
 
-  constructor(filmsService: FilmService) {
-
+  constructor(private filmsService: FilmService) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
+    this.initFilmsList();
+  }
 
+  private initFilmsList(): void {
+    this.filmsList = this.filmsService.initFilms();
   }
 
 }
