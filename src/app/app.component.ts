@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'films-catalog-jsexpert';
+
+  links: object[] = [
+    { path: '/main', label: 'Main Page', active: 'button-active', icon: 'home'},
+    { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt'}
+  ];
+
 }
