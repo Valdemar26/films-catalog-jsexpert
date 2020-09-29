@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'details-inner',
+  selector: 'exp-details-inner',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
