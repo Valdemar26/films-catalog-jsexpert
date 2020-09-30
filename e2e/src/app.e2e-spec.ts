@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('films-catalog-jsexpert app is running!');
+    expect(page.getTitleText()).toEqual('films-list-catalog-jsexpert app is running!');
   });
 
   afterEach(async () => {
