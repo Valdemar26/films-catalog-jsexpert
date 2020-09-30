@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
-import { FilmsComponent } from './films/films.component';
 import { FormsModule } from '@angular/forms';
-import { DetailsComponent } from './details/details.component';
+import { CommonModule } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTabsModule } from '@angular/material/tabs';
+
+import { MainComponent } from './main/main.component';
+import { FilmsComponent } from './films/films.component';
+import { FooterComponent } from './footer/footer.component';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
   imports: [
@@ -18,10 +21,14 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatGridListModule,
     MatTabsModule
   ],
+  exports: [
+    FooterComponent
+  ],
   declarations: [
     MainComponent,
     FilmsComponent,
-    DetailsComponent
+    DetailsComponent,
+    FooterComponent
   ]
 })
 export class FilmCatalogModule { }

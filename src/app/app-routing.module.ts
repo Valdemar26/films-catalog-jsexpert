@@ -7,7 +7,8 @@ import { FilmsComponent } from './film-catalog/films/films.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },
   { path: 'main', component: MainComponent },
-  { path: 'films', component: FilmsComponent}
+  { path: 'films', component: FilmsComponent },
+  { path: '**', redirectTo: 'main' }
 ];
 
 @NgModule({
