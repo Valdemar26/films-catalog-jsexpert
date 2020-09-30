@@ -12,6 +12,17 @@
 
   mat-card-header {
     justify-content: center;
+    position: relative;
+
+    .favorite {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+
+      &.active {
+        color: #f50;
+      }
+    }
   }
 
   img {
@@ -22,7 +33,7 @@
     display: flex;
   }
 
-  details-inner {
+  exp-details-inner {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 6;

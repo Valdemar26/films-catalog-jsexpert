@@ -12,6 +12,9 @@ import { FilmsListComponent } from './films-list/films-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { DetailsComponent } from './details/details.component';
 import { FilmItemComponent } from './films-list/film-item/film-item.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -20,7 +23,10 @@ import { FilmItemComponent } from './films-list/film-item/film-item.component';
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   exports: [
     FooterComponent

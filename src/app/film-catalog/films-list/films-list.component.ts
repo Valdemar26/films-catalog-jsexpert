@@ -12,6 +12,8 @@ import { FilmInterface } from '../interfaces/film.interface';
 export class FilmsListComponent implements OnInit {
 
   public filmsList: FilmInterface[];
+  public sortingMethod: number;
+  public favoriteFilmsCounter = 0;
 
 
   constructor(private filmsService: FilmService) {
@@ -21,8 +23,16 @@ export class FilmsListComponent implements OnInit {
     this.initFilmsList();
   }
 
+  public transform(): void {
+    console.log(this.sortingMethod);
+  }
+
   private initFilmsList(): void {
     this.filmsList = this.filmsService.initFilms();
+  }
+
+  public setFavorite(count: boolean): void {
+    count === true ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
   }
 
 }
