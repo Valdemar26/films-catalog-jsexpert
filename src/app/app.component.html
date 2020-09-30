@@ -6,10 +6,13 @@
         *ngFor="let link of links"
         [routerLink]="link.path"
         [routerLinkActive]="link.active">
-        <mat-icon class="example-icon">{{link.icon}}</mat-icon>{{link.label}}
+        <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
     </a>
     </mat-toolbar-row>
 </mat-toolbar>
 
 
 <router-outlet></router-outlet>
+
+
+<exp-footer></exp-footer>
