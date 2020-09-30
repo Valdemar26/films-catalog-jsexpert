@@ -5,11 +5,11 @@ import { FilmInterface } from '../interfaces/film.interface';
 
 
 @Component({
-  selector: 'exp-films',
-  templateUrl: './films.component.html',
-  styleUrls: ['./films.component.scss']
+  selector: 'exp-films-list',
+  templateUrl: './films-list.component.html',
+  styleUrls: ['./films-list.component.scss']
 })
-export class FilmsComponent implements OnInit {
+export class FilmsListComponent implements OnInit {
 
   public filmsList: FilmInterface[];
 

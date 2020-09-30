@@ -8,9 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { MainComponent } from './main/main.component';
-import { FilmsComponent } from './films/films.component';
+import { FilmsListComponent } from './films-list/films-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { DetailsComponent } from './details/details.component';
+import { FilmItemComponent } from './films-list/film-item/film-item.component';
 
 @NgModule({
   imports: [
@@ -26,9 +27,10 @@ import { DetailsComponent } from './details/details.component';
   ],
   declarations: [
     MainComponent,
-    FilmsComponent,
+    FilmsListComponent,
     DetailsComponent,
-    FooterComponent
+    FooterComponent,
+    FilmItemComponent
   ]
 })
 export class FilmCatalogModule { }

@@ -1,0 +1,20 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{ film.name }}</mat-card-title>
+  </mat-card-header>
+
+  <img mat-card-image
+       [src]="film.imgUrl" alt="film-item">
+
+  <mat-card-content>
+    <exp-details-inner>
+      {{ film.description }}
+    </exp-details-inner>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" mat-button>Open</button>
+    <button mat-raised-button color="primary" mat-button>Edit</button>
+  </mat-card-actions>
+</mat-card>
+
+
