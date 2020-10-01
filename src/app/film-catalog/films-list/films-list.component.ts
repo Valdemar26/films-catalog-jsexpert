@@ -23,8 +23,18 @@ export class FilmsListComponent implements OnInit {
     this.initFilmsList();
   }
 
-  public transform(): void {
-    console.log(this.sortingMethod);
+  public transform(): FilmInterface[] {
+    this.filmsList.sort((a: FilmInterface, b: FilmInterface) => {
+      const x = a.name.toLowerCase();
+      const y = b.name.toLowerCase();
+
+      if (x < y) {
+        return -1 * this.sortingMethod;
+      } else {
+        return 1 * this.sortingMethod;
+      }
+    });
+    return this.filmsList;
   }
 
   private initFilmsList(): void {
