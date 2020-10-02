@@ -9,9 +9,12 @@
 
       <div>
         <mat-form-field>
-          <mat-select placeholder="Сортувати за" [(value)]="sortingMethod" (selectionChange)="transform()">
-            <mat-option value="1">назвою: A-Я</mat-option>
-            <mat-option value="-1">назвою: Я-A</mat-option>
+          <mat-select #templateSelect
+                      placeholder="Сортувати за"
+                      [(value)]="sortingMethod"
+                      (selectionChange)="transform(templateSelect.value)">
+            <mat-option value="0">назвою: A-Я</mat-option>
+            <mat-option value="1">назвою: Я-A</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
