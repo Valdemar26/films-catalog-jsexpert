@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './film-catalog/main/main.component';
-import { FilmsListComponent } from './film-catalog/films-list/films-list.component';
+import { FilmsListComponent } from './films/components/films-list/films-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },

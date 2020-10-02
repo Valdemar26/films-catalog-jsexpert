@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FilmCatalogModule } from './film-catalog/film-catalog.module';
 import { SharedModule } from './shared/shared.module';
+import { FilmsModule } from './films/films.module';
 
 
 @NgModule({
@@ -15,10 +16,11 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FilmCatalogModule,
     SharedModule,
-    BrowserAnimationsModule
+    FilmsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

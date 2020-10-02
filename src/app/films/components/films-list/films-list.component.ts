@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FilmService } from '../services/film.service';
-import { FilmInterface } from '../interfaces/film.interface';
+import { FilmService } from '../../../film-catalog/services/film.service';
+import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
 
 
 @Component({

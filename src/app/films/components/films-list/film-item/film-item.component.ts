@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { FilmInterface } from '../../interfaces/film.interface';
+import { FilmInterface } from '../../../../film-catalog/interfaces/film.interface';
 
 @Component({
   selector: 'exp-film-item',
