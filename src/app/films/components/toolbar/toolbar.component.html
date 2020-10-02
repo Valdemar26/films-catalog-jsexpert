@@ -1,0 +1,22 @@
+
+<mat-toolbar class="menu-toolbar">
+  <mat-toolbar-row>
+
+    <span>В обране додано {{ favoriteFilmsCounter }} елементів</span>
+
+    <span class="menu-spacing"></span>
+
+    <div>
+      <mat-form-field>
+        <mat-select #templateSelect
+                    placeholder="Сортувати за"
+                    [(value)]="sortingMethod"
+                    (selectionChange)="transform(templateSelect.value)">
+          <mat-option value="0">назвою: A-Я</mat-option>
+          <mat-option value="1">назвою: Я-A</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </mat-toolbar-row>
+</mat-toolbar>
