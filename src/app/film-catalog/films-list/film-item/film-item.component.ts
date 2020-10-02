@@ -19,16 +19,9 @@ export class FilmItemComponent implements OnInit {
 
   public ngOnInit(): void {}
 
-  public addToFavorite(): void {
-    this.counter.emit(true);
-
+  public toggleFavoriteFilm(): void {
     this.isFavoriteFilm = !this.isFavoriteFilm;
-  }
-
-  public removeFromFavorite(): void {
-    this.counter.emit(false);
-
-    this.isFavoriteFilm = !this.isFavoriteFilm;
+    this.counter.emit(this.isFavoriteFilm);
   }
 
 }

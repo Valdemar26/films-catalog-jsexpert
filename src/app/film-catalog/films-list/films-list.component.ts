@@ -23,18 +23,9 @@ export class FilmsListComponent implements OnInit {
     this.initFilmsList();
   }
 
-  public transform(): FilmInterface[] {
-    this.filmsList.sort((a: FilmInterface, b: FilmInterface) => {
-      const x = a.name.toLowerCase();
-      const y = b.name.toLowerCase();
-
-      if (x < y) {
-        return -1 * this.sortingMethod;
-      } else {
-        return 1 * this.sortingMethod;
-      }
-    });
-    return this.filmsList;
+  public transform(value): FilmInterface[] {
+    const direction = !!parseInt(value, 10) ? -1 : 1;
+    return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => direction * (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
   }
 
   private initFilmsList(): void {
@@ -42,7 +33,7 @@ export class FilmsListComponent implements OnInit {
   }
 
   public setFavorite(count: boolean): void {
-    count === true ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
+    count ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
   }
 
 }

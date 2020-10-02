@@ -3,8 +3,9 @@
   <mat-card-header>
     <mat-card-title>{{ film.name }}</mat-card-title>
 
-    <mat-icon class="favorite" *ngIf="!isFavoriteFilm" (click)="addToFavorite()">favorite_border</mat-icon>
-    <mat-icon class="favorite active" *ngIf="isFavoriteFilm" (click)="removeFromFavorite()">favorite</mat-icon>
+    <mat-icon class="favorite"
+              [class.active]="isFavoriteFilm"
+              (click)="toggleFavoriteFilm()">favorite_border</mat-icon>
 
   </mat-card-header>
 
