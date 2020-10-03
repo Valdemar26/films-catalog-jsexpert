@@ -34,7 +34,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   private initFilmsList(): void {
-    // this.filmsList = this.filmsService.initFilms();
     const filmsSubscription = this.dataService.getFilmList()
       .subscribe( (films: any) => {
         this.filmsList = films.results;
