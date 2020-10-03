@@ -44,7 +44,9 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   public setFavorite(count: boolean): void {
-    count ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
+    // count ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
+    console.log('count: ', count);
+    this.dataService.setFavoriteFilm(count);
   }
 
   public ngOnDestroy(): void {

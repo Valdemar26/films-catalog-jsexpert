@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'exp-toolbar',
@@ -12,9 +14,16 @@ export class ToolbarComponent implements OnInit {
   public sortingMethod: number;
   public favoriteFilmsCounter = 0;
 
-  constructor() { }
+
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.checkFavoriteFilms();
+  }
+
+  get checkFavoriteFilms() {
+    this.dataService.setFavoriteFilm().subscribe((favorite: number) => this.favoriteFilmsCounter = favorite);
   }
 
   public transform(value): FilmInterface[] {
@@ -22,8 +31,6 @@ export class ToolbarComponent implements OnInit {
     return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
   }
 
-  public setFavorite(count: boolean): void {
-    count ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
-  }
+
 
 }
