@@ -17,7 +17,7 @@
 
   </mat-grid-list>
 
-  <div class="loader-wrapper">
+  <div class="loader-wrapper" *ngIf="!filmsList">
     <div class="loading">
       <div class="loading-letter">L</div>
       <div class="loading-letter">o</div>
@@ -30,7 +30,7 @@
       <div class="loading-letter">.</div>
       <div class="loading-letter">.</div>
     </div>
-    <div *ngIf="!filmsList" id="loader"></div>
+    <div id="loader"></div>
   </div>
 
 </div>

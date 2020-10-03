@@ -1,7 +1,9 @@
 <mat-card class="example-card">
 
   <mat-card-header>
-    <mat-card-title>{{ film.title }}</mat-card-title>
+    <mat-card-title [title]="film.title">
+      {{ film.title.length > 16 ? (film.title | slice:0:16) + '...' : film.title }}
+    </mat-card-title>
 
     <mat-icon class="favorite"
               [class.active]="isFavoriteFilm"
@@ -11,6 +13,20 @@
 
   <img mat-card-image
        [src]="imagePath" alt="film-item">
+
+  <div class="rating"
+       *ngIf="film.vote_average; else templateNoRating"
+       [class.perfect]="film.vote_average >= 8"
+       [class.high]="film.vote_average >= 7 && film.vote_average < 8"
+       [class.good]="film.vote_average >= 6 && film.vote_average < 7"
+       [class.normal]="film.vote_average >= 5 && film.vote_average < 6"
+       [class.bad]="film.vote_average <= 5">
+    {{ film.vote_average }}
+  </div>
+
+  <ng-template class="no-rating" #templateNoRating>
+    N/A
+  </ng-template>
 
   <mat-card-content>
     <exp-details-inner>
