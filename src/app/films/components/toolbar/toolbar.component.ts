@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FilmInterface} from '../../../film-catalog/interfaces/film.interface';
+import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
 
 @Component({
   selector: 'exp-toolbar',
@@ -19,7 +19,7 @@ export class ToolbarComponent implements OnInit {
 
   public transform(value): FilmInterface[] {
     const direction = !!parseInt(value, 10) ? -1 : 1;
-    return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => direction * (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
+    return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
   }
 
   public setFavorite(count: boolean): void {

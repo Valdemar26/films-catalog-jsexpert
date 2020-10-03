@@ -6,6 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -14,9 +17,6 @@ import { FilmsListComponent } from '../films/components/films-list/films-list.co
 import { DetailsComponent } from './details/details.component';
 import { FilmItemComponent } from '../films/components/films-list/film-item/film-item.component';
 import { FilmsModule } from '../films/films.module';
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatSelectModule} from "@angular/material/select";
-import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
