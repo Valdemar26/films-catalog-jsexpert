@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.prod';
 
 import { Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+import { environment } from '../../environments/environment.prod';
 
 
 @Injectable({
@@ -15,6 +17,8 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   public getFilmList(): Observable<any> {
-    return this.http.get(this.popularFilmUrl);
+    return this.http.get(this.popularFilmUrl).pipe(
+      delay(2000)
+    );
   }
 }

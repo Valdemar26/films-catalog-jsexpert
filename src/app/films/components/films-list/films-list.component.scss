@@ -1,11 +1,64 @@
-.menu-card {
-  padding: 20px;
+.exp-films-list-wrapper {
+  position: relative;
+
+  .menu-card {
+    padding: 20px;
+  }
+
+  mat-grid-tile {
+    margin-bottom: 50px;
+  }
+
+  mat-grid-list {
+    margin-bottom: 100px;
+  }
+
+
+
+
+  .loader-wrapper {
+    width: calc(100vw - 15px);
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+
+    span {
+      position: absolute;
+      top: calc(50% - 10px);
+      left: calc(50% - 35px);
+      color: #f50;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 20px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    #loader {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      margin: -75px 0 0 -75px;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    /* animaton */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+
 }
 
-mat-grid-tile {
-  margin-bottom: 50px;
-}
 
-mat-grid-list {
-  margin-bottom: 100px;
-}
