@@ -5,6 +5,23 @@
   .mat-toolbar-row {
     display: flex;
     justify-content: space-between;
+
+    .search {
+
+      .mat-form-field {
+
+        .search-icon {
+          cursor: pointer;
+        }
+
+        .search-input {
+          font-size: 14px;
+          height: 20px;
+        }
+      }
+
+
+    }
   }
 
 }

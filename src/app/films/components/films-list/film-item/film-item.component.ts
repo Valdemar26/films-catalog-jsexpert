@@ -20,7 +20,6 @@ export class FilmItemComponent implements OnInit {
 
   public ngOnInit(): void {
     this.imagePath = 'https://image.tmdb.org/t/p/w500' + this.film.poster_path;
-    console.log('film: ', this.film);
   }
 
   public toggleFavoriteFilm(): void {
