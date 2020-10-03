@@ -1,7 +1,7 @@
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="film">
 
   <mat-card-header>
-    <mat-card-title>{{ film.name }}</mat-card-title>
+    <mat-card-title>{{ film.title }}</mat-card-title>
 
     <mat-icon class="favorite"
               [class.active]="isFavoriteFilm"
@@ -10,11 +10,11 @@
   </mat-card-header>
 
   <img mat-card-image
-       [src]="film.imgUrl" alt="film-item">
+       [src]="imagePath" alt="film-item">
 
   <mat-card-content>
     <exp-details-inner>
-      {{ film.description }}
+      {{ film.overview }}
     </exp-details-inner>
   </mat-card-content>
 

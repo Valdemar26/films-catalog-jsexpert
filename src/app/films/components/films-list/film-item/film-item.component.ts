@@ -14,10 +14,13 @@ export class FilmItemComponent implements OnInit {
   @Output() counter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public isFavoriteFilm: boolean;
+  public imagePath: string;
 
   constructor() { }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.imagePath = 'https://image.tmdb.org/t/p/w500' + this.film.poster_path;
+  }
 
   public toggleFavoriteFilm(): void {
     this.isFavoriteFilm = !this.isFavoriteFilm;
