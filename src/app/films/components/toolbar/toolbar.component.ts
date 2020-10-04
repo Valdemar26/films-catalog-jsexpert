@@ -24,17 +24,17 @@ export class ToolbarComponent implements OnInit {
   }
 
   get checkFavoriteFilms(): Subscription {
-    return this.dataService.getFavoriteFilm().subscribe( (count) => this.favoriteFilmsCounter = count);
+    return this.dataService.getFavoriteFilm().subscribe( (count) => {
+      console.log(count);
+      return this.favoriteFilmsCounter = count;
+    });
   }
 
-  public transform(value): FilmInterface[] {
-    // const direction = !!parseInt(value, 10) ? -1 : 1;
-    // return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
-
+  public transform(value): Subscription {
     return this.dataService.sortFilmByTitle(value);
   }
 
-  public searchFilmByTitle() {
+  public searchFilmByTitle(): void {
     this.dataService.searchFilmByTitle();
   }
 
