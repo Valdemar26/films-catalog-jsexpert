@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
 import { DataService } from '../../../services/data.service';
@@ -30,23 +31,29 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   public transform(value): FilmInterface[] {
     const direction = !!parseInt(value, 10) ? -1 : 1;
-    return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
+    return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => {
+      return direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
+    });
   }
 
   private initFilmsList(): void {
-    const filmsSubscription = this.dataService.getFilmList()
-      .subscribe( (films: any) => {
-        this.filmsList = films.results;
-        console.log('filmsList: ', this.filmsList);
-      });
+    const filmsSubscription = this.dataService.initFilmList().pipe(
+      map(({results}) => {
+        console.log(results);
+        return results;
+      })
+    )
+      .subscribe((films: FilmInterface[]) => this.dataService.updateFilmList(films));
 
     this.subscription.add(filmsSubscription);
   }
 
-  public setFavorite(count: boolean): void {
-    // count ? this.favoriteFilmsCounter++ : this.favoriteFilmsCounter--;
-    console.log('count: ', count);
-    this.dataService.setFavoriteFilm(count);
+  public get getFilmsList(): any {
+    return this.dataService.getFilmList;
+  }
+
+  public setFavoriteFilm(film: FilmInterface): void {
+    this.dataService.setFavoriteFilm(film);
   }
 
   public ngOnDestroy(): void {

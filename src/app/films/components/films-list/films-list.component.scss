@@ -15,7 +15,7 @@
 
 
 
-
+  /* loader */
   .loader-wrapper {
     display: flex;
     justify-content: center;
@@ -118,4 +118,13 @@
 
 }
 
+@media all and (max-width: 900px) and (min-width: 420px) {
+  .exp-films-list-wrapper {
+    .mat-card {
+      .mat-grid-tile {
+        width: calc(50% - 50px);  // todo fix this
+      }
+    }
+  }
+}
 

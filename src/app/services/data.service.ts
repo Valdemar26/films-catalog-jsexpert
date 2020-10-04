@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
+import { FilmInterface } from '../film-catalog/interfaces/film.interface';
 
 
 @Injectable({
@@ -12,20 +13,42 @@ import { environment } from '../../environments/environment.prod';
 })
 export class DataService {
 
+  public favoriteFilms = new Map();
+
   private apiKey = environment.movieDbApiKey;
-  private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=2`;
+  private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
+
+  private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
+
   constructor(private http: HttpClient) { }
 
-  public getFilmList(): Observable<any> {
-    return this.http.get(this.popularFilmUrl).pipe(
-      delay(700)
-    );
+  public initFilmList(): Observable<any> {
+    return this.http.get(this.popularFilmUrl).pipe(delay(700));
   }
 
-  // todo add film to favorite and save in LocalStorage
-  public setFavoriteFilm(favorite): Observable<number> {
-    console.log(favorite);
-    return null;
+  public updateFilmList(value: FilmInterface[]): void {
+    if (value && value.length) {
+      this.filmList$.next(value);
+    }
+  }
+
+  public get getFilmList(): Observable<FilmInterface[]> {
+    return this.filmList$.asObservable();
+  }
+
+  public setFavoriteFilm(favorite: FilmInterface): Map<any, any> {
+    if (favorite.isFavorite) {
+      this.favoriteFilms.set(favorite.title, favorite);
+    } else {
+      this.favoriteFilms.delete(favorite.title);
+    }
+
+    localStorage.setItem('favoriteFilms', JSON.stringify([...this.favoriteFilms.keys()]));
+    return this.favoriteFilms;
+  }
+
+  getFavoriteFilm(): Observable<number> {
+    return of(localStorage.getItem('favoriteFilms').length);
   }
 
   // todo create search film method
@@ -34,7 +57,15 @@ export class DataService {
   }
 
   // todo sort film method
-  public sortFilmByTitle(): void {
+  public sortFilmByTitle(value): FilmInterface[] {
 
+    const direction = !!parseInt(value, 10) ? -1 : 1;
+    return this.getFilmList.subscribe((films: FilmInterface[]) => {
+      console.log('FILMS: ', films);
+      return films.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
+    });
+
+    console.log('sort: ', this.getFilmList);
+    return null;
   }
 }
