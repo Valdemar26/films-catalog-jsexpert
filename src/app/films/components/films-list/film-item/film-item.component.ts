@@ -11,7 +11,7 @@ export class FilmItemComponent implements OnInit {
 
   @Input() film: FilmInterface;
 
-  @Output() counter: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() favoriteFilm: EventEmitter<FilmInterface> = new EventEmitter<FilmInterface>();
 
   public isFavoriteFilm: boolean;
   public imagePath: string;
@@ -22,9 +22,10 @@ export class FilmItemComponent implements OnInit {
     this.imagePath = 'https://image.tmdb.org/t/p/w500' + this.film.poster_path;
   }
 
-  public toggleFavoriteFilm(): void {
+  public toggleFavoriteFilm(favoriteFilm: FilmInterface): void {
     this.isFavoriteFilm = !this.isFavoriteFilm;
-    this.counter.emit(this.isFavoriteFilm);
+    favoriteFilm.isFavorite = this.isFavoriteFilm;
+    this.favoriteFilm.emit(favoriteFilm);
   }
 
 }
