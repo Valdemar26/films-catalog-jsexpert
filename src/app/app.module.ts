@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { FilmCatalogModule } from './film-catalog/film-catalog.module';
 import { SharedModule } from './shared/shared.module';
 import { FilmsModule } from './films/films.module';
+import { ActorsModule } from './actors/actors.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FilmsModule } from './films/films.module';
     FilmCatalogModule,
     SharedModule,
     FilmsModule,
+    ActorsModule,
     HttpClientModule
   ],
   providers: [],

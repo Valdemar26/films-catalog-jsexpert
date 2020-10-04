@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
@@ -47,8 +47,13 @@ export class DataService {
     return this.favoriteFilms;
   }
 
-  getFavoriteFilm(): Observable<number> {
-    return of(localStorage.getItem('favoriteFilms').length);
+  // getFavoriteFilm(): Observable<number> {
+  //   return of(localStorage.getItem('favoriteFilms').length);
+  // }
+
+  getFavoriteFilm(): any {
+    console.log(localStorage.getItem('favoriteFilms'));
+    return localStorage.getItem('favoriteFilms');
   }
 
   // todo create search film method
@@ -56,8 +61,7 @@ export class DataService {
 
   }
 
-  // todo sort film method
-  public sortFilmByTitle(value): FilmInterface[] {
+  public sortFilmByTitle(value): Subscription {
 
     const direction = !!parseInt(value, 10) ? -1 : 1;
     return this.getFilmList.subscribe((films: FilmInterface[]) => {
@@ -65,7 +69,5 @@ export class DataService {
       return films.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
     });
 
-    console.log('sort: ', this.getFilmList);
-    return null;
   }
 }
