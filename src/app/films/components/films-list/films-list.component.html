@@ -12,6 +12,7 @@
     <mat-grid-tile colspan="2" *ngFor="let film of filmsList">
 
       <exp-film-item [film]="film"
+                     [genresList]="genresList"
                      (favoriteFilm)="setFavoriteFilm($event)"></exp-film-item>
 
     </mat-grid-tile>

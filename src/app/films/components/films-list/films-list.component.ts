@@ -17,8 +17,9 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   public filmsList: FilmInterface[];
   public sortingMethod: number;
   public favoriteFilmsCounter = 0;
-  private subscription: Subscription = new Subscription();
+  public genresList = [];
 
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private dataService: DataService
@@ -27,6 +28,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.initFilmsList();
+    this.initGenresList();
   }
 
   public transform(value): FilmInterface[] {
@@ -34,18 +36,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => {
       return direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
     });
-  }
-
-  private initFilmsList(): void {
-    const filmsSubscription = this.dataService.initFilmList().pipe(
-      map(({results}) => {
-        console.log(results);
-        return results;
-      })
-    )
-      .subscribe((films: FilmInterface[]) => this.dataService.updateFilmList(films));
-
-    this.subscription.add(filmsSubscription);
   }
 
   public get getFilmsList(): any {
@@ -58,6 +48,27 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  private initFilmsList(): void {
+    const filmsSubscription = this.dataService.initFilmList().pipe(
+      map(({results}) => {
+        console.log('films: ', results);
+        return results;
+      })
+    )
+      .subscribe((films: FilmInterface[]) => this.dataService.updateFilmList(films));
+
+    this.subscription.add(filmsSubscription);
+  }
+
+  private initGenresList(): void {
+    const genresSubscription = this.dataService.getGenres()
+      .subscribe((genres) => {
+        this.genresList = genres.genres;
+      });
+
+    this.subscription.add(genresSubscription);
   }
 
 }

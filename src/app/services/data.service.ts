@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
 import { FilmInterface } from '../film-catalog/interfaces/film.interface';
@@ -17,13 +17,17 @@ export class DataService {
 
   private apiKey = environment.movieDbApiKey;
   private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
+  private genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=uk-UA`;
 
   private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
 
   public initFilmList(): Observable<any> {
-    return this.http.get(this.popularFilmUrl).pipe(delay(700));
+    return this.http.get(this.popularFilmUrl).pipe(
+      delay(700),
+      catchError( (error) => error)
+    );
   }
 
   public updateFilmList(value: FilmInterface[]): void {
@@ -70,5 +74,9 @@ export class DataService {
       return films.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
     });
 
+  }
+
+  public getGenres(): any {
+    return this.http.get(this.genresUrl);
   }
 }
