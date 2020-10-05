@@ -28,6 +28,12 @@
   <img mat-card-image
        [src]="imagePath" alt="film-item">
 
+  <span class="release">{{ film.release_date }}</span>
+
+  <div class="genres">
+    <span *ngFor="let genre of genres">{{ genre }}</span>
+  </div>
+
 
   <mat-card-content>
     <exp-details-inner>

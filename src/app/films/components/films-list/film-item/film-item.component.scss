@@ -25,6 +25,33 @@
     }
   }
 
+  .release {
+    color: #333;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+  }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+
+    span {
+      font-size: 12px;
+      line-height: 12px;
+      padding: 4px 6px;
+      background-color: #ebebeb;
+      color: #333;
+      margin-right: 5px;
+      transition: 0.3s ease-in;
+
+      &:hover {
+        background-color: darken(#ebebeb, 10%);
+        color: #000;
+      }
+    }
+  }
+
   img {
     max-width: 200px;
     width: auto;
