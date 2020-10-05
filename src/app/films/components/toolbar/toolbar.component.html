@@ -9,7 +9,7 @@
     <div class="search">
       <mat-form-field class="example-full-width">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search..." class="search-input">
+        <input matInput placeholder="Search..." class="search-input" (keyup.enter)="searchFilmByTitle()">
         <mat-icon class="search-icon" (click)="searchFilmByTitle()">search</mat-icon>
       </mat-form-field>
     </div>
