@@ -20,10 +20,10 @@ export class ToolbarComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.checkFavoriteFilms;
+    this.checkFavoriteFilms();
   }
 
-  get checkFavoriteFilms(): Subscription {
+  private checkFavoriteFilms(): Subscription {
     return this.dataService.getFavoriteFilm().subscribe( (count) => {
       console.log(count);
       return this.favoriteFilmsCounter = count;

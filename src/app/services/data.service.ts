@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {BehaviorSubject, Observable, of, Subscription} from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
@@ -47,13 +47,14 @@ export class DataService {
     return this.favoriteFilms;
   }
 
-  // getFavoriteFilm(): Observable<number> {
-  //   return of(localStorage.getItem('favoriteFilms').length);
-  // }
+  public getFavoriteFilm(): any {
 
-  getFavoriteFilm(): any {
-    console.log(localStorage.getItem('favoriteFilms'));
-    return localStorage.getItem('favoriteFilms');
+    const favoriteFilmsArray = localStorage.getItem('favoriteFilms');
+    const count = favoriteFilmsArray.length;
+
+    console.log(favoriteFilmsArray, typeof(favoriteFilmsArray), count);
+
+    return localStorage.getItem('favoriteFilms').length;
   }
 
   // todo create search film method
