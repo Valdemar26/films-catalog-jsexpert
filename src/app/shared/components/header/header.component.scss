@@ -8,4 +8,10 @@
 
 mat-toolbar {
   font-family: 'Quicksand', sans-serif;
+
+  .mat-toolbar-row {
+    a.disabled {
+      pointer-events: none;
+    }
+  }
 }

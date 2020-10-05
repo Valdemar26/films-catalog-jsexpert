@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Subscription } from 'rxjs';
+
 import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
 import { DataService } from '../../../services/data.service';
-import {Subscription} from 'rxjs';
+import {SearchService} from '../../../services/search.service';
+
 
 @Component({
   selector: 'exp-toolbar',
@@ -17,15 +20,19 @@ export class ToolbarComponent implements OnInit {
 
 
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    public dataService: DataService,
+    private searchService: SearchService
+  ) { }
 
   ngOnInit(): void {
     this.checkFavoriteFilms();
+    this.getCountOfFavoriteFilms();
   }
 
   private checkFavoriteFilms(): Subscription {
     return this.dataService.getFavoriteFilm().subscribe( (count) => {
-      console.log(count);
+      console.log('count: ', count);
       return this.favoriteFilmsCounter = count;
     });
   }
@@ -34,8 +41,18 @@ export class ToolbarComponent implements OnInit {
     return this.dataService.sortFilmByTitle(value);
   }
 
-  public searchFilmByTitle(): void {
-    this.dataService.searchFilmByTitle();
+  public searchFilmByTitle(event: Event): void {
+    console.log(event);
+    if (event && (event.target as HTMLInputElement).value) {
+      this.searchService.searchFilms(event);
+    }
+  }
+
+  public getCountOfFavoriteFilms(): any {
+    return this.dataService.getCountFavoriteFilm().subscribe((data) => {
+      this.favoriteFilmsCounter = data;
+      console.log(this.favoriteFilmsCounter);
+    });
   }
 
 
