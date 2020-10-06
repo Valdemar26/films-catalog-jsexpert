@@ -17,6 +17,8 @@ export class SearchService {
   constructor(private dataService: DataService) { }
 
   public searchFilms(event): any {
+    console.log(event);
+    // this.searchFilm$ =
     // this.searchFilm$.
   }
 

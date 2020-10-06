@@ -19,7 +19,7 @@
 
   </mat-grid-list>
 
-  <button class="more">Ще фільмів!</button>
+
 
   <ng-template #templateLoader>
     <div class="loader-wrapper">
@@ -38,5 +38,8 @@
       <div id="loader"></div>
     </div>
   </ng-template>
+
+  <button mat-raised-button color="primary" mat-button class="more"
+          (click)="loadMoreFilms()">More films</button>
 
 </div>

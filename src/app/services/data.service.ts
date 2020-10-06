@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
-import {delay, catchError, tap, map} from 'rxjs/operators';
+import { delay, catchError, tap, map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
 import { FilmInterface } from '../film-catalog/interfaces/film.interface';
@@ -18,6 +18,7 @@ export class DataService {
   private apiKey = environment.movieDbApiKey;
   private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
   private genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=uk-UA`;
+  private count = 1;
 
   private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
 
@@ -31,10 +32,14 @@ export class DataService {
 
     return this.http.get(this.popularFilmUrl).pipe(
       map((filmList: any) => {
-        const transformedFilmList = filmList.results.map((film) => {
+
+        const transformedFilmList = filmList.results.map((film: FilmInterface) => {
+
           if (selectedFilms.includes(film.title)) {
-            film.isFavorite = true;
+            this.favoriteFilms.set(film.title, film);
           }
+
+          film.isFavorite = selectedFilms.includes(film.title);
 
           return film;
         });
@@ -44,6 +49,14 @@ export class DataService {
       delay(700),
       catchError( (error) => error)
     );
+  }
+
+  public getMoreFilms(): any {
+    this.count++;
+    this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=${this.count}`)
+      .subscribe((films: any) => {
+        this.updateFilmList(films.results);
+      });
   }
 
   public updateFilmList(value: FilmInterface[]): void {
@@ -93,7 +106,6 @@ export class DataService {
 
     const direction = !!parseInt(value, 10) ? -1 : 1;
     return this.getFilmList.subscribe((films: FilmInterface[]) => {
-      console.log('FILMS: ', films);
       return films.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
     });
 
