@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { delay, catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
+import {delay, catchError, tap, map} from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
 import { FilmInterface } from '../film-catalog/interfaces/film.interface';
@@ -21,10 +21,26 @@ export class DataService {
 
   private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
 
+  private favoriteFilmsCount$: Subject<number> = new Subject();
+
   constructor(private http: HttpClient) { }
 
   public initFilmList(): Observable<any> {
+
+    const selectedFilms = JSON.parse(localStorage.getItem('favoriteFilms'));
+
     return this.http.get(this.popularFilmUrl).pipe(
+      map((filmList: any) => {
+        const transformedFilmList = filmList.results.map((film) => {
+          if (selectedFilms.includes(film.title)) {
+            film.isFavorite = true;
+          }
+
+          return film;
+        });
+
+        return {...filmList, results: transformedFilmList};
+      }),
       delay(700),
       catchError( (error) => error)
     );
@@ -43,27 +59,34 @@ export class DataService {
   public setFavoriteFilm(favorite: FilmInterface): Map<any, any> {
     if (favorite.isFavorite) {
       this.favoriteFilms.set(favorite.title, favorite);
+
+      this.favoriteFilmsCount$.next(Array.from(this.favoriteFilms.keys()).length);
     } else {
       this.favoriteFilms.delete(favorite.title);
+
+      this.favoriteFilmsCount$.next(Array.from(this.favoriteFilms.keys()).length);
     }
 
     localStorage.setItem('favoriteFilms', JSON.stringify([...this.favoriteFilms.keys()]));
     return this.favoriteFilms;
   }
 
-  public getFavoriteFilm(): any {
+  public getFavoriteFilm(): Observable<number> {
 
     const favoriteFilmsArray = localStorage.getItem('favoriteFilms');
-    const count = favoriteFilmsArray.length;
-
-    console.log(favoriteFilmsArray, typeof(favoriteFilmsArray), count);
-
-    return localStorage.getItem('favoriteFilms').length;
+    const counter = JSON.parse(favoriteFilmsArray).length;
+    this.setCountFavoriteFilm(counter);
+    return of(counter);
   }
 
-  // todo create search film method
-  public searchFilmByTitle(): void {
+  public getCountFavoriteFilm(): Observable<number> {
+    return this.favoriteFilmsCount$.asObservable().pipe(
+      tap(result => console.log(result))
+    );
+  }
 
+  public setCountFavoriteFilm(countFilms: number): void {
+    this.favoriteFilmsCount$.next(countFilms);
   }
 
   public sortFilmByTitle(value): Subscription {
