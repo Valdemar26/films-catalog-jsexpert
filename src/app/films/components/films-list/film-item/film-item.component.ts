@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription } from 'rxjs';
 
 import { FilmInterface } from '../../../../film-catalog/interfaces/film.interface';
-import { DataService } from '../../../../services/data.service';
+
 
 @Component({
   selector: 'exp-film-item',

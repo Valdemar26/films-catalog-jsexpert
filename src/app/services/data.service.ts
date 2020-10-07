@@ -51,9 +51,9 @@ export class DataService {
     );
   }
 
-  public getMoreFilms(): any {
+  public getMoreFilms(): Subscription {
     this.count++;
-    this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=${this.count}`)
+    return this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=${this.count}`)
       .subscribe((films: any) => {
         this.updateFilmList(films.results);
       });
@@ -103,12 +103,11 @@ export class DataService {
   }
 
   public sortFilmByTitle(value): Subscription {
-
     const direction = !!parseInt(value, 10) ? -1 : 1;
+
     return this.getFilmList.subscribe((films: FilmInterface[]) => {
       return films.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
     });
-
   }
 
   public getGenres(): any {

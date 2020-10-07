@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
@@ -15,8 +15,6 @@ import { DataService } from '../../../services/data.service';
 export class FilmsListComponent implements OnInit, OnDestroy {
 
   public filmsList: FilmInterface[];
-  public sortingMethod: number;
-  public favoriteFilmsCounter = 0;
   public genresList = [];
 
   private subscription: Subscription = new Subscription();
@@ -38,7 +36,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  public get getFilmsList(): any {
+  public get getFilmsList(): Observable<FilmInterface[]> {
     return this.dataService.getFilmList;
   }
 
