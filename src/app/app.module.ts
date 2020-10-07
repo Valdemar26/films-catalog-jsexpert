@@ -5,12 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FilmCatalogModule } from './film-catalog/film-catalog.module';
 import { SharedModule } from './shared/shared.module';
 import { FilmsModule } from './films/films.module';
 import { ActorsModule } from './actors/actors.module';
 
 import { FilmsInterceptor } from './interceptor/films.interceptor';
+import { WelcomeModule } from './welcome/welcome.module';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { FilmsInterceptor } from './interceptor/films.interceptor';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FilmCatalogModule,
+    WelcomeModule,
     SharedModule,
     FilmsModule,
     ActorsModule,

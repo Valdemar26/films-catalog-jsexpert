@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
-import { FilmInterface } from '../film-catalog/interfaces/film.interface';
+import { FilmInterface } from '../films/interfaces/film.interface';
 
 
 @Injectable({
@@ -29,6 +29,7 @@ export class DataService {
   public initFilmList(): Observable<any> {
 
     const selectedFilms = JSON.parse(localStorage.getItem('favoriteFilms'));
+    // const selectedFilms = [];  // todo fix bug when havent selected films
 
     return this.http.get(this.popularFilmUrl).pipe(
       map((filmList: any) => {
@@ -85,10 +86,15 @@ export class DataService {
 
   public getFavoriteFilm(): Observable<number> {
 
-    const favoriteFilmsArray = localStorage.getItem('favoriteFilms');
-    const counter = JSON.parse(favoriteFilmsArray).length;
-    this.setCountFavoriteFilm(counter);
-    return of(counter);
+    if (localStorage.getItem('favoriteFilms')) {
+      const favoriteFilmsArray = localStorage.getItem('favoriteFilms');
+      const counter = JSON.parse(favoriteFilmsArray).length;
+      this.setCountFavoriteFilm(counter);
+      return of(counter);
+    } else {
+      return of(null);
+    }
+
   }
 
   public getCountFavoriteFilm(): Observable<number> {

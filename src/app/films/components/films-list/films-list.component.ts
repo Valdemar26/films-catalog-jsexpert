@@ -3,9 +3,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
-import { DataService } from '../../../services/data.service';
-import { LoaderService } from '../../../services/loader.service';
+
+import { FilmInterface } from '../../interfaces/film.interface';
+import {DataService} from '../../../services/data.service';
+import {LoaderService} from '../../../services/loader.service';
 
 
 @Component({
@@ -32,13 +33,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.checkLoading();
     this.initFilmsList();
     this.initGenresList();
-  }
-
-  public transform(value): FilmInterface[] {
-    const direction = !!parseInt(value, 10) ? -1 : 1;
-    return this.filmsList.sort((a: FilmInterface, b: FilmInterface) => {
-      return direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
-    });
   }
 
   public get getFilmsList(): Observable<FilmInterface[]> {
