@@ -3,9 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, skipWhile, switchMap, tap } from 'rxjs/operators';
 
-import { DataService } from '../../../services/data.service';
-
 import { FilmInterface } from '../../interfaces/film.interface';
+import { DataService } from '../../services/data.service';
 
 
 @Component({

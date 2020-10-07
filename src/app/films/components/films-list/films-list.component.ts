@@ -3,10 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 import { FilmInterface } from '../../interfaces/film.interface';
-import {DataService} from '../../../services/data.service';
-import {LoaderService} from '../../../services/loader.service';
+import { DataService } from '../../services/data.service';
+import { LoaderService } from '../../../shared/services/loader.service';
 
 
 @Component({

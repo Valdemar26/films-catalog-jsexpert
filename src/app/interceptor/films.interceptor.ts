@@ -9,7 +9,8 @@ import {
 import { Observable } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
-import { LoaderService } from '../services/loader.service';
+import { LoaderService } from '../shared/services/loader.service';
+
 
 @Injectable()
 export class FilmsInterceptor implements HttpInterceptor {

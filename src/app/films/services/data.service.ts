@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { environment } from '../../environments/environment.prod';
-import { FilmInterface } from '../films/interfaces/film.interface';
+import { environment } from '../../../environments/environment.prod';
+import { FilmInterface } from '../interfaces/film.interface';
 
 
 @Injectable({
