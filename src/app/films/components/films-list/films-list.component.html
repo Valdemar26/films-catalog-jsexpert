@@ -7,7 +7,7 @@
   </mat-card>
 
 
-  <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmsList | async as filmsList; else templateLoader">
+  <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmsList | async as filmsList">
 
     <mat-grid-tile colspan="2" *ngFor="let film of filmsList">
 
@@ -20,25 +20,23 @@
   </mat-grid-list>
 
 
-  <ng-template #templateLoader>
-    <div class="loader-wrapper">
-      <div class="loading">
-        <div class="loading-letter">L</div>
-        <div class="loading-letter">o</div>
-        <div class="loading-letter">a</div>
-        <div class="loading-letter">d</div>
-        <div class="loading-letter">i</div>
-        <div class="loading-letter">n</div>
-        <div class="loading-letter">g</div>
-        <div class="loading-letter">.</div>
-        <div class="loading-letter">.</div>
-        <div class="loading-letter">.</div>
-      </div>
-      <div id="loader"></div>
+  <div class="loader-wrapper" *ngIf="isLoaderShown">
+    <div class="loading">
+      <div class="loading-letter">L</div>
+      <div class="loading-letter">o</div>
+      <div class="loading-letter">a</div>
+      <div class="loading-letter">d</div>
+      <div class="loading-letter">i</div>
+      <div class="loading-letter">n</div>
+      <div class="loading-letter">g</div>
+      <div class="loading-letter">.</div>
+      <div class="loading-letter">.</div>
+      <div class="loading-letter">.</div>
     </div>
-  </ng-template>
+    <div id="loader"></div>
+  </div>
 
-  <button mat-raised-button color="primary" mat-button class="more"
+  <button mat-raised-button color="accent" mat-button class="more" *ngIf="getFilmsList | async as filmsList"
           (click)="loadMoreFilms()">More films</button>
 
 </div>

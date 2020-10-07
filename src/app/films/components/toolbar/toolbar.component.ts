@@ -70,7 +70,6 @@ export class ToolbarComponent implements OnInit {
   public getCountOfFavoriteFilms(): any {
     return this.dataService.getCountFavoriteFilm().subscribe((data) => {
       this.favoriteFilmsCounter = data;
-      console.log(this.favoriteFilmsCounter);
     });
   }
 

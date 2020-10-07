@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
-import { delay, catchError, tap, map } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.prod';
 import { FilmInterface } from '../film-catalog/interfaces/film.interface';
@@ -46,7 +46,6 @@ export class DataService {
 
         return {...filmList, results: transformedFilmList};
       }),
-      delay(700),
       catchError( (error) => error)
     );
   }
