@@ -17,13 +17,12 @@ export class FilmItemComponent implements OnInit, OnDestroy {
 
   @Output() favoriteFilm: EventEmitter<FilmInterface> = new EventEmitter<FilmInterface>();
 
-  public isFavoriteFilm: boolean;
   public imagePath: string;
   public genres = [];
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private dataService: DataService) { }
+  constructor() { }
 
   public ngOnInit(): void {
     this.fetchPosterPath();
@@ -35,8 +34,9 @@ export class FilmItemComponent implements OnInit, OnDestroy {
   }
 
   public toggleFavoriteFilm(favoriteFilm: FilmInterface): void {
-    this.isFavoriteFilm = !this.isFavoriteFilm;
-    favoriteFilm.isFavorite = this.isFavoriteFilm;
+
+    favoriteFilm.isFavorite = !favoriteFilm.isFavorite;
+
     this.favoriteFilm.emit(favoriteFilm);
   }
 

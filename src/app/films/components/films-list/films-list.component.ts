@@ -46,6 +46,10 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.dataService.setFavoriteFilm(film);
   }
 
+  public loadMoreFilms(): void {
+    this.dataService.getMoreFilms();
+  }
+
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
