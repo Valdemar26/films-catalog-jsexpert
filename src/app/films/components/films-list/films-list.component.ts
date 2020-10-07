@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
 import { DataService } from '../../../services/data.service';
+import { LoaderService } from '../../../services/loader.service';
 
 
 @Component({
@@ -17,14 +18,18 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   public filmsList: FilmInterface[];
   public genresList = [];
 
+  public isLoaderShown: boolean;
+
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private loaderService: LoaderService
   ) {
   }
 
   public ngOnInit(): void {
+    this.checkLoading();
     this.initFilmsList();
     this.initGenresList();
   }
@@ -71,6 +76,10 @@ export class FilmsListComponent implements OnInit, OnDestroy {
       });
 
     this.subscription.add(genresSubscription);
+  }
+
+  private checkLoading(): Subscription {
+    return this.loaderService.getLoadingStatus().subscribe((status: boolean) => this.isLoaderShown = status);
   }
 
 }
