@@ -18,8 +18,6 @@ export class SearchService {
 
   public searchFilms(event): any {
     console.log(event);
-    // this.searchFilm$ =
-    // this.searchFilm$.
   }
 
 }
