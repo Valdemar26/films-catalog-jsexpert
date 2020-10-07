@@ -5,8 +5,9 @@ import { map } from 'rxjs/operators';
 
 
 import { FilmInterface } from '../../interfaces/film.interface';
-import {DataService} from '../../../services/data.service';
+import {DataService} from '../../services/data.service';
 import {LoaderService} from '../../../services/loader.service';
+
 
 
 @Component({

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Subscription } from 'rxjs';
-import {FilmInterface} from '../../../interfaces/film.interface';
+
+import { FilmInterface } from '../../../interfaces/film.interface';
 
 
 
