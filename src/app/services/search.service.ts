@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Subject } from 'rxjs';
-
-import { FilmInterface } from '../film-catalog/interfaces/film.interface';
 import { DataService } from './data.service';
 
 
@@ -10,9 +7,6 @@ import { DataService } from './data.service';
   providedIn: 'root'
 })
 export class SearchService {
-
-  public searchFilm$: Subject<FilmInterface[]> = new Subject();
-  private existFilms = this.dataService.getFilmList;
 
   constructor(private dataService: DataService) { }
 

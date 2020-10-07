@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
-
-import { FilmInterface } from '../../../film-catalog/interfaces/film.interface';
-import { DataService } from '../../../services/data.service';
-import { SearchService } from '../../../services/search.service';
-
 import { debounceTime, distinctUntilChanged, map, skipWhile, switchMap, tap } from 'rxjs/operators';
+
+import { DataService } from '../../../services/data.service';
+
+import { FilmInterface } from '../../interfaces/film.interface';
 
 
 @Component({
@@ -23,8 +22,7 @@ export class ToolbarComponent implements OnInit {
   public favoriteFilmsCounter = 0;
 
   constructor(
-    public dataService: DataService,
-    private searchService: SearchService
+    public dataService: DataService
   ) { }
 
   ngOnInit(): void {

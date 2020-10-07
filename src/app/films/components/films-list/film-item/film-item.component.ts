@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Subscription } from 'rxjs';
+import {FilmInterface} from '../../../interfaces/film.interface';
 
-import { FilmInterface } from '../../../../film-catalog/interfaces/film.interface';
 
 
 @Component({
@@ -48,7 +48,10 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     this.film.genre_ids.forEach((genre: number) => {
 
       const item = this.genresList.filter((x) => x.id === genre);
-      this.genres.push(item[0].name);
+
+      if (item.length) {
+        this.genres.push(item[0].name);
+      }
     });
   }
 
