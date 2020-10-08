@@ -33,8 +33,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   public setFavoriteFilm(film: FilmInterface): void {
-    console.log('favorite');
-    // this.dataService.setFavoriteFilm(film);
+    this.dataService.setFavoriteFilm(film);
   }
 
   public loadMoreFilms(): void {

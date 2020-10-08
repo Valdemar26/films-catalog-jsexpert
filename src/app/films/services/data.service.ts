@@ -23,6 +23,7 @@ export class DataService {
   private filmListArray: FilmInterface[] = [];
 
   private favoriteFilmsCount$: Subject<number> = new Subject();
+  private favoriteFilmsArray = [];
 
   constructor(private http: HttpClient) { }
 
@@ -60,35 +61,22 @@ export class DataService {
     return this.filmList$.asObservable();
   }
 
-  // public setFavoriteFilm(favorite: FilmInterface): Map<any, any> {
-  //   favorite.isFavorite ? this.favoriteFilms.set(favorite.title, favorite) : this.favoriteFilms.delete(favorite.title);
-  //
-  //   this.favoriteFilmsCount$.next(Array.from(this.favoriteFilms.keys()).length);
-  //
-  //   localStorage.setItem('favoriteFilms', JSON.stringify([...this.favoriteFilms.keys()]));
-  //   return this.favoriteFilms;
-  // }
+  public setFavoriteFilm(film: FilmInterface): void {
+    if (film.isFavorite) {
+      this.favoriteFilmsArray.push(film.id);
+      localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
+    } else {
+      const index = this.favoriteFilmsArray.indexOf(film.id);
+      this.favoriteFilmsArray.splice(index, 1);
+      localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
+    }
 
-  // public getFavoriteFilm(): Observable<number> {
-  //
-  //   if (DataService.getItemFromLocalStorage()) {
-  //     const favoriteFilmsArray = DataService.getItemFromLocalStorage();
-  //     const counter = JSON.parse(favoriteFilmsArray).length;
-  //     this.setCountFavoriteFilm(counter);
-  //     return of(counter);
-  //   } else {
-  //     return of(null);
-  //   }
-  //
-  // }
+    this.favoriteFilmsCount$.next(this.favoriteFilmsArray.length);
+  }
 
-  // public getCountFavoriteFilm(): Observable<number> {
-  //   return this.favoriteFilmsCount$.asObservable();
-  // }
-  //
-  // public setCountFavoriteFilm(countFilms: number): void {
-  //   this.favoriteFilmsCount$.next(countFilms);
-  // }
+  public getCountFavoriteFilm(): Observable<number> {
+    return this.favoriteFilmsCount$.asObservable();
+  }
 
   public sortFilmByTitle(value): Subscription {
     const direction = !!parseInt(value, 10) ? -1 : 1;
