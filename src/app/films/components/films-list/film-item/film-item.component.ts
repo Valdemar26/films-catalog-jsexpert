@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { FilmInterface } from '../../../interfaces/film.interface';
 
 
-
 @Component({
   selector: 'exp-film-item',
   templateUrl: './film-item.component.html',

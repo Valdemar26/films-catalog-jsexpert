@@ -13,8 +13,6 @@ import { FilmInterface } from '../interfaces/film.interface';
 })
 export class DataService {
 
-  public favoriteFilms = new Map();
-
   private apiKey = environment.movieDbApiKey;
   private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
   private nextPagePopularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=`;
@@ -30,22 +28,10 @@ export class DataService {
 
   public initFilmList(): Observable<any> {
 
-    const selectedFilms = JSON.parse(localStorage.getItem('favoriteFilms'));
-    // const selectedFilms = [];  // todo fix bug when have not selected films
-
     return this.http.get(this.popularFilmUrl).pipe(
       map((filmList: any) => {
 
-        const transformedFilmList = filmList.results.map((film: FilmInterface) => {
-
-          if (selectedFilms.includes(film.title)) {
-            this.favoriteFilms.set(film.title, film);
-          }
-
-          film.isFavorite = selectedFilms.includes(film.title);
-
-          return film;
-        });
+        const transformedFilmList = filmList.results.map((film: FilmInterface) => film);
 
         return {...filmList, results: transformedFilmList};
       }),
@@ -64,8 +50,9 @@ export class DataService {
   public updateFilmList(value: FilmInterface[]): void {
     if (value && value.length) {
       value.forEach((val) => this.filmListArray.push(val));
-      console.log('films: ', this.filmListArray);
       this.filmList$.next(this.filmListArray);
+
+      console.log('films: ', this.filmListArray);
     }
   }
 
@@ -73,43 +60,35 @@ export class DataService {
     return this.filmList$.asObservable();
   }
 
-  public setFavoriteFilm(favorite: FilmInterface): Map<any, any> {
-    if (favorite.isFavorite) {
-      this.favoriteFilms.set(favorite.title, favorite);
+  // public setFavoriteFilm(favorite: FilmInterface): Map<any, any> {
+  //   favorite.isFavorite ? this.favoriteFilms.set(favorite.title, favorite) : this.favoriteFilms.delete(favorite.title);
+  //
+  //   this.favoriteFilmsCount$.next(Array.from(this.favoriteFilms.keys()).length);
+  //
+  //   localStorage.setItem('favoriteFilms', JSON.stringify([...this.favoriteFilms.keys()]));
+  //   return this.favoriteFilms;
+  // }
 
-      this.favoriteFilmsCount$.next(Array.from(this.favoriteFilms.keys()).length);
-    } else {
-      this.favoriteFilms.delete(favorite.title);
+  // public getFavoriteFilm(): Observable<number> {
+  //
+  //   if (DataService.getItemFromLocalStorage()) {
+  //     const favoriteFilmsArray = DataService.getItemFromLocalStorage();
+  //     const counter = JSON.parse(favoriteFilmsArray).length;
+  //     this.setCountFavoriteFilm(counter);
+  //     return of(counter);
+  //   } else {
+  //     return of(null);
+  //   }
+  //
+  // }
 
-      this.favoriteFilmsCount$.next(Array.from(this.favoriteFilms.keys()).length);
-    }
-
-    localStorage.setItem('favoriteFilms', JSON.stringify([...this.favoriteFilms.keys()]));
-    return this.favoriteFilms;
-  }
-
-  public getFavoriteFilm(): Observable<number> {
-
-    if (localStorage.getItem('favoriteFilms')) {
-      const favoriteFilmsArray = localStorage.getItem('favoriteFilms');
-      const counter = JSON.parse(favoriteFilmsArray).length;
-      this.setCountFavoriteFilm(counter);
-      return of(counter);
-    } else {
-      return of(null);
-    }
-
-  }
-
-  public getCountFavoriteFilm(): Observable<number> {
-    return this.favoriteFilmsCount$.asObservable().pipe(
-      tap(result => console.log(result))
-    );
-  }
-
-  public setCountFavoriteFilm(countFilms: number): void {
-    this.favoriteFilmsCount$.next(countFilms);
-  }
+  // public getCountFavoriteFilm(): Observable<number> {
+  //   return this.favoriteFilmsCount$.asObservable();
+  // }
+  //
+  // public setCountFavoriteFilm(countFilms: number): void {
+  //   this.favoriteFilmsCount$.next(countFilms);
+  // }
 
   public sortFilmByTitle(value): Subscription {
     const direction = !!parseInt(value, 10) ? -1 : 1;

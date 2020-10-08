@@ -25,8 +25,8 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkFavoriteFilms();
-    this.getCountOfFavoriteFilms();
+    // this.checkFavoriteFilms();
+    // this.getCountOfFavoriteFilms();
     this.getFilmList();
   }
 
@@ -64,17 +64,17 @@ export class ToolbarComponent implements OnInit {
     );
   }
 
-  public getCountOfFavoriteFilms(): any {
-    return this.dataService.getCountFavoriteFilm().subscribe((data) => {
-      this.favoriteFilmsCounter = data;
-    });
-  }
-
-  private checkFavoriteFilms(): Subscription {
-    return this.dataService.getFavoriteFilm().subscribe( (count) => {
-      return this.favoriteFilmsCounter = count;
-    });
-  }
+  // public getCountOfFavoriteFilms(): any {
+  //   return this.dataService.getCountFavoriteFilm().subscribe((data) => {
+  //     this.favoriteFilmsCounter = data;
+  //   });
+  // }
+  //
+  // private checkFavoriteFilms(): Subscription {
+  //   return this.dataService.getFavoriteFilm().subscribe( (count) => {
+  //     return this.favoriteFilmsCounter = count;
+  //   });
+  // }
 
   private getFilmList(): void {
     this.dataService.getFilmList.subscribe((films) => this.filmsList = films);
