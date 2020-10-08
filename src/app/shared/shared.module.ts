@@ -27,7 +27,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   ],
   exports: [
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoaderComponent
   ]
 })
 export class SharedModule { }

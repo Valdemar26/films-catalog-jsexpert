@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 
 import { FilmInterface } from '../../interfaces/film.interface';
 import { DataService } from '../../services/data.service';
-import { LoaderService } from '../../../shared/services/loader.service';
 
 
 @Component({
@@ -15,21 +14,16 @@ import { LoaderService } from '../../../shared/services/loader.service';
 })
 export class FilmsListComponent implements OnInit, OnDestroy {
 
-  public filmsList: FilmInterface[];
   public genresList = [];
-
-  public isLoaderShown: boolean;
 
   private subscription: Subscription = new Subscription();
 
   constructor(
     private dataService: DataService,
-    private loaderService: LoaderService
   ) {
   }
 
   public ngOnInit(): void {
-    this.checkLoading();
     this.initFilmsList();
     this.initGenresList();
   }
@@ -69,10 +63,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
       });
 
     this.subscription.add(genresSubscription);
-  }
-
-  private checkLoading(): Subscription {
-    return this.loaderService.getLoadingStatus().subscribe((status: boolean) => this.isLoaderShown = status);
   }
 
 }

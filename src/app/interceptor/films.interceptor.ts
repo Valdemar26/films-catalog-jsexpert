@@ -25,7 +25,7 @@ export class FilmsInterceptor implements HttpInterceptor {
       return next.handle(request);
     } else {
       return next.handle(request).pipe(
-        delay(200),
+        delay(700),
         tap(() => {
           this.loaderService.hide();
         })
