@@ -17,10 +17,12 @@ export class DataService {
 
   private apiKey = environment.movieDbApiKey;
   private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
+  private nextPagePopularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=`;
   private genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=uk-UA`;
   private count = 1;
 
   private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
+  private filmListArray: FilmInterface[] = [];
 
   private favoriteFilmsCount$: Subject<number> = new Subject();
 
@@ -29,7 +31,7 @@ export class DataService {
   public initFilmList(): Observable<any> {
 
     const selectedFilms = JSON.parse(localStorage.getItem('favoriteFilms'));
-    // const selectedFilms = [];  // todo fix bug when havent selected films
+    // const selectedFilms = [];  // todo fix bug when have not selected films
 
     return this.http.get(this.popularFilmUrl).pipe(
       map((filmList: any) => {
@@ -53,7 +55,7 @@ export class DataService {
 
   public getMoreFilms(): Subscription {
     this.count++;
-    return this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=${this.count}`)
+    return this.http.get(`${this.nextPagePopularFilmUrl}${this.count}`)
       .subscribe((films: any) => {
         this.updateFilmList(films.results);
       });
@@ -61,7 +63,8 @@ export class DataService {
 
   public updateFilmList(value: FilmInterface[]): void {
     if (value && value.length) {
-      this.filmList$.next(value);
+      value.forEach((val) => this.filmListArray.push(val));
+      this.filmList$.next(this.filmListArray);
     }
   }
 

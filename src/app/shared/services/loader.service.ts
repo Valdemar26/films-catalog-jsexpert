@@ -12,7 +12,6 @@ export class LoaderService {
   constructor() { }
 
   public show(): void {
-    console.log('SHOW');
     this.isLoading$.next(true);
   }
 
