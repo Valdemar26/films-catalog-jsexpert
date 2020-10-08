@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { SharedModule } from '../shared/shared.module';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,6 +26,7 @@ import { DetailsComponent } from './components/details/details.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     MatToolbarModule,
     MatIconModule,
     MatSelectModule,

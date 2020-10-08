@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {Observable, Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,7 @@ export class LoaderService {
   constructor() { }
 
   public show(): void {
+    console.log('SHOW');
     this.isLoading$.next(true);
   }
 
