@@ -47,7 +47,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   private initFilmsList(): void {
     const filmsSubscription = this.dataService.initFilmList().pipe(
       map(({results}) => {
-        console.log('films: ', results);
         return results;
       })
     )

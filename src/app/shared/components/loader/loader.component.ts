@@ -21,7 +21,6 @@ export class LoaderComponent implements OnInit {
 
   private checkLoading(): Subscription {
     return this.loaderService.getLoadingStatus().subscribe((status: boolean) => {
-      console.log('status: ', status);
       this.isLoaderShown = status;
     });
   }

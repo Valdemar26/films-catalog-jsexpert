@@ -28,6 +28,8 @@
   <img mat-card-image
        [src]="imagePath" alt="film-item">
 
+  <img *ngIf="!film.poster_path" src="../../../../../assets/images/not-available.jpg" alt="not-available">
+
   <span class="release">{{ film.release_date }}</span>
 
   <div class="genres">
