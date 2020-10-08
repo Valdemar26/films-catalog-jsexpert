@@ -64,6 +64,7 @@ export class DataService {
   public updateFilmList(value: FilmInterface[]): void {
     if (value && value.length) {
       value.forEach((val) => this.filmListArray.push(val));
+      console.log('films: ', this.filmListArray);
       this.filmList$.next(this.filmListArray);
     }
   }
