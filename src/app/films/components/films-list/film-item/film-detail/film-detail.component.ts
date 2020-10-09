@@ -16,6 +16,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public filmDetail: FilmInterface;
 
+  public imagePath = 'https://image.tmdb.org/t/p/w500';
+
   private filmId: number;
   private subscription: Subscription = new Subscription();
 
@@ -29,6 +31,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.initFilmSubscription();
     this.getFilmIdFromUrl();
     this.initFilmDetail();
+
+    this.getFullFilmInfoById();
   }
 
   private getFilmIdFromUrl(): number {
@@ -43,6 +47,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
       if (film) {
         this.filmDetail = film;
+        // this.filmDetail.poster_path = 'https://image.tmdb.org/t/p/w500' + film.poster_path;
       }
       console.log('filmDetail: ', this.filmDetail);
     });
@@ -52,5 +57,9 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  private getFullFilmInfoById(): void {
+    this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
   }
 }
