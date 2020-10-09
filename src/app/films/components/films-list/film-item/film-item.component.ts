@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -22,7 +23,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public ngOnInit(): void {
     this.fetchPosterPath();
@@ -55,4 +56,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     });
   }
 
+  public openFilm(film: FilmInterface): any {
+    this.router.navigate(['/films/' + film.id]);
+  }
 }

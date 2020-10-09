@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
 import { FilmInterface } from '../interfaces/film.interface';
@@ -24,6 +24,8 @@ export class DataService {
 
   private favoriteFilmsCount$: Subject<number> = new Subject();
   private favoriteFilmsArray = [];
+
+  private currentFilm$: Subject<FilmInterface> = new Subject<FilmInterface>();
 
   constructor(private http: HttpClient) { }
 
@@ -88,5 +90,17 @@ export class DataService {
 
   public getGenres(): any {
     return this.http.get(this.genresUrl);
+  }
+
+  public getFilmById(id: number): any {
+    this.getFilmList.subscribe((filmList: FilmInterface[]) => {
+      this.filmListArray = filmList;
+    });
+    const currentFilm = this.filmListArray.find((film: FilmInterface) => film.id === Number(id));
+    this.currentFilm$.next(currentFilm);
+  }
+
+  public getFilmObservable(): Observable<FilmInterface> {
+    return this.currentFilm$.asObservable();
   }
 }

@@ -15,6 +15,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
 import { FilmItemComponent } from './components/films-list/film-item/film-item.component';
 import { DetailsComponent } from './components/details/details.component';
+import { FilmDetailComponent } from './components/films-list/film-item/film-detail/film-detail.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { DetailsComponent } from './components/details/details.component';
     ToolbarComponent,
     FilmsListComponent,
     FilmItemComponent,
-    DetailsComponent
+    DetailsComponent,
+    FilmDetailComponent
   ],
   imports: [
     CommonModule,
