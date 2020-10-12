@@ -17,6 +17,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public filmDetail: FilmInterface;
 
   public imagePath = 'https://image.tmdb.org/t/p/w500';
+  public backdropPath = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
 
   private filmId: number;
   private subscription: Subscription = new Subscription();
