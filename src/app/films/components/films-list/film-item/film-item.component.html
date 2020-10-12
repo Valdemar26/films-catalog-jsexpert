@@ -5,19 +5,7 @@
       {{ film.title.length > 25 ? (film.title | slice:0:25) + '...' : film.title }}
     </mat-card-title>
 
-    <div class="rating"
-         *ngIf="film.vote_average; else templateNoRating"
-         [class.perfect]="film.vote_average >= 8"
-         [class.high]="film.vote_average >= 7 && film.vote_average < 8"
-         [class.good]="film.vote_average >= 6 && film.vote_average < 7"
-         [class.normal]="film.vote_average >= 5 && film.vote_average < 6"
-         [class.bad]="film.vote_average <= 5">
-      {{ film.vote_average }}
-    </div>
-
-    <ng-template class="no-rating" #templateNoRating>
-      N/A
-    </ng-template>
+    <exp-rating [filmDetail]="film"></exp-rating>
 
     <mat-icon class="favorite"
               [class.active]="film.isFavorite"

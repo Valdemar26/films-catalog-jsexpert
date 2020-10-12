@@ -61,37 +61,6 @@
     position: relative;
   }
 
-  .rating {
-    font-size: 14px;
-    font-weight: bold;
-    width: 30px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #222;
-
-    &.perfect {
-      background-color: #20ff11;
-    }
-
-    &.high {
-      background-color: #fb7400;
-    }
-
-    &.good {
-      background-color: yellow;
-    }
-
-    &.normal {
-      background-color: #3498db;
-    }
-
-    &.bad {
-      background-color: lightgrey;
-    }
-  }
-
   exp-details-inner {
     overflow: hidden;
     display: -webkit-box;

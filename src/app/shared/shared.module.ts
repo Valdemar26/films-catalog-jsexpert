@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { RatingComponent } from './components/rating/rating.component';
 
 
 
@@ -16,7 +17,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   declarations: [
     FooterComponent,
     HeaderComponent,
-    LoaderComponent
+    LoaderComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { LoaderComponent } from './components/loader/loader.component';
   exports: [
     FooterComponent,
     HeaderComponent,
-    LoaderComponent
+    LoaderComponent,
+    RatingComponent
   ]
 })
 export class SharedModule { }

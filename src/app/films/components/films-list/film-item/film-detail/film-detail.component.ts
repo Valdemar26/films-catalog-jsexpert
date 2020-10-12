@@ -1,7 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
-import {Observable, Subscription} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 import { FilmInterface } from '../../../../interfaces/film.interface';
 import { DataService } from '../../../../services/data.service';
@@ -22,17 +23,21 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private filmId: number;
   private subscription: Subscription = new Subscription();
 
+  public heroesList;
+
 
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
     ) { }
 
   public ngOnInit(): void {
     this.initFilmSubscription();
     this.getFilmIdFromUrl();
     this.initFilmDetail();
+    this.initFilmHeroes();
 
     // this.getFullFilmInfoById();
   }
@@ -45,16 +50,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.dataService.getFilmById(this.filmId);
   }
 
-  private initFilmSubscription(): void {
-    const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
-      if (film) {
-        this.filmDetail = film;
-        // this.filmDetail.poster_path = 'https://image.tmdb.org/t/p/w500' + film.poster_path;
-      }
-      console.log('filmDetail: ', this.filmDetail);
-    });
-
-    this.subscription.add(filmSubscription);
+  public back(): void {
+    this.location.back();
   }
 
   public ngOnDestroy(): void {
@@ -65,7 +62,25 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   //   this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
   // }
 
-  public back(): void {
-    this.router.navigate(['/films']);
+  private initFilmSubscription(): void {
+    const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
+      if (film) {
+        this.filmDetail = film;
+      }
+      console.log('filmDetail: ', this.filmDetail);
+    });
+
+    this.subscription.add(filmSubscription);
   }
+
+  private initFilmHeroes(): void {
+    const heroesSubscription = this.dataService.getFilmHeroes(this.filmId)
+      .subscribe((heroes) => {
+        this.heroesList = heroes.cast;
+        console.log(this.heroesList);
+      });
+
+    this.subscription.add(heroesSubscription);
+  }
+
 }
