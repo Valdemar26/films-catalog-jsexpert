@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { FilmInterface } from '../../interfaces/film.interface';
 import { DataService } from '../../services/data.service';
@@ -45,11 +44,8 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   private initFilmsList(): void {
-    const filmsSubscription = this.dataService.initFilmList().pipe(
-      map(({results}) => {
-        return results;
-      })
-    ).subscribe((films: FilmInterface[]) => this.dataService.updateFilmList(films));
+    const filmsSubscription = this.dataService.initFilmList()
+      .subscribe(() => this.getFilmsList);
 
     this.subscription.add(filmsSubscription);
   }

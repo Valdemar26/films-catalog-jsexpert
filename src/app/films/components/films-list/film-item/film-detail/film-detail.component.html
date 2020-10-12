@@ -1,9 +1,15 @@
-<div class="exp-film-detail-wrapper">
+<div class="exp-film-detail-wrapper" *ngIf="filmDetail">
   <div class="poster">
     <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">
   </div>
 
-  <div class="film-info">
+  <div class="film-info" [ngStyle]="{'background-image': 'url(' + backdropPath + filmDetail.backdrop_path + ')'}">
+
+
+
+  </div>
+
+  <div class="film-info-content">
     <h2>
       {{ filmDetail.title }}
       <span>({{ filmDetail.release_date.slice(0,4) }})</span>
@@ -22,12 +28,15 @@
       {{ filmDetail.vote_average }}
     </div>
 
-<!--    <div class="genres">{{ filmDetail.genres.name }}</div>-->
-<!--    <div class="budget">{{ filmDetail.budget }}</div>-->
+    <!--    <div class="genres">{{ filmDetail.genres.name }}</div>-->
+    <!--    <div class="budget">{{ filmDetail.budget }}</div>-->
 
     <ng-template class="no-rating" #templateNoRating>N/A</ng-template>
 
     <h4>Опис</h4>
     <p>{{ filmDetail.overview }}</p>
+
+    <button mat-raised-button color="primary" mat-button (click)="back()">Back</button>
   </div>
+
 </div>

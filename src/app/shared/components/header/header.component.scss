@@ -10,6 +10,12 @@ mat-toolbar {
   font-family: 'Quicksand', sans-serif;
 
   .mat-toolbar-row {
+
+    span.logo {
+      cursor: pointer;
+      outline: none;
+    }
+
     a.disabled {
       pointer-events: none;
     }

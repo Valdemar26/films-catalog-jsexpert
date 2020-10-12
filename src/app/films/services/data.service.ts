@@ -36,6 +36,8 @@ export class DataService {
 
         const transformedFilmList = filmList.results.map((film: FilmInterface) => film);
 
+        this.updateFilmList(transformedFilmList);
+
         return {...filmList, results: transformedFilmList};
       }),
       catchError( (error) => error)
@@ -96,15 +98,15 @@ export class DataService {
     this.getFilmList.subscribe((filmList: FilmInterface[]) => {
       this.filmListArray = filmList;
     });
-    const currentFilm = this.filmListArray.find((film: FilmInterface) => film.id === Number(id));
-    this.currentFilm$.next(currentFilm);
+
+    if (this.filmListArray && this.filmListArray.length) {
+      const currentFilm = this.filmListArray.find((film: FilmInterface) => film.id === Number(id));
+      this.currentFilm$.next(currentFilm);
+    }
   }
 
   public getFilmObservable(): Observable<FilmInterface> {
     return this.currentFilm$.asObservable();
   }
 
-  public getFullFilmInfo(): Observable<any> {
-    return this.http.get('https://api.themoviedb.org/3/movie/497582?&api_key=0994e7679a856150aadcecf7de489bce&language=uk-UK');
-  }
 }
