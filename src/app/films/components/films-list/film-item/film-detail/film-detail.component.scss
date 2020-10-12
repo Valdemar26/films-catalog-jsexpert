@@ -64,3 +64,20 @@
     left: 36%;
   }
 }
+
+.film-heroes {
+  border: 1px solid red;
+  display: flex;
+  width: calc(100% - 40px);
+  margin: 20px;
+  height: 350px;
+  overflow-x: scroll;
+
+  span {
+
+    img {
+      width: 150px;
+      height: auto;
+    }
+  }
+}
