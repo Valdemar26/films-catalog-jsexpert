@@ -2,8 +2,8 @@
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  background-color: #333;
   position: relative;
+  background: linear-gradient(to right, rgba(14.12%, 14.51%, 16.86%, 1.00) 150px, rgba(22.35%, 22.35%, 22.35%, 0.84) 100%);
 
   .poster {
     img {
@@ -56,43 +56,11 @@
       line-height: 24px;
       color: #fff;
     }
+  }
 
-    button {
-      //position: absolute;
-      //bottom: 5px;
-    }
-
-
-    // todo move 'rating' in separate component
-    .rating {
-      font-size: 14px;
-      font-weight: bold;
-      width: 30px;
-      height: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #222;
-
-      &.perfect {
-        background-color: #20ff11;
-      }
-
-      &.high {
-        background-color: #fb7400;
-      }
-
-      &.good {
-        background-color: yellow;
-      }
-
-      &.normal {
-        background-color: #3498db;
-      }
-
-      &.bad {
-        background-color: lightgrey;
-      }
-    }
+  button {
+    position: absolute;
+    bottom: 20px;
+    left: 36%;
   }
 }

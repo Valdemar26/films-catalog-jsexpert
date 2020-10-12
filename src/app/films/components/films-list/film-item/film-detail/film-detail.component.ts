@@ -1,7 +1,8 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
-import {Observable, Subscription} from 'rxjs';
+import { Subscription} from 'rxjs';
 
 import { FilmInterface } from '../../../../interfaces/film.interface';
 import { DataService } from '../../../../services/data.service';
@@ -28,7 +29,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
     ) { }
 
   public ngOnInit(): void {
@@ -49,7 +51,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public back(): void {
-    this.router.navigate(['/films']);
+    this.location.back();
   }
 
   public ngOnDestroy(): void {
@@ -64,7 +66,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
       if (film) {
         this.filmDetail = film;
-        // this.filmDetail.poster_path = 'https://image.tmdb.org/t/p/w500' + film.poster_path;
       }
       console.log('filmDetail: ', this.filmDetail);
     });
