@@ -104,7 +104,8 @@ export class DataService {
     return this.currentFilm$.asObservable();
   }
 
-  public getFullFilmInfo(): Observable<any> {
-    return this.http.get('https://api.themoviedb.org/3/movie/497582?&api_key=0994e7679a856150aadcecf7de489bce&language=uk-UK');
-  }
+  // public getFullFilmInfo(): Observable<any> {
+  //   // todo remove or rewrite method
+  //   return this.http.get('https://api.themoviedb.org/3/movie/497582?&api_key=0994e7679a856150aadcecf7de489bce&language=uk-UK');
+  // }
 }

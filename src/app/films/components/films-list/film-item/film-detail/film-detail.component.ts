@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {Observable, Subscription} from 'rxjs';
 
@@ -24,7 +24,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
     ) { }
 
   public ngOnInit(): void {
@@ -32,7 +33,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.getFilmIdFromUrl();
     this.initFilmDetail();
 
-    this.getFullFilmInfoById();
+    // this.getFullFilmInfoById();
   }
 
   private getFilmIdFromUrl(): number {
@@ -59,7 +60,11 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private getFullFilmInfoById(): void {
-    this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
+  // private getFullFilmInfoById(): void {
+  //   this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
+  // }
+
+  public back(): void {
+    this.router.navigate(['/films']);
   }
 }
