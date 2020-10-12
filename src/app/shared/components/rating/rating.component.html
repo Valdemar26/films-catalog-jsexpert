@@ -1,0 +1,11 @@
+<div class="rating"
+     *ngIf="filmDetail.vote_average; else templateNoRating"
+     [class.perfect]="filmDetail.vote_average >= 8"
+     [class.high]="filmDetail.vote_average >= 7 && filmDetail.vote_average < 8"
+     [class.good]="filmDetail.vote_average >= 6 && filmDetail.vote_average < 7"
+     [class.normal]="filmDetail.vote_average >= 5 && filmDetail.vote_average < 6"
+     [class.bad]="filmDetail.vote_average <= 5">
+  {{ filmDetail.vote_average.toString().length > 1 ? filmDetail.vote_average : (filmDetail.vote_average + '.0') }}
+</div>
+
+<ng-template class="no-rating" #templateNoRating>N/A</ng-template>
