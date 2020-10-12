@@ -36,6 +36,12 @@
     <h4>Опис</h4>
     <p>{{ filmDetail.overview }}</p>
 
+    Heroes:
+    <span *ngFor="let hero of heroesList">{{ hero.character }} - {{ hero.name }}
+      <img [src]="imagePath +hero.profile_path" alt="hero">
+    </span>
+
+
     <button mat-raised-button color="primary" mat-button (click)="back()">Back</button>
   </div>
 

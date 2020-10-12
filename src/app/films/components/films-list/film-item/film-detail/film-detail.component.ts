@@ -22,6 +22,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private filmId: number;
   private subscription: Subscription = new Subscription();
 
+  public heroesList;
+
 
   constructor(
     private dataService: DataService,
@@ -33,6 +35,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.initFilmSubscription();
     this.getFilmIdFromUrl();
     this.initFilmDetail();
+    this.initFilmHeroes();
 
     // this.getFullFilmInfoById();
   }
@@ -44,6 +47,18 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public initFilmDetail(): void {
     this.dataService.getFilmById(this.filmId);
   }
+
+  public back(): void {
+    this.router.navigate(['/films']);
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  // private getFullFilmInfoById(): void {
+  //   this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
+  // }
 
   private initFilmSubscription(): void {
     const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
@@ -57,15 +72,14 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.subscription.add(filmSubscription);
   }
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  private initFilmHeroes(): void {
+    const heroesSubscription = this.dataService.getFilmHeroes(this.filmId)
+      .subscribe((heroes) => {
+        this.heroesList = heroes.cast;
+        console.log(this.heroesList);
+      });
+
+    this.subscription.add(heroesSubscription);
   }
 
-  // private getFullFilmInfoById(): void {
-  //   this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
-  // }
-
-  public back(): void {
-    this.router.navigate(['/films']);
-  }
 }

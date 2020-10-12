@@ -9,7 +9,7 @@
 
   <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmsList | async as filmsList">
 
-    <mat-grid-tile colspan="2" *ngFor="let film of filmsList">
+    <mat-grid-tile colspan="2" *ngFor="let film of filmsList; trackBy: identify">
 
       <exp-film-item [film]="film"
                      [genresList]="genresList"

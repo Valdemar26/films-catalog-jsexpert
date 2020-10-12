@@ -39,6 +39,10 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.dataService.getMoreFilms();
   }
 
+  public identify(index, item): number {
+    return item.id;
+  }
+
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

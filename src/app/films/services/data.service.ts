@@ -14,9 +14,12 @@ import { FilmInterface } from '../interfaces/film.interface';
 export class DataService {
 
   private apiKey = environment.movieDbApiKey;
+
   private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
   private nextPagePopularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=`;
   private genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=uk-UA`;
+  private filmHeroesUrl = `https://api.themoviedb.org/3/movie/`;
+
   private count = 1;
 
   private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
@@ -107,6 +110,11 @@ export class DataService {
 
   public getFilmObservable(): Observable<FilmInterface> {
     return this.currentFilm$.asObservable();
+  }
+
+
+  public getFilmHeroes(id: number): any {
+    return this.http.get(`${this.filmHeroesUrl}${id}/credits?api_key=${this.apiKey}`);
   }
 
 }
