@@ -20,7 +20,7 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     position: relative;
-    filter: grayscale(80%);
+    //filter: grayscale(80%);
 
     .film-info-content {
       width: calc(100% - 20px);
@@ -56,6 +56,23 @@
         font-size: 15px;
         line-height: 24px;
         color: #fff;
+      }
+
+      .trailer {
+        display: flex;
+        margin-top: 20px;
+
+        img {
+          width: 40px;
+          height: auto;
+          border-radius: 50%;
+          transition: 0.3s ease-in;
+
+          &:hover {
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          }
+        }
       }
     }
 

@@ -10,6 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
@@ -18,7 +19,8 @@ import { RatingComponent } from './components/rating/rating.component';
     FooterComponent,
     HeaderComponent,
     LoaderComponent,
-    RatingComponent
+    RatingComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { RatingComponent } from './components/rating/rating.component';
     FooterComponent,
     HeaderComponent,
     LoaderComponent,
-    RatingComponent
+    RatingComponent,
+    ModalComponent
   ]
 })
 export class SharedModule { }
