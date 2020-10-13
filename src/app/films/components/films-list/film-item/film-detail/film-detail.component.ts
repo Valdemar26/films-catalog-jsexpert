@@ -6,6 +6,7 @@ import { Subscription} from 'rxjs';
 
 import { FilmInterface } from '../../../../interfaces/film.interface';
 import { DataService } from '../../../../services/data.service';
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -20,6 +21,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public imagePath = 'https://image.tmdb.org/t/p/w500';
   public backdropPath = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
 
+  public trailerPath;
+
   private filmId: number;
   private subscription: Subscription = new Subscription();
 
@@ -30,7 +33,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private sanitizer: DomSanitizer
     ) { }
 
   public ngOnInit(): void {
@@ -38,6 +42,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.getFilmIdFromUrl();
     this.initFilmDetail();
     this.initFilmHeroes();
+    this.getFilmTrailer();
 
     // this.getFullFilmInfoById();
   }
@@ -81,6 +86,20 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
       });
 
     this.subscription.add(heroesSubscription);
+  }
+
+  private getFilmTrailer(): void {
+
+    const trailerSubscription = this.dataService.getTrailerByFilmId(this.filmId)
+      .subscribe((trailer) => {
+        const youtubeId = trailer.results[0].key;
+        const youtubePath = 'https://www.youtube.com/embed/';
+
+        this.trailerPath = `${youtubePath}${youtubeId}`;
+        console.log('trailerPath: ', this.trailerPath);
+      });
+
+    this.subscription.add(trailerSubscription);
   }
 
 }
