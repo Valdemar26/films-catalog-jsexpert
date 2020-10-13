@@ -2,7 +2,6 @@
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  position: relative;
   background: linear-gradient(to right, rgba(14.12%, 14.51%, 16.86%, 1.00) 150px, rgba(22.35%, 22.35%, 22.35%, 0.84) 100%);
 
   .poster {
@@ -13,71 +12,102 @@
   }
 
   .film-info {
-    padding-left: 20px;
     width: 100%;
     height: 100%;
-
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    filter: blur(5px) grayscale(80%);
-  }
+    position: relative;
+    filter: grayscale(80%);
 
-  .film-info-content {
-    position: absolute;
-    top: 15px;
-    left: 36%;
+    .film-info-content {
+      width: calc(100% - 20px);
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding-left: 20px;
 
-    h2 {
-      font-size: 32px;
-      color: #fff;
-      margin-bottom: 0;
+      h2 {
+        padding-top: 20px;
+        font-size: 32px;
+        color: #fff;
+        margin-bottom: 0;
 
-      span {
+        span {
+          color: #ccc;
+          font-size: 16px;
+        }
+      }
+
+      h3 {
         color: #ccc;
+        font-size: 13px;
+      }
+
+      h4 {
+        color: #fff;
         font-size: 16px;
+        font-weight: bold;
+        margin-top: 16px;
+      }
+
+      p {
+        font-size: 15px;
+        line-height: 24px;
+        color: #fff;
       }
     }
 
-    h3 {
-      color: #ccc;
-      font-size: 13px;
-    }
-
-    h4 {
-      color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 16px;
-    }
-
-    p {
-      font-size: 15px;
-      line-height: 24px;
-      color: #fff;
+    button {
+      position: absolute;
+      bottom: 20px;
+      background-color: red;
+      margin-left: 20px;
     }
   }
 
-  button {
-    position: absolute;
-    bottom: 20px;
-    left: 36%;
-  }
+
 }
 
 .film-heroes {
-  border: 1px solid red;
   display: flex;
+  flex-direction: column;
   width: calc(100% - 40px);
   margin: 20px;
   height: 350px;
   overflow-x: scroll;
 
-  span {
+  h3 {
+    color: #ccc;
+    font-size: 13px;
+  }
 
-    img {
-      width: 150px;
-      height: auto;
+  .hero-wrapper {
+    display: flex;
+
+    .hero {
+      display: flex;
+      flex-direction: column-reverse;
+      margin: 10px;
+      border: 1px solid #ebebeb;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      span {
+        font-size: 12px;
+        color: #ccc;
+
+        &.actor-name {
+          font-weight: bold;
+          font-size: 14px;
+        }
+      }
+
+      img {
+        width: 150px;
+        height: auto;
+        border-radius: 10px 10px 0 0;
+      }
     }
   }
+
 }
