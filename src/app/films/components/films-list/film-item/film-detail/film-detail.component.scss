@@ -1,3 +1,5 @@
+@import "../../../../../../assets/scss/mixins/mixin-scroll";
+
 .exp-film-detail-wrapper {
   padding: 20px;
   display: grid;
@@ -60,25 +62,24 @@
     button {
       position: absolute;
       bottom: 20px;
-      background-color: red;
       margin-left: 20px;
     }
   }
-
-
 }
 
 .film-heroes {
   display: flex;
   flex-direction: column;
   width: calc(100% - 40px);
-  margin: 20px;
-  height: 350px;
-  overflow-x: scroll;
+  height: auto;
+  overflow-x: auto;
+  margin: 50px auto;
+  @include scroll();
 
   h3 {
-    color: #ccc;
-    font-size: 13px;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
   }
 
   .hero-wrapper {
@@ -90,15 +91,29 @@
       margin: 10px;
       border: 1px solid #ebebeb;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
-      span {
-        font-size: 12px;
-        color: #ccc;
+      .hero-info {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
 
-        &.actor-name {
-          font-weight: bold;
-          font-size: 14px;
+        span {
+          font-size: 13px;
+          color: #898989;
+          line-height: 24px;
+
+          &.actor-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            transition: 0.3s ease-in;
+
+            &:hover {
+              color: #4056b5;
+              cursor: pointer;
+            }
+          }
         }
       }
 

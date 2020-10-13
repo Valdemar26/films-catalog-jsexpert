@@ -33,9 +33,13 @@
 
   <div class="hero-wrapper">
     <div class="hero" *ngFor="let hero of heroesList">
-      <span>{{ hero.name }}</span>
-      <span class="actor-name">{{ hero.character }}</span>
-      <img [src]="imagePath + hero.profile_path" alt="hero">
+      <div class="hero-info">
+        <span class="actor-name">{{ hero.name.toString().length ? hero.name : 'No Actor Name' }}</span>
+        <span>{{ hero.character.toString().length ? hero.character : 'No Character Name' }}</span>
+      </div>
+
+      <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path">
+      <img src="assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
     </div>
   </div>
 
