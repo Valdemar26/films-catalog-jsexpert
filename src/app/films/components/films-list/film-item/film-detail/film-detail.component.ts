@@ -1,12 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import {DomSanitizer} from '@angular/platform-browser';
 
 import { Subscription} from 'rxjs';
 
 import { FilmInterface } from '../../../../interfaces/film.interface';
 import { DataService } from '../../../../services/data.service';
-import {DomSanitizer} from "@angular/platform-browser";
+import {ModalComponent} from '../../../../../shared/components/modal/modal.component';
 
 
 @Component({
@@ -15,6 +24,9 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./film-detail.component.scss']
 })
 export class FilmDetailComponent implements OnInit, OnDestroy {
+
+  @ViewChild('modalContainer', { read: ViewContainerRef }) container;
+  componentRef: ComponentRef<any>;
 
   public filmDetail: FilmInterface;
 
@@ -34,7 +46,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private resolver: ComponentFactoryResolver
     ) { }
 
   public ngOnInit(): void {
@@ -59,13 +72,19 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  public openTrailerModal(): void {
+    console.log(this.trailerPath);
+
+    this.container.clear();
+    const factory = this.resolver.resolveComponentFactory(ModalComponent);
+    this.componentRef = this.container.createComponent(factory);
+    // this.componentRef.instance.type = type;
   }
 
-  // private getFullFilmInfoById(): void {
-  //   this.dataService.getFullFilmInfo().subscribe((data) => console.log('HARDCODED: ', data));
-  // }
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.componentRef.destroy();
+  }
 
   private initFilmSubscription(): void {
     const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
@@ -96,7 +115,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
         const youtubePath = 'https://www.youtube.com/embed/';
 
         this.trailerPath = `${youtubePath}${youtubeId}`;
-        console.log('trailerPath: ', this.trailerPath);
       });
 
     this.subscription.add(trailerSubscription);
