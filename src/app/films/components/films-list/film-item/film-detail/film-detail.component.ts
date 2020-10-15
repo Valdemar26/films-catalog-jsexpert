@@ -9,13 +9,15 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { Subscription} from 'rxjs';
 
+import { FilmService } from '../../../../services/film.service';
+import { FilmDetailService } from '../../../../services/film-detail.service';
+
 import { FilmInterface } from '../../../../interfaces/film.interface';
-import { DataService } from '../../../../services/data.service';
-import {ModalComponent} from '../../../../../shared/components/modal/modal.component';
+import { ModalComponent } from '../../../../../shared/components/modal/modal.component';
 
 
 @Component({
@@ -39,12 +41,12 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   public heroesList;
-
-  public isModalShown: boolean;
+  public similarList;
 
 
   constructor(
-    private dataService: DataService,
+    private filmService: FilmService,
+    private filmDetailService: FilmDetailService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -58,16 +60,13 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.initFilmDetail();
     this.initFilmHeroes();
     this.getFilmTrailer();
+    this.getSimilarFilms();
 
     // this.getFullFilmInfoById();
   }
 
-  private getFilmIdFromUrl(): number {
-    return this.filmId = this.route.snapshot.params['id'];
-  }
-
   public initFilmDetail(): void {
-    this.dataService.getFilmById(this.filmId);
+    this.filmService.getFilmById(this.filmId);
   }
 
   public back(): void {
@@ -95,7 +94,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   private initFilmSubscription(): void {
-    const filmSubscription = this.dataService.getFilmObservable().subscribe((film: FilmInterface) => {
+    const filmSubscription = this.filmService.getFilmObservable().subscribe((film: FilmInterface) => {
       if (film) {
         this.filmDetail = film;
       }
@@ -106,7 +105,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   private initFilmHeroes(): void {
-    const heroesSubscription = this.dataService.getFilmHeroes(this.filmId)
+    const heroesSubscription = this.filmDetailService.getFilmHeroes(this.filmId)
       .subscribe((heroes) => {
         this.heroesList = heroes.cast;
         console.log(this.heroesList);
@@ -117,7 +116,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   private getFilmTrailer(): void {
 
-    const trailerSubscription = this.dataService.getTrailerByFilmId(this.filmId)
+    const trailerSubscription = this.filmDetailService.getTrailerByFilmId(this.filmId)
       .subscribe((trailer) => {
         const youtubeId = trailer.results[0].key;
         const youtubePath = 'https://www.youtube.com/embed/';
@@ -126,6 +125,20 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
       });
 
     this.subscription.add(trailerSubscription);
+  }
+
+  private getFilmIdFromUrl(): number {
+    return this.filmId = this.route.snapshot.params['id'];
+  }
+
+  private getSimilarFilms(): any {
+
+    const similarFilmsSubscription = this.filmDetailService.getSimilarFilmsById(this.filmId)
+      .subscribe((similar) => {
+        this.similarList = similar.results;
+      });
+
+    this.subscription.add(similarFilmsSubscription);
   }
 
 }

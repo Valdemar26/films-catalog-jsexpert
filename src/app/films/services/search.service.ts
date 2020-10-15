@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { DataService } from './data.service';
+import { FilmService } from './film.service';
 
 
 @Injectable({
@@ -8,7 +8,7 @@ import { DataService } from './data.service';
 })
 export class SearchService {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: FilmService) { }
 
   public searchFilms(event): any {
     console.log(event);
