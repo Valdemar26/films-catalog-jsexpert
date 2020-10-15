@@ -12,11 +12,13 @@ exp-modal {
 }
 
 .exp-modal-content {
+  display: flex;
+  flex-direction: column;
   position: relative;
   z-index: 1000;
   font-family: sans-serif;
-  width: 80vw;
-  height: 80vh;
+  width: 50vw;
+  height: 50vh;
   padding: 24px;
   background: #fff;
   color: #002A30;
@@ -24,17 +26,21 @@ exp-modal {
   box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2), 0 24px 38px 3px rgba(0, 0, 0, .14), 0 9px 46px 8px rgba(0, 0, 0, .12);
 
   .trailer-wrapper {
-    margin: 20px auto;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 
     iframe {
       width: 90%;
-      height: auto;
+      height: 90%;
+      border: none;
     }
   }
 
   .exp-modal-title {
     margin-bottom: 10px;
     text-align: center;
+    font-size: 20px;
   }
 
   .exp-modal-close {
@@ -43,8 +49,8 @@ exp-modal {
     top: 10px;
 
     .exp-modal-close-icon {
-      width: 14px;
-      height: 14px;
+      width: 20px;
+      height: 20px;
       display: flex;
       cursor: pointer;
     }
