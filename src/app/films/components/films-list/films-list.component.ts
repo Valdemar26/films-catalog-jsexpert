@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import { FilmInterface } from '../../interfaces/film.interface';
-import { DataService } from '../../services/data.service';
+import { FilmService } from '../../services/film.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private dataService: DataService,
+    private dataService: FilmService,
   ) {
   }
 

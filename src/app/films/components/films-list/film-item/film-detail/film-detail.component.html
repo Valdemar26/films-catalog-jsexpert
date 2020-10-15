@@ -43,10 +43,30 @@
       </div>
 
       <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path">
-      <img src="assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
+      <img src="../../../../../../assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
     </div>
   </div>
 
+</div>
+
+<div class="film-similar">
+  <h3>Similar Movies</h3>
+
+  <div class="film-similar-wrapper">
+
+    <div class="similar" *ngFor="let similar of similarList">
+
+      <div class="similar-info">
+        <span>{{ similar.title }}</span>
+        <span>{{ similar.vote_average }}</span>
+      </div>
+
+      <div class="poster">
+        <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <ng-template #modalContainer></ng-template>

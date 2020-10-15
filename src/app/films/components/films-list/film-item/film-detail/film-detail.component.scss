@@ -84,7 +84,7 @@
   }
 }
 
-.film-heroes {
+.film-heroes, .film-similar {
   display: flex;
   flex-direction: column;
   width: calc(100% - 40px);
@@ -99,10 +99,10 @@
     font-weight: bold;
   }
 
-  .hero-wrapper {
+  .hero-wrapper, .film-similar-wrapper {
     display: flex;
 
-    .hero {
+    .hero, .similar {
       display: flex;
       flex-direction: column-reverse;
       margin: 10px;
@@ -110,7 +110,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
-      .hero-info {
+      .hero-info, .similar-info {
         padding: 10px;
         display: flex;
         flex-direction: column;

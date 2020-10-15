@@ -4,7 +4,7 @@ import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, skipWhile, switchMap, tap } from 'rxjs/operators';
 
 import { FilmInterface } from '../../interfaces/film.interface';
-import { DataService } from '../../services/data.service';
+import { FilmService } from '../../services/film.service';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ToolbarComponent implements OnInit {
   public favoriteFilmsCounter: number;
 
   constructor(
-    public dataService: DataService
+    public dataService: FilmService
   ) { }
 
   ngOnInit(): void {
