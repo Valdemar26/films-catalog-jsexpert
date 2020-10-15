@@ -40,6 +40,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public heroesList;
 
+  public isModalShown: boolean;
+
 
   constructor(
     private dataService: DataService,
@@ -79,6 +81,12 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
     this.componentRef.instance.trailerPath = this.trailerPath;
     this.componentRef.instance.filmTitle = this.filmDetail.original_title;
+    this.componentRef.instance.output = this.modalClosed;
+  }
+
+  public modalClosed(isClosed): void {
+    console.log(isClosed);
+    this.container.clear();
   }
 
   public ngOnDestroy(): void {

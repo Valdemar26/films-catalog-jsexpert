@@ -1,16 +1,20 @@
-<div class="exp-modal-content">
-  <h3 class="exp-modal-title">"{{ filmTitle }}" official trailer</h3>
+<div class="modal-wrapper" #modalWrapperContainer>
+  <div class="exp-modal-content">
+    <h3 class="exp-modal-title">"{{ filmTitle }}" official trailer</h3>
 
-  <div class="trailer-wrapper">
-    <iframe [src]="trailerPath | safeUrl" allowfullscreen></iframe>
+    <div class="trailer-wrapper">
+      <iframe [src]="trailerPath | safeUrl" allowfullscreen></iframe>
+    </div>
+
+    <div class="exp-modal-close">
+      <img src="../../../../assets/images/close.png" alt="close" class="exp-modal-close-icon"
+           (click)="closeModal()">
+    </div>
   </div>
 
-  <div class="exp-modal-close">
-    <img src="../../../../assets/images/close.png" alt="close" class="exp-modal-close-icon"
-         (click)="dismiss()">
-  </div>
+  <div class="exp-modal-backdrop" (click)="closeModal()"></div>
 </div>
 
-<div class="exp-modal-backdrop" (click)="dismiss()"></div>
+
 
 
