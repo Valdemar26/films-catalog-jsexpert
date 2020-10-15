@@ -90,7 +90,10 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    this.componentRef.destroy();
+
+    if (this.componentRef) {
+      this.componentRef.destroy();
+    }
   }
 
   private initFilmSubscription(): void {
