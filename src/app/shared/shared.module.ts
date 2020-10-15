@@ -11,7 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
-
+import { SafeUrlPipe } from './pipe/safe-url.pipe';
 
 
 @NgModule({
@@ -20,7 +20,8 @@ import { ModalComponent } from './components/modal/modal.component';
     HeaderComponent,
     LoaderComponent,
     RatingComponent,
-    ModalComponent
+    ModalComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,

@@ -1,16 +1,16 @@
 <div class="exp-modal-content">
-  <h3 class="exp-modal-title">Title</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, maiores!</p>
+  <h3 class="exp-modal-title">{{ filmTitle }}</h3>
+
+  <div class="trailer-wrapper">
+    <iframe [src]="trailerPath | safeUrl" allowfullscreen></iframe>
+  </div>
 
   <div class="exp-modal-close">
     <img src="../../../../assets/images/close.png" alt="close" class="exp-modal-close-icon"
          (click)="dismiss()">
-
-    <div class="exp-modal-buttons-wrapper">
-      <button class="exp-button">Ok</button>
-    </div>
   </div>
 </div>
 
 <div class="exp-modal-backdrop" (click)="dismiss()"></div>
+
 

@@ -73,12 +73,12 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public openTrailerModal(): void {
-    console.log(this.trailerPath);
-
     this.container.clear();
     const factory = this.resolver.resolveComponentFactory(ModalComponent);
     this.componentRef = this.container.createComponent(factory);
-    // this.componentRef.instance.type = type;
+
+    this.componentRef.instance.trailerPath = this.trailerPath;
+    this.componentRef.instance.filmTitle = this.filmDetail.original_title;
   }
 
   public ngOnDestroy(): void {

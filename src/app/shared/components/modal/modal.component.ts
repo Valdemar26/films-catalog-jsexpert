@@ -1,4 +1,6 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'exp-modal',
@@ -8,11 +10,21 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class ModalComponent implements OnInit {
 
-  constructor() { }
+  @Input() trailerPath;
+  @Input() filmTitle;
+
+  constructor(
+    private sanitizer: DomSanitizer
+  ) {
+      this.sanitizer.bypassSecurityTrustResourceUrl(this.trailerPath);
+  }
 
   ngOnInit(): void {
   }
 
   public dismiss(): void {}
 
+  public closeModal(): void {
+
+  }
 }
