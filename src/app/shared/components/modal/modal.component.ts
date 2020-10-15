@@ -1,4 +1,14 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -8,23 +18,29 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./modal.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
 
   @Input() trailerPath;
   @Input() filmTitle;
 
-  constructor(
-    private sanitizer: DomSanitizer
-  ) {
-      this.sanitizer.bypassSecurityTrustResourceUrl(this.trailerPath);
-  }
+  @Output() modalClose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  ngOnInit(): void {
-  }
+  @ViewChild('modalWrapperContainer') modalWrapperContainer: TemplateRef<ModalComponent>;
 
-  public dismiss(): void {}
+  private modalContainer: ComponentRef<ModalComponent>;
+
+  public onInit(): void {
+    this.modalClose.emit(true);
+  }
 
   public closeModal(): void {
+    console.log('close');
+    this.modalClose.emit(false);
+    console.log(this.modalWrapperContainer.elementRef.nativeElement);
+
+    if (this.modalWrapperContainer.elementRef.nativeElement) {
+      this.modalWrapperContainer.elementRef.nativeElement.destroy();
+    }
 
   }
 }

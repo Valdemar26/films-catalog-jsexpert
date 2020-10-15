@@ -1,4 +1,4 @@
-<div class="exp-film-detail-wrapper">
+<div class="exp-film-detail-wrapper" *ngIf="filmDetail">
   <div class="poster">
     <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">
   </div>
@@ -49,5 +49,8 @@
 
 </div>
 
+<ng-template #modalContainer></ng-template>
 
-<template #modalContainer></template>
+<!--<ng-container #modalContainer (modalClose)="modalClosed($event)"></ng-container>-->
+<!--<template #modalContainer></template>-->
+
