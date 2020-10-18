@@ -16,8 +16,9 @@ import { Subscription} from 'rxjs';
 import { FilmService } from '../../../../services/film.service';
 import { FilmDetailService } from '../../../../services/film-detail.service';
 
-import { FilmInterface } from '../../../../interfaces/film.interface';
+
 import { ModalComponent } from '../../../../../shared/components/modal/modal.component';
+import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   @ViewChild('modalContainer', { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
 
-  public filmDetail: FilmInterface;
+  public filmDetail: FilmListInterface;
 
   public imagePath = 'https://image.tmdb.org/t/p/w500';
   public backdropPath = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
@@ -97,7 +98,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   private initFilmSubscription(): void {
-    const filmSubscription = this.filmService.getFilmObservable().subscribe((film: FilmInterface) => {
+    const filmSubscription = this.filmService.getFilmObservable().subscribe((film: FilmListInterface) => {
       if (film) {
         this.filmDetail = film;
       }

@@ -5,9 +5,11 @@ import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
-import { FilmInterface } from '../interfaces/film.interface';
+
 import { GenresListInterface } from '../interfaces/genres-list.interface';
 import { GenresInterface } from '../interfaces/genres.interface';
+import { FilmListInterface } from '../interfaces/film-list.interface';
+import {FilmInterface} from '../interfaces/film.interface';
 
 
 @Injectable({
@@ -23,28 +25,24 @@ export class FilmService {
 
   private count = 1;
 
-  private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
-  private filmListArray: FilmInterface[] = [];
+  private filmList$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject(null);
+  private filmListArray: FilmListInterface[] = [];
 
   private genresList$: BehaviorSubject<any[]> = new BehaviorSubject(null);
 
   private favoriteFilmsCount$: Subject<number> = new Subject();
   private favoriteFilmsArray = [];
 
-  private currentFilm$: Subject<FilmInterface> = new Subject<FilmInterface>();
+  private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
 
   constructor(private http: HttpClient) { }
 
   public initFilmList(): Observable<any> {
 
     return this.http.get(this.popularFilmUrl).pipe(
-      map((filmList: any) => {
-
-        const transformedFilmList = filmList.results.map((film: FilmInterface) => film);
-
-        this.updateFilmList(transformedFilmList);
-
-        return {...filmList, results: transformedFilmList};
+      tap((filmList: FilmInterface) => {
+        console.log(filmList);
+        this.updateFilmList(filmList.results);
       }),
       catchError( (error) => error)
     );
@@ -53,12 +51,13 @@ export class FilmService {
   public getMoreFilms(): Subscription {
     this.count++;
     return this.http.get(`${this.nextPagePopularFilmUrl}${this.count}`)
-      .subscribe((films: any) => {
+      .subscribe((films: FilmInterface) => {
+        console.log(films);
         this.updateFilmList(films.results);
       });
   }
 
-  public updateFilmList(value: FilmInterface[]): void {
+  public updateFilmList(value: FilmListInterface[]): void {
     if (value && value.length) {
       value.forEach((val) => this.filmListArray.push(val));
       this.filmList$.next(this.filmListArray);
@@ -67,7 +66,7 @@ export class FilmService {
     }
   }
 
-  public get getFilmList(): Observable<FilmInterface[]> {
+  public get getFilmList(): Observable<FilmListInterface[]> {
     return this.filmList$.asObservable();
   }
 
@@ -75,7 +74,7 @@ export class FilmService {
     return this.genresList$.asObservable();
   }
 
-  public setFavoriteFilm(film: FilmInterface): void {
+  public setFavoriteFilm(film: FilmListInterface): void {
     if (film.isFavorite) {
       this.favoriteFilmsArray.push(film.id);
       localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
@@ -95,8 +94,10 @@ export class FilmService {
   public sortFilmByTitle(value): Subscription {
     const direction = !!parseInt(value, 10) ? -1 : 1;
 
-    return this.getFilmList.subscribe((films: FilmInterface[]) => {
-      return films.sort((a: FilmInterface, b: FilmInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1));
+    return this.getFilmList.subscribe((films: FilmListInterface[]) => {
+      return films.sort(
+        (a: FilmListInterface, b: FilmListInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+      );
     });
   }
 
@@ -105,22 +106,23 @@ export class FilmService {
       tap((genres: GenresInterface) => {
         console.log('genres: ', genres);
         this.genresList$.next(genres.genres);
-      })
+      }),
+      catchError( (error) => error)
     );
   }
 
   public getFilmById(id: number): any {
-    this.getFilmList.subscribe((filmList: FilmInterface[]) => {
+    this.getFilmList.subscribe((filmList: FilmListInterface[]) => {
       this.filmListArray = filmList;
     });
 
     if (this.filmListArray && this.filmListArray.length) {
-      const currentFilm = this.filmListArray.find((film: FilmInterface) => film.id === Number(id));
+      const currentFilm = this.filmListArray.find((film: FilmListInterface) => film.id === Number(id));
       this.currentFilm$.next(currentFilm);
     }
   }
 
-  public getFilmObservable(): Observable<FilmInterface> {
+  public getFilmObservable(): Observable<FilmListInterface> {
     return this.currentFilm$.asObservable();
   }
 

@@ -3,8 +3,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, skipWhile, switchMap, tap } from 'rxjs/operators';
 
-import { FilmInterface } from '../../interfaces/film.interface';
+
 import { FilmService } from '../../services/film.service';
+import { FilmListInterface } from '../../interfaces/film-list.interface';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ToolbarComponent implements OnInit {
 
   @ViewChild('searchRef') searchRef: ElementRef;
 
-  public filmsList: FilmInterface[];
+  public filmsList: FilmListInterface[];
   public sortingMethod: number;
   public favoriteFilmsCounter: number;
 
@@ -62,7 +63,7 @@ export class ToolbarComponent implements OnInit {
 
   private getFilteredFilms(currentInputValue): Observable<any> {
     return of(this.filmsList).pipe(
-      map((arrOfFilms: FilmInterface[]) => {
+      map((arrOfFilms: FilmListInterface[]) => {
         console.log('arrOfFilms: ', arrOfFilms);
         return arrOfFilms.filter((item) => item.title.includes(currentInputValue));
       })
