@@ -57,9 +57,9 @@ export class FilmService {
       });
   }
 
-  public updateFilmList(value: FilmListInterface[]): void {
-    if (value && value.length) {
-      value.forEach((val) => this.filmListArray.push(val));
+  public updateFilmList(list: FilmListInterface[]): void {
+    if (list && list.length) {
+      this.filmListArray = this.filmListArray.concat(list);
       this.filmList$.next(this.filmListArray);
 
       console.log('films: ', this.filmListArray);
@@ -77,12 +77,12 @@ export class FilmService {
   public setFavoriteFilm(film: FilmListInterface): void {
     if (film.isFavorite) {
       this.favoriteFilmsArray.push(film.id);
-      localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
     } else {
       const index = this.favoriteFilmsArray.indexOf(film.id);
       this.favoriteFilmsArray.splice(index, 1);
-      localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
     }
+
+    localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
 
     this.favoriteFilmsCount$.next(this.favoriteFilmsArray.length);
   }
@@ -112,10 +112,6 @@ export class FilmService {
   }
 
   public getFilmById(id: number): any {
-    this.getFilmList.subscribe((filmList: FilmListInterface[]) => {
-      this.filmListArray = filmList;
-    });
-
     if (this.filmListArray && this.filmListArray.length) {
       const currentFilm = this.filmListArray.find((film: FilmListInterface) => film.id === Number(id));
       this.currentFilm$.next(currentFilm);

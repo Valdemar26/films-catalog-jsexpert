@@ -56,14 +56,14 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     ) { }
 
   public ngOnInit(): void {
+    window.scroll(0, 0);
+
     this.initFilmSubscription();
     this.getFilmIdFromUrl();
     this.initFilmDetail();
     this.initFilmHeroes();
     this.getFilmTrailer();
     this.getSimilarFilms();
-
-    // this.getFullFilmInfoById();
   }
 
   public initFilmDetail(): void {
@@ -79,9 +79,10 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     const factory = this.resolver.resolveComponentFactory(ModalComponent);
     this.componentRef = this.container.createComponent(factory);
 
+    this.componentRef.instance.parentRef = this.componentRef;
+
     this.componentRef.instance.trailerPath = this.trailerPath;
     this.componentRef.instance.filmTitle = this.filmDetail.original_title;
-    this.componentRef.instance.output = this.modalClosed;
   }
 
   public modalClosed(isClosed): void {

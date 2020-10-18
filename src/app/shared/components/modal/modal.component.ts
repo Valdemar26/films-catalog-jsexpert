@@ -1,14 +1,4 @@
-import {
-  Component,
-  ComponentRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 
 @Component({
@@ -21,25 +11,10 @@ export class ModalComponent {
 
   @Input() trailerPath;
   @Input() filmTitle;
-
-  @Output() modalClose: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  @ViewChild('modalWrapperContainer') modalWrapperContainer: TemplateRef<ModalComponent>;
-
-  private modalContainer: ComponentRef<ModalComponent>;
-
-  public onInit(): void {
-    this.modalClose.emit(true);
-  }
+  @Input() parentRef;
 
   public closeModal(): void {
-    console.log('close');
-    this.modalClose.emit(false);
-    console.log(this.modalWrapperContainer.elementRef.nativeElement);
-
-    if (this.modalWrapperContainer.elementRef.nativeElement) {
-      this.modalWrapperContainer.elementRef.nativeElement.destroy();
-    }
-
+    this.parentRef.destroy();
+    this.parentRef = null;
   }
 }
