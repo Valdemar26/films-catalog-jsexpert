@@ -25,8 +25,11 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.initFilmsList();
-    this.initGenresList();
+    // this.initFilmsList();
+    // this.initGenresList();
+
+
+    this.initFilmListAndGenres();
   }
 
   public get getFilmsList(): Observable<FilmListInterface[]> {
@@ -66,5 +69,34 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
     this.subscription.add(genresSubscription);
   }
+
+
+  private initFilmListAndGenres(): void {
+    this.subscription.add(
+      this.dataService.initFilmList()
+        .subscribe()
+    );
+
+    this.subscription.add(
+      this.dataService.initGenresList()
+        .subscribe()
+    );
+  }
+
+  //
+  // private initData() {
+  //   this.subscription.add(
+  //     this.dataService.getFilmList.subscribe()
+  //   );
+  //   // option 1
+  //   // this.subscription.add(
+  //   //   this.dataService.getGenres().subscribe(genres => {
+  //   //     this.genresList = genres.genres;
+  //   //   })
+  //   // );
+  //
+  //   // option 2
+  //   this.genresList = this.dataService.genresList;
+  // }
 
 }
