@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
+import {FilmListInterface} from '../../../interfaces/film-list.interface';
 
-import { FilmInterface } from '../../../interfaces/film.interface';
 
 
 @Component({
@@ -13,10 +13,10 @@ import { FilmInterface } from '../../../interfaces/film.interface';
 })
 export class FilmItemComponent implements OnInit, OnDestroy {
 
-  @Input() film: FilmInterface;
+  @Input() film: FilmListInterface;
   @Input() genresList: any;
 
-  @Output() favoriteFilm: EventEmitter<FilmInterface> = new EventEmitter<FilmInterface>();
+  @Output() favoriteFilm: EventEmitter<FilmListInterface> = new EventEmitter<FilmListInterface>();
 
   public imagePath: string;
   public genres = [];
@@ -34,7 +34,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     return this.imagePath = 'https://image.tmdb.org/t/p/w500' + this.film.poster_path;
   }
 
-  public toggleFavoriteFilm(favoriteFilm: FilmInterface): void {
+  public toggleFavoriteFilm(favoriteFilm: FilmListInterface): void {
 
     favoriteFilm.isFavorite = !favoriteFilm.isFavorite;
 
@@ -56,7 +56,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  public openFilm(film: FilmInterface): any {
+  public openFilm(film: FilmListInterface): any {
     this.router.navigate(['/films/' + film.id]);
   }
 }

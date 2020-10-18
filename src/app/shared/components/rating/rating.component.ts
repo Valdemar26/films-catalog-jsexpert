@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {FilmInterface} from '../../../films/interfaces/film.interface';
+import { FilmListInterface } from '../../../films/interfaces/film-list.interface';
 
 @Component({
   selector: 'exp-rating',
@@ -8,7 +8,7 @@ import {FilmInterface} from '../../../films/interfaces/film.interface';
 })
 export class RatingComponent implements OnInit {
 
-  @Input() filmDetail: FilmInterface;
+  @Input() filmDetail: FilmListInterface;
 
   constructor() { }
 

@@ -2,9 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
-import { FilmInterface } from '../../interfaces/film.interface';
+
 import { FilmService } from '../../services/film.service';
-import {GenresListInterface} from '../../interfaces/genres-list.interface';
+import { GenresListInterface } from '../../interfaces/genres-list.interface';
+import { FilmListInterface } from '../../interfaces/film-list.interface';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.initGenresList();
   }
 
-  public get getFilmsList(): Observable<FilmInterface[]> {
+  public get getFilmsList(): Observable<FilmListInterface[]> {
     return this.dataService.getFilmList;
   }
 
@@ -36,7 +37,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     return this.dataService.getGenresList;
   }
 
-  public setFavoriteFilm(film: FilmInterface): void {
+  public setFavoriteFilm(film: FilmListInterface): void {
     this.dataService.setFavoriteFilm(film);
   }
 
