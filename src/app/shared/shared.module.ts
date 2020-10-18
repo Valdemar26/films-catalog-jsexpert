@@ -36,6 +36,7 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
     LoaderComponent,
     RatingComponent,
     ModalComponent
-  ]
+  ],
+  entryComponents: [ModalComponent]
 })
 export class SharedModule { }
