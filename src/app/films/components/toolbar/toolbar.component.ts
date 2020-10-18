@@ -29,7 +29,10 @@ export class ToolbarComponent implements OnInit {
     this.getCountOfFavoriteFilms();
     this.getFilmList();
 
-    this.favoriteFilmsCounter = JSON.parse(localStorage.getItem('favoriteFilms')).length;
+    if (localStorage.getItem('favoriteFilms') && localStorage.getItem('favoriteFilms').length) {
+      this.favoriteFilmsCounter = JSON.parse(localStorage.getItem('favoriteFilms')).length;
+    }
+
   }
 
   public transform(value): Subscription {
