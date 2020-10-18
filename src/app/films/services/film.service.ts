@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
 import { FilmInterface } from '../interfaces/film.interface';
+import { GenresListInterface } from '../interfaces/genres-list.interface';
+import { GenresInterface } from '../interfaces/genres.interface';
 
 
 @Injectable({
@@ -23,6 +25,8 @@ export class FilmService {
 
   private filmList$: BehaviorSubject<FilmInterface[]> = new BehaviorSubject(null);
   private filmListArray: FilmInterface[] = [];
+
+  private genresList$: BehaviorSubject<any[]> = new BehaviorSubject(null);
 
   private favoriteFilmsCount$: Subject<number> = new Subject();
   private favoriteFilmsArray = [];
@@ -67,6 +71,10 @@ export class FilmService {
     return this.filmList$.asObservable();
   }
 
+  public get getGenresList(): Observable<GenresListInterface[]> {
+    return this.genresList$.asObservable();
+  }
+
   public setFavoriteFilm(film: FilmInterface): void {
     if (film.isFavorite) {
       this.favoriteFilmsArray.push(film.id);
@@ -92,8 +100,13 @@ export class FilmService {
     });
   }
 
-  public getGenres(): any {
-    return this.http.get(this.genresUrl);
+  public initGenresList(): Observable<any> {
+    return this.http.get(this.genresUrl).pipe(
+      tap((genres: GenresInterface) => {
+        console.log('genres: ', genres);
+        this.genresList$.next(genres.genres);
+      })
+    );
   }
 
   public getFilmById(id: number): any {

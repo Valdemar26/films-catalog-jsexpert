@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 
 import { FilmInterface } from '../../interfaces/film.interface';
 import { FilmService } from '../../services/film.service';
+import {GenresListInterface} from '../../interfaces/genres-list.interface';
 
 
 @Component({
@@ -31,6 +32,10 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     return this.dataService.getFilmList;
   }
 
+  public get getGenresList(): Observable<GenresListInterface[]> {
+    return this.dataService.getGenresList;
+  }
+
   public setFavoriteFilm(film: FilmInterface): void {
     this.dataService.setFavoriteFilm(film);
   }
@@ -49,16 +54,14 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   private initFilmsList(): void {
     const filmsSubscription = this.dataService.initFilmList()
-      .subscribe(() => this.getFilmsList);
+      .subscribe();
 
     this.subscription.add(filmsSubscription);
   }
 
   private initGenresList(): void {
-    const genresSubscription = this.dataService.getGenres()
-      .subscribe((genres) => {
-        this.genresList = genres.genres;
-      });
+    const genresSubscription = this.dataService.initGenresList()
+      .subscribe();
 
     this.subscription.add(genresSubscription);
   }
