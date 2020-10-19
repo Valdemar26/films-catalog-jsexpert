@@ -1,7 +1,16 @@
-<exp-header></exp-header>
+<div [ngClass]="{'dark-theme': isDarkTheme | async}">
 
-<exp-loader></exp-loader>
+  <div class="mat-app-background">
 
-<router-outlet></router-outlet>
+    <exp-header></exp-header>
 
-<exp-footer></exp-footer>
+    <exp-loader></exp-loader>
+
+    <router-outlet></router-outlet>
+
+    <exp-footer></exp-footer>
+
+  </div>
+
+
+</div>

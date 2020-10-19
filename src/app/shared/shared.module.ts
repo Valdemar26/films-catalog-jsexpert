@@ -12,6 +12,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatSlideToggleModule,
     RouterModule
   ],
   exports: [

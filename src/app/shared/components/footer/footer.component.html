@@ -1,5 +1,13 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>© Copyright 2020</span>
+
+    <span class="menu-spacing"></span>
+
+    <mat-slide-toggle
+      [checked]="isDarkTheme | async"
+      (change)="toggleDarkTheme($event.checked)">
+        Dark theme
+    </mat-slide-toggle>
   </mat-toolbar-row>
 </mat-toolbar>
