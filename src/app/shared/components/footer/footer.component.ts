@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {ThemeService} from '../../../films/services/themes.service';
 
 @Component({
   selector: 'exp-footer',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  public isDarkTheme: Observable<boolean>;
 
-  ngOnInit(): void {
+  constructor(private themeService: ThemeService) { }
+
+  public ngOnInit(): void {
+    this.isDarkTheme = this.themeService.isDarkTheme;
   }
+
+  public toggleDarkTheme(checked: boolean): void {
+    this.themeService.setDarkTheme(checked);
+  }
+
 
 }
