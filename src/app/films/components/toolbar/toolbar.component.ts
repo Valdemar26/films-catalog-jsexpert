@@ -22,7 +22,7 @@ export class ToolbarComponent implements OnInit {
   public favoriteFilmsCounter: number;
 
   constructor(
-    public dataService: FilmService
+    public filmService: FilmService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   public transform(value): Subscription {
-    return this.dataService.sortFilmByTitle(value);
+    return this.filmService.sortFilmByTitle(value);
   }
 
   public searchFilmByTitle(): void {
@@ -58,27 +58,31 @@ export class ToolbarComponent implements OnInit {
 
     value.subscribe((data) => console.log('DATA: ', data));
 
-    // this.dataService.updateFilmList(value);
+    // this.filmService.updateFilmList(value);
   }
 
   private getFilteredFilms(currentInputValue): Observable<any> {
     return of(this.filmsList).pipe(
       map((arrOfFilms: FilmListInterface[]) => {
         console.log('arrOfFilms: ', arrOfFilms);
-        return arrOfFilms.filter((item) => item.title.includes(currentInputValue));
+        const filmResult = arrOfFilms.filter((item: FilmListInterface) => {
+          return item.original_title.includes(currentInputValue);
+        });
+        this.filmService.updateFilmListAfterSearch(filmResult);
+        return filmResult;
       })
     );
   }
 
   public getCountOfFavoriteFilms(): any {
-    return this.dataService.getCountFavoriteFilm().subscribe((data) => {
+    return this.filmService.getCountFavoriteFilm().subscribe((data) => {
       console.log('data: ', data);
       this.favoriteFilmsCounter = data;
     });
   }
 
   private getFilmList(): void {
-    this.dataService.getFilmList.subscribe((films) => this.filmsList = films);
+    this.filmService.getFilmList.subscribe((films) => this.filmsList = films);
   }
 
 }

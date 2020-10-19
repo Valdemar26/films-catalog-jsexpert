@@ -66,6 +66,12 @@ export class FilmService {
     }
   }
 
+  public updateFilmListAfterSearch(result: FilmListInterface[]): void {
+    if (result && result.length) {
+      this.filmList$.next(result);
+    }
+  }
+
   public get getFilmList(): Observable<FilmListInterface[]> {
     return this.filmList$.asObservable();
   }

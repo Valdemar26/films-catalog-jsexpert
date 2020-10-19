@@ -7,6 +7,7 @@ import { ActorsListComponent } from './actors/components/actors-list/actors-list
 import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
 import { FilmDetailComponent } from './films/components/films-list/film-item/film-detail/film-detail.component';
 import { FilmsResolver } from './films/services/film.resolver';
+import { FavoriteFilmsComponent } from './films/components/favorite-films/favorite-films.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   },
   { path: 'films/:id', component: FilmDetailComponent},
   { path: 'actors', component: ActorsListComponent },
+  { path: 'favorite-films', component: FavoriteFilmsComponent },
   { path: '**', redirectTo: 'main' }
 ];
 
