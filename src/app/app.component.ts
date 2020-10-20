@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ThemeService} from './films/services/themes.service';
-import {Observable} from 'rxjs';
+
+import { Observable } from 'rxjs';
+
+import { ThemesService } from './films/services/themes.service';
 
 @Component({
   selector: 'exp-root',
@@ -9,11 +11,11 @@ import {Observable} from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  isDarkTheme: Observable<boolean>;
+  public isDarkTheme: Observable<boolean>;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: ThemesService) {}
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.isDarkTheme = this.themeService.isDarkTheme;
   }
 
