@@ -1,1 +1,40 @@
-<p>favorite-films works!</p>
+<div class="exp-favorite-films-wrapper">
+
+  <div *ngFor="let film of favoriteFilmsList" class="exp-film-container">
+
+    <mat-card class="example-card">
+
+      <mat-card-header>
+        <mat-card-title>
+          {{ film.title.length > 25 ? (film.title | slice:0:25) + '...' : film.title }}
+        </mat-card-title>
+
+        <exp-rating [filmDetail]="film"></exp-rating>
+
+      </mat-card-header>
+
+      <img mat-card-image [src]="imagePath + film.poster_path" alt="film-item">
+
+      <img *ngIf="!film.poster_path" src="../../../../assets/images/not-available.jpg" alt="not-available">
+
+      <span class="release">{{ film.release_date }}</span>
+
+      <mat-card-content>
+        <exp-details-inner>
+          {{ film.overview ? film.overview : 'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}
+        </exp-details-inner>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" mat-button
+                (click)="removeFromFavoriteFilms(film)">
+          Remove from favorite
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  </div>
+
+</div>

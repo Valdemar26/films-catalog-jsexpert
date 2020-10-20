@@ -1,0 +1,10 @@
+.exp-favorite-films-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .exp-film-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

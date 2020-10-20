@@ -14,21 +14,31 @@
       </mat-form-field>
     </div>
 
-    <!--<form class="example-form">-->
-      <!--<mat-form-field class="example-full-width">-->
-        <!--<input type="text"-->
-               <!--placeholder="Pick one"-->
-               <!--aria-label="Number"-->
-               <!--matInput-->
-               <!--[formControl]="myControl"-->
-               <!--[matAutocomplete]="auto">-->
-        <!--<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">-->
-          <!--<mat-option *ngFor="let option of filteredOptions | async" [value]="option">-->
-            <!--{{option}}-->
-          <!--</mat-option>-->
-        <!--</mat-autocomplete>-->
-      <!--</mat-form-field>-->
-    <!--</form>-->
+
+    <form class="example-form" [formGroup]='searchForm'>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Choose a Film" [matAutocomplete]="auto" formControlName='searchInput'>
+      </mat-form-field>
+      <span>Your choice is: {{searchForm.get('searchInput').value | json}}</span>
+
+
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+
+        <mat-option *ngIf="isLoading" class="is-loading">
+          <mat-progress-spinner diameter="50"></mat-progress-spinner>
+        </mat-option>
+
+        <ng-container *ngIf="!isLoading">
+          <mat-option *ngFor="let film of filteredFilms" [value]="film">
+            <span>{{ film.title }}</span>
+            <small> | ID: {{ film.id }}</small>
+          </mat-option>
+        </ng-container>
+
+      </mat-autocomplete>
+
+    </form>
 
 
     <span class="menu-spacing"></span>
