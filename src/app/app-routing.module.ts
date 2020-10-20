@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { FilmsResolver } from './films/services/film.resolver';
 
 import { FilmsListComponent } from './films/components/films-list/films-list.component';
 import { ActorsListComponent } from './actors/components/actors-list/actors-list.component';
 import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
 import { FilmDetailComponent } from './films/components/films-list/film-item/film-detail/film-detail.component';
-import { FilmsResolver } from './films/services/film.resolver';
 import { FavoriteFilmsComponent } from './films/components/favorite-films/favorite-films.component';
 
 const routes: Routes = [

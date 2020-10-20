@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import {FilmListInterface} from '../../../interfaces/film-list.interface';
-
+import { FilmListInterface } from '../../../interfaces/film-list.interface';
 
 
 @Component({
