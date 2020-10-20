@@ -33,6 +33,9 @@ export class FilmService {
   private favoriteFilmsCount$: Subject<number> = new Subject();
   private favoriteFilmsArray = [];
 
+  private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
+  private favoriteFilmsList = [];
+
   private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
 
   constructor(private http: HttpClient) { }
@@ -83,6 +86,7 @@ export class FilmService {
   public setFavoriteFilm(film: FilmListInterface): void {
     if (film.isFavorite) {
       this.favoriteFilmsArray.push(film.id);
+      this.setFavoriteFilmsArray(film);
     } else {
       const index = this.favoriteFilmsArray.indexOf(film.id);
       this.favoriteFilmsArray.splice(index, 1);
@@ -95,6 +99,17 @@ export class FilmService {
 
   public getCountFavoriteFilm(): Observable<number> {
     return this.favoriteFilmsCount$.asObservable();
+  }
+
+  public getFavoriteFilmsArray(): Observable<FilmListInterface[]> {
+    return this.favoriteFilmsArray$.asObservable();
+  }
+
+  private setFavoriteFilmsArray(film: FilmListInterface): any {
+
+    this.favoriteFilmsList.push(film);
+    this.favoriteFilmsArray$.next(this.favoriteFilmsList);
+    localStorage.setItem('favoriteFilmsList', JSON.stringify(this.favoriteFilmsList));
   }
 
   public sortFilmByTitle(value): Subscription {

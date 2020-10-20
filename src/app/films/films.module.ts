@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -10,6 +11,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
@@ -31,13 +34,16 @@ import { FavoriteFilmsComponent } from './components/favorite-films/favorite-fil
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
     MatSelectModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ToolbarComponent

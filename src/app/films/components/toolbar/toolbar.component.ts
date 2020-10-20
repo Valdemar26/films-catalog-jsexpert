@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { fromEvent, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, skipWhile, switchMap, tap } from 'rxjs/operators';
-
+import {debounceTime, distinctUntilChanged, finalize, map, skipWhile, switchMap, tap} from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
@@ -21,19 +21,24 @@ export class ToolbarComponent implements OnInit {
   public sortingMethod: number;
   public favoriteFilmsCounter: number;
 
+  public searchForm: FormGroup;
+  public isLoading: boolean;
+  public filteredFilms: FilmListInterface[] = [];
+
   constructor(
-    public filmService: FilmService
+    public filmService: FilmService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    // this.checkFavoriteFilms();
     this.getCountOfFavoriteFilms();
     this.getFilmList();
+
+    this.initSearchForm();
 
     if (localStorage.getItem('favoriteFilms') && localStorage.getItem('favoriteFilms').length) {
       this.favoriteFilmsCounter = JSON.parse(localStorage.getItem('favoriteFilms')).length;
     }
-
   }
 
   public transform(value): Subscription {
@@ -64,7 +69,6 @@ export class ToolbarComponent implements OnInit {
   private getFilteredFilms(currentInputValue): Observable<any> {
     return of(this.filmsList).pipe(
       map((arrOfFilms: FilmListInterface[]) => {
-        console.log('arrOfFilms: ', arrOfFilms);
         const filmResult = arrOfFilms.filter((item: FilmListInterface) => {
           return item.original_title.includes(currentInputValue);
         });
@@ -74,15 +78,33 @@ export class ToolbarComponent implements OnInit {
     );
   }
 
-  public getCountOfFavoriteFilms(): any {
+  public getCountOfFavoriteFilms(): Subscription {
     return this.filmService.getCountFavoriteFilm().subscribe((data) => {
-      console.log('data: ', data);
       this.favoriteFilmsCounter = data;
     });
   }
 
+  public displayFn(user: any): void {
+    if (user) {
+      return user.name;
+    }
+  }
+
   private getFilmList(): void {
     this.filmService.getFilmList.subscribe((films) => this.filmsList = films);
+  }
+
+  private initSearchForm(): void {
+    this.searchForm = this.fb.group({
+      searchInput: ['']
+    });
+
+    this.searchForm.get('searchInput').valueChanges.pipe(
+      debounceTime(300),
+      tap(() => this.isLoading = true),
+      switchMap((currentInputValue) => this.getFilteredFilms(currentInputValue)),
+      tap(() => this.isLoading = false)
+    ).subscribe((films: FilmListInterface[]) => this.filteredFilms = films);
   }
 
 }

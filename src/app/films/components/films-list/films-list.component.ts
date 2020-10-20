@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
-
 import { FilmService } from '../../services/film.service';
 import { GenresListInterface } from '../../interfaces/genres-list.interface';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
@@ -15,8 +14,6 @@ import { FilmListInterface } from '../../interfaces/film-list.interface';
 })
 export class FilmsListComponent implements OnInit, OnDestroy {
 
-  public genresList = [];
-
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -25,10 +22,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    // this.initFilmsList();
-    // this.initGenresList();
-
-
     this.initFilmListAndGenres();
   }
 
@@ -56,21 +49,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  private initFilmsList(): void {
-    const filmsSubscription = this.dataService.initFilmList()
-      .subscribe();
-
-    this.subscription.add(filmsSubscription);
-  }
-
-  private initGenresList(): void {
-    const genresSubscription = this.dataService.initGenresList()
-      .subscribe();
-
-    this.subscription.add(genresSubscription);
-  }
-
-
   private initFilmListAndGenres(): void {
     this.subscription.add(
       this.dataService.initFilmList()
@@ -82,21 +60,5 @@ export class FilmsListComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
-
-  //
-  // private initData() {
-  //   this.subscription.add(
-  //     this.dataService.getFilmList.subscribe()
-  //   );
-  //   // option 1
-  //   // this.subscription.add(
-  //   //   this.dataService.getGenres().subscribe(genres => {
-  //   //     this.genresList = genres.genres;
-  //   //   })
-  //   // );
-  //
-  //   // option 2
-  //   this.genresList = this.dataService.genresList;
-  // }
 
 }
