@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { from, Subscription } from 'rxjs';
 import { FilmListInterface } from '../../../interfaces/film-list.interface';
+import { FilmService } from '../../../services/film.service';
+import { filter, reduce, switchMap, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private filmService: FilmService) { }
 
   public ngOnInit(): void {
     this.fetchPosterPath();
@@ -50,12 +52,29 @@ export class FilmItemComponent implements OnInit, OnDestroy {
       const item = this.genresList.filter((x) => x.id === genre);
 
       if (item.length) {
-        this.genres.push(item[0].name);
+        this.genres.push(item[0]);
       }
     });
   }
 
   public openFilm(film: FilmListInterface): any {
     this.router.navigate(['/films/' + film.id]);
+  }
+
+  public sortByGenres(id: number): void {
+    this.filmService.foundedSearchFilm.pipe(
+      tap((data) => console.log(data)),
+      switchMap((items: FilmListInterface[]) => {
+        return from(items);
+      }),
+      filter((film) => film.genre_ids.indexOf(id) > 0),
+      reduce((acc, item) => {
+        console.log('item: ', item);
+        return [...acc, item];
+      }, [])
+    ).subscribe((data) => {
+      console.log('DATA: ', data);
+      this.filmService.foundSearchFilm$.next(data);
+    });
   }
 }

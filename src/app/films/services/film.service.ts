@@ -36,7 +36,7 @@ export class FilmService {
   private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>([]);
   private favoriteFilmsList = [];
 
-  private foundSearchFilm$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
+  public foundSearchFilm$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
 
   private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
 
