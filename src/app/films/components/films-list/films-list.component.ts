@@ -25,8 +25,8 @@ export class FilmsListComponent implements OnInit, OnDestroy {
     this.initFilmListAndGenres();
   }
 
-  public get getFilmsList(): Observable<FilmListInterface[]> {
-    return this.filmService.getFilmList;
+  public get foundedSearchFilm(): Observable<FilmListInterface[]> {
+    return this.filmService.foundedSearchFilm;
   }
 
   public get getGenresList(): Observable<GenresListInterface[]> {

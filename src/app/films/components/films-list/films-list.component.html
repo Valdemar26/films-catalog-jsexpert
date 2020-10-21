@@ -7,7 +7,7 @@
   </mat-card>
 
 
-  <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmsList | async as filmsList">
+  <mat-grid-list cols="6" rowHeight="600px" *ngIf="foundedSearchFilm | async as filmsList">
 
     <mat-grid-tile colspan="2" *ngFor="let film of filmsList; trackBy: identify">
 
@@ -19,7 +19,7 @@
 
   </mat-grid-list>
 
-  <button mat-raised-button color="accent" mat-button class="more" *ngIf="getFilmsList | async as filmsList"
+  <button mat-raised-button color="accent" mat-button class="more" *ngIf="foundedSearchFilm | async as filmsList"
           (click)="loadMoreFilms()">More films</button>
 
 </div>

@@ -22,7 +22,6 @@
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Choose a Film" [matAutocomplete]="auto" formControlName='searchInput'>
       </mat-form-field>
-      <span>Your choice is: {{searchForm.get('searchInput').value | json}}</span>
 
 
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
