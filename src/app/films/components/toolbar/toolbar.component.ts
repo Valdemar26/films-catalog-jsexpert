@@ -19,7 +19,6 @@ export class ToolbarComponent implements OnInit {
 
   public filmsList: FilmListInterface[];
   public sortingMethod: number;
-  public favoriteFilmsCounter: number;
 
   public searchForm: FormGroup;
   public isLoading: boolean;
@@ -31,14 +30,9 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCountOfFavoriteFilms();
     this.getFilmList();
 
     this.initSearchForm();
-
-    if (localStorage.getItem('favoriteFilms') && localStorage.getItem('favoriteFilms').length) {
-      this.favoriteFilmsCounter = JSON.parse(localStorage.getItem('favoriteFilms')).length;
-    }
   }
 
   public transform(value): Subscription {
@@ -78,12 +72,8 @@ export class ToolbarComponent implements OnInit {
     );
   }
 
-  public getCountOfFavoriteFilms(): Subscription {
-    return this.filmService.getCountFavoriteFilm().subscribe((data) => {
-      this.favoriteFilmsCounter = data;
-    });
-
-    // return this.filmService.getCountFavoriteFilm();
+  public get getFavoriteFilmsCount(): Observable<number> {
+    return this.filmService.getCountFavoriteFilm();
   }
 
   public displayFn(user: any): void {
