@@ -1,6 +1,7 @@
 .exp-favorite-films-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 65px;
 
   .exp-film-container {
     display: flex;

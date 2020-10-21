@@ -30,10 +30,10 @@ export class FilmService {
 
   private genresList$: BehaviorSubject<any[]> = new BehaviorSubject(null);
 
-  private favoriteFilmsCount$: Subject<number> = new Subject();
+  private favoriteFilmsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private favoriteFilmsArray = [];
 
-  private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
+  private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>([]);
   private favoriteFilmsList = [];
 
   private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
@@ -95,6 +95,14 @@ export class FilmService {
     localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
 
     this.favoriteFilmsCount$.next(this.favoriteFilmsArray.length);
+  }
+
+  public removeFromFavoriteFilms(film: FilmListInterface): void {
+    this.favoriteFilmsList = this.favoriteFilmsList.filter((item) => item.id !== film.id);
+    localStorage.setItem('favoriteFilmsList', JSON.stringify(this.favoriteFilmsList));
+
+    this.favoriteFilmsCount$.next(this.favoriteFilmsList.length);
+    this.favoriteFilmsArray$.next(this.favoriteFilmsList);
   }
 
   public getCountFavoriteFilm(): Observable<number> {

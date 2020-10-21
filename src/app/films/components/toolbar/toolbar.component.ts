@@ -82,6 +82,8 @@ export class ToolbarComponent implements OnInit {
     return this.filmService.getCountFavoriteFilm().subscribe((data) => {
       this.favoriteFilmsCounter = data;
     });
+
+    // return this.filmService.getCountFavoriteFilm();
   }
 
   public displayFn(user: any): void {
