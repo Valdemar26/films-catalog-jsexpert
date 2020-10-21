@@ -17,7 +17,7 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private dataService: FilmService,
+    private filmService: FilmService,
   ) {
   }
 
@@ -26,19 +26,19 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   }
 
   public get getFilmsList(): Observable<FilmListInterface[]> {
-    return this.dataService.getFilmList;
+    return this.filmService.getFilmList;
   }
 
   public get getGenresList(): Observable<GenresListInterface[]> {
-    return this.dataService.getGenresList;
+    return this.filmService.getGenresList;
   }
 
   public setFavoriteFilm(film: FilmListInterface): void {
-    this.dataService.setFavoriteFilm(film);
+    this.filmService.setFavoriteFilm(film);
   }
 
   public loadMoreFilms(): void {
-    this.dataService.getMoreFilms();
+    this.filmService.getMoreFilms();
   }
 
   public identify(index, item): number {
@@ -51,12 +51,12 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   private initFilmListAndGenres(): void {
     this.subscription.add(
-      this.dataService.initFilmList()
+      this.filmService.initFilmList()
         .subscribe()
     );
 
     this.subscription.add(
-      this.dataService.initGenresList()
+      this.filmService.initGenresList()
         .subscribe()
     );
   }
