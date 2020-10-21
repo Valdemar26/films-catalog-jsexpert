@@ -44,7 +44,6 @@ export class ToolbarComponent implements OnInit {
     const value = fromEvent(this.searchRef.nativeElement, 'keyup').pipe(
       skipWhile((data) => !data),
       map((e: any) => {
-        console.log('e: ', e);
         return e.target.value;
       }),
       debounceTime(500),
@@ -56,15 +55,13 @@ export class ToolbarComponent implements OnInit {
     );
 
     value.subscribe((data) => console.log('DATA: ', data));
-
-    // this.filmService.updateFilmList(value);
   }
 
   private getFilteredFilms(currentInputValue): Observable<any> {
     return of(this.filmsList).pipe(
       map((arrOfFilms: FilmListInterface[]) => {
         const filmResult = arrOfFilms.filter((item: FilmListInterface) => {
-          return item.original_title.includes(currentInputValue);
+          return item.original_title.toLowerCase().includes(currentInputValue.toLowerCase());
         });
         this.filmService.updateFilmListAfterSearch(filmResult);
         return filmResult;

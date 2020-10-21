@@ -36,6 +36,8 @@ export class FilmService {
   private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>([]);
   private favoriteFilmsList = [];
 
+  private foundSearchFilm$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
+
   private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
 
   constructor(private http: HttpClient) { }
@@ -64,19 +66,22 @@ export class FilmService {
     if (list && list.length) {
       this.filmListArray = this.filmListArray.concat(list);
       this.filmList$.next(this.filmListArray);
-
-      console.log('films: ', this.filmListArray);
+      this.foundSearchFilm$.next(this.filmListArray);
     }
   }
 
   public updateFilmListAfterSearch(result: FilmListInterface[]): void {
     if (result && result.length) {
-      this.filmList$.next(result);
+      this.foundSearchFilm$.next(result);
     }
   }
 
   public get getFilmList(): Observable<FilmListInterface[]> {
     return this.filmList$.asObservable();
+  }
+
+  public get foundedSearchFilm(): Observable<FilmListInterface[]> {
+    return this.foundSearchFilm$.asObservable();
   }
 
   public get getGenresList(): Observable<GenresListInterface[]> {
@@ -123,7 +128,7 @@ export class FilmService {
   public sortFilmByTitle(value): Subscription {
     const direction = !!parseInt(value, 10) ? -1 : 1;
 
-    return this.getFilmList.subscribe((films: FilmListInterface[]) => {
+    return this.foundedSearchFilm.subscribe((films: FilmListInterface[]) => {
       return films.sort(
         (a: FilmListInterface, b: FilmListInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
       );
@@ -133,7 +138,6 @@ export class FilmService {
   public initGenresList(): Observable<any> {
     return this.http.get(this.genresUrl).pipe(
       tap((genres: GenresInterface) => {
-        console.log('genres: ', genres);
         this.genresList$.next(genres.genres);
       }),
       catchError( (error) => error)
