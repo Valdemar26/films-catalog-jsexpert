@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -12,7 +13,6 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
