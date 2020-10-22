@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { fromEvent, Observable, of, Subscription } from 'rxjs';
-import {debounceTime, distinctUntilChanged, finalize, map, skipWhile, switchMap, tap} from 'rxjs/operators';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, skipWhile } from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
@@ -20,19 +19,12 @@ export class ToolbarComponent implements OnInit {
   public filmsList: FilmListInterface[];
   public sortingMethod: number;
 
-  public searchForm: FormGroup;
-  public isLoading: boolean;
-  public filteredFilms: FilmListInterface[] = [];
-
   constructor(
-    public filmService: FilmService,
-    private fb: FormBuilder
+    public filmService: FilmService
   ) { }
 
   ngOnInit(): void {
     this.getFilmList();
-
-    this.initSearchForm();
   }
 
   public transform(value): Subscription {
@@ -47,53 +39,29 @@ export class ToolbarComponent implements OnInit {
         return e.target.value;
       }),
       debounceTime(500),
-      distinctUntilChanged(),
-      switchMap((currentInputValue) => {
-        return this.getFilteredFilms(currentInputValue);
-      }),
-      tap((res) => console.log('res: ', res))
+      distinctUntilChanged()
     );
 
-    value.subscribe((data) => console.log('DATA: ', data));
+    value.subscribe((currentInputValue) => this.getFilteredFilms(currentInputValue));
   }
 
-  private getFilteredFilms(currentInputValue): Observable<any> {
-    return of(this.filmsList).pipe(
-      map((arrOfFilms: FilmListInterface[]) => {
-        const filmResult = arrOfFilms.filter((item: FilmListInterface) => {
-          return item.original_title.toLowerCase().includes(currentInputValue.toLowerCase());
-        });
-        this.filmService.updateFilmListAfterSearch(filmResult);
-        return filmResult;
-      })
-    );
+  private getFilteredFilms(inputValue): void {
+
+    const result = this.filmsList.filter((item: FilmListInterface) => {
+      return item.original_title.toLowerCase().includes(inputValue.toLowerCase());
+    });
+    console.log(result);
+
+    this.filmService.updateFilmListAfterSearch(result);
   }
 
   public get getFavoriteFilmsCount(): Observable<number> {
     return this.filmService.getCountFavoriteFilm();
   }
 
-  public displayFn(user: any): void {
-    if (user) {
-      return user.name;
-    }
-  }
-
-  private getFilmList(): void {
+  private getFilmList(): void { // todo .subscribe to another stream
     this.filmService.getFilmList.subscribe((films) => this.filmsList = films);
-  }
-
-  private initSearchForm(): void {
-    this.searchForm = this.fb.group({
-      searchInput: ['']
-    });
-
-    this.searchForm.get('searchInput').valueChanges.pipe(
-      debounceTime(300),
-      tap(() => this.isLoading = true),
-      switchMap((currentInputValue) => this.getFilteredFilms(currentInputValue)),
-      tap(() => this.isLoading = false)
-    ).subscribe((films: FilmListInterface[]) => this.filteredFilms = films);
+    // this.filmService.foundedSearchFilm.subscribe((films) => this.filmsList = films);
   }
 
 }

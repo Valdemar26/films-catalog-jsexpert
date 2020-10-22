@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -12,18 +12,13 @@ import { FilmListInterface } from '../../interfaces/film-list.interface';
   templateUrl: './films-list.component.html',
   styleUrls: ['./films-list.component.scss']
 })
-export class FilmsListComponent implements OnInit, OnDestroy {
+export class FilmsListComponent implements OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
   constructor(
     private filmService: FilmService,
-  ) {
-  }
-
-  public ngOnInit(): void {
-    this.initFilmListAndGenres();
-  }
+  ) {}
 
   public get foundedSearchFilm(): Observable<FilmListInterface[]> {
     return this.filmService.foundedSearchFilm;
@@ -47,18 +42,6 @@ export class FilmsListComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  private initFilmListAndGenres(): void {
-    this.subscription.add(
-      this.filmService.initFilmList()
-        .subscribe()
-    );
-
-    this.subscription.add(
-      this.filmService.initGenresList()
-        .subscribe()
-    );
   }
 
 }

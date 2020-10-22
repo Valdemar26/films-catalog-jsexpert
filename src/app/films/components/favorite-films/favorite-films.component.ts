@@ -18,6 +18,10 @@ export class FavoriteFilmsComponent implements OnInit {
 
   public ngOnInit(): void {
     console.log(JSON.parse(localStorage.getItem('favoriteFilmsList')));
+
+    // TODO favoriteService.getFilmListFromLS
+    // check if have favorite films and get
+    // from service or LS
   }
 
   public removeFromFavoriteFilms(film: FilmListInterface): void {
