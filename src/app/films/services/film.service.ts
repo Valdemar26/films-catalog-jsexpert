@@ -11,6 +11,7 @@ import { GenresInterface } from '../interfaces/genres.interface';
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmInterface } from '../interfaces/film.interface';
 
+// todo FavoriteService with it's own methods
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,8 @@ export class FilmService {
   public updateFilmList(list: FilmListInterface[]): void {
     if (list && list.length) {
       this.filmListArray = this.filmListArray.concat(list);
+
+      // todo   I have two same streams (need to be one)
       this.filmList$.next(this.filmListArray);
       this.foundSearchFilm$.next(this.filmListArray);
     }
@@ -73,6 +76,9 @@ export class FilmService {
   public updateFilmListAfterSearch(result: FilmListInterface[]): void {
     if (result && result.length) {
       this.foundSearchFilm$.next(result);
+    } else {
+      // todo show 'no results'
+      console.log('no results');
     }
   }
 

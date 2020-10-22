@@ -16,32 +16,6 @@
       </mat-form-field>
     </div>
 
-
-    <form class="example-form" [formGroup]='searchForm'>
-
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Choose a Film" [matAutocomplete]="auto" formControlName='searchInput'>
-      </mat-form-field>
-
-
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-
-        <mat-option *ngIf="isLoading" class="is-loading">
-          <mat-progress-spinner diameter="50"></mat-progress-spinner>
-        </mat-option>
-
-        <ng-container *ngIf="!isLoading">
-          <mat-option *ngFor="let film of filteredFilms" [value]="film">
-            <span>{{ film.title }}</span>
-            <small> | ID: {{ film.id }}</small>
-          </mat-option>
-        </ng-container>
-
-      </mat-autocomplete>
-
-    </form>
-
-
     <span class="menu-spacing"></span>
 
     <div>
