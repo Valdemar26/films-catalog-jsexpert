@@ -16,13 +16,11 @@ export class FilmsResolver implements Resolve<boolean> {
 
   constructor(private router: Router, private filmService: FilmService) {}
 
-  resolve(): Promise<boolean> {
-    return new Promise<boolean>((resolve) => {
-      this.fetchData().subscribe(() => resolve(true));
-    });
+  resolve(): Observable<boolean> {
+    return this.fetchData();
   }
 
-  fetchData(): Observable<any> {
+  fetchData(): Observable<boolean> {
     return this.filmService.initFilmList().pipe(
       switchMap(() => {
         return this.filmService.initGenresList();
@@ -30,6 +28,7 @@ export class FilmsResolver implements Resolve<boolean> {
       catchError(async err => {
         console.log(err);
         await this.router.navigate(['/', 'main']);
+        // TODO call service to show "error" modal
         return of(false);
       })
     );
