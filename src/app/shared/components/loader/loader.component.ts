@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -23,7 +23,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
 
   private checkLoading(): void {
     const loaderSubscription = this.loaderService.getLoadingStatus().subscribe((status: boolean) => {
-      console.log('loader status: ', status);  // todo check this!!!!
       this.isLoaderShown = status;
     });
 

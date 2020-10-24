@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  Router,
-  RouterStateSnapshot
-} from '@angular/router';
-import { from, Observable, of } from 'rxjs';
-import {catchError, delay, switchMap, tap} from 'rxjs/operators';
-import { FilmService } from './film.service';
-import {LoaderService} from '../../shared/services/loader.service';
+import { Resolve, Router } from '@angular/router';
+
+import { Observable, of } from 'rxjs';
+import { catchError, delay, switchMap, tap } from 'rxjs/operators';
+
+import { LoaderService } from '../../shared/services/loader.service';
+import { FilmService } from '../services/film.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +26,7 @@ export class FilmsResolver implements Resolve<boolean> {
     this.loaderService.show();
 
     return this.filmService.initFilmList().pipe(
-      delay(700),
+      delay(800),
       tap(() => this.loaderService.hide()),
       switchMap(() => {
         return this.filmService.initGenresList();

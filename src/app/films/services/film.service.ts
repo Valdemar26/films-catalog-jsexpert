@@ -11,7 +11,6 @@ import { GenresInterface } from '../interfaces/genres.interface';
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmInterface } from '../interfaces/film.interface';
 
-// todo FavoriteService with it's own methods
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +29,6 @@ export class FilmService {
   private filmListArray: FilmListInterface[] = [];
 
   private genresList$: BehaviorSubject<any[]> = new BehaviorSubject(null);
-
-  private favoriteFilmsCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private favoriteFilmsArray = [];
-
-  private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>([]);
-  private favoriteFilmsList = [];
 
   public foundSearchFilm$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
 
@@ -92,43 +85,6 @@ export class FilmService {
 
   public get getGenresList(): Observable<GenresListInterface[]> {
     return this.genresList$.asObservable();
-  }
-
-  public setFavoriteFilm(film: FilmListInterface): void {
-    if (film.isFavorite) {
-      this.favoriteFilmsArray.push(film.id);
-      this.setFavoriteFilmsArray(film);
-    } else {
-      const index = this.favoriteFilmsArray.indexOf(film.id);
-      this.favoriteFilmsArray.splice(index, 1);
-    }
-
-    localStorage.setItem('favoriteFilms', JSON.stringify(this.favoriteFilmsArray));
-
-    this.favoriteFilmsCount$.next(this.favoriteFilmsArray.length);
-  }
-
-  public removeFromFavoriteFilms(film: FilmListInterface): void {
-    this.favoriteFilmsList = this.favoriteFilmsList.filter((item) => item.id !== film.id);
-    localStorage.setItem('favoriteFilmsList', JSON.stringify(this.favoriteFilmsList));
-
-    this.favoriteFilmsCount$.next(this.favoriteFilmsList.length);
-    this.favoriteFilmsArray$.next(this.favoriteFilmsList);
-  }
-
-  public getCountFavoriteFilm(): Observable<number> {
-    return this.favoriteFilmsCount$.asObservable();
-  }
-
-  public getFavoriteFilmsArray(): Observable<FilmListInterface[]> {
-    return this.favoriteFilmsArray$.asObservable();
-  }
-
-  private setFavoriteFilmsArray(film: FilmListInterface): any {
-
-    this.favoriteFilmsList.push(film);
-    this.favoriteFilmsArray$.next(this.favoriteFilmsList);
-    localStorage.setItem('favoriteFilmsList', JSON.stringify(this.favoriteFilmsList));
   }
 
   public sortFilmByTitle(value): Subscription {

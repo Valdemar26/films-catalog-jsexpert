@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged, map, skipWhile } from 'rxjs/operato
 
 import { FilmService } from '../../services/film.service';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
+import {FavoriteFilmsService} from '../../services/favorite-films.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class ToolbarComponent implements OnInit {
   public sortingMethod: number;
 
   constructor(
-    public filmService: FilmService
+    public filmService: FilmService,
+    private favoriteFilmsService: FavoriteFilmsService
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   public get getFavoriteFilmsCount(): Observable<number> {
-    return this.filmService.getCountFavoriteFilm();
+    return this.favoriteFilmsService.getCountFavoriteFilm();
   }
 
   private getFilmList(): void { // todo .subscribe to another stream

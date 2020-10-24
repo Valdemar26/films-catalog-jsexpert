@@ -21,5 +21,6 @@
 
   <button mat-raised-button color="accent" mat-button class="more" *ngIf="foundedSearchFilm | async as filmsList"
           (click)="loadMoreFilms()">More films</button>
+  <!-- TODO block click on button before previos call to backend didn't finished (maybe 'trottle' from RxJS -->
 
 </div>
