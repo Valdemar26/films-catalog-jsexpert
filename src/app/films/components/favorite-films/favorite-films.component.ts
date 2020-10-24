@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
-import { FilmService } from '../../services/film.service';
-import { FilmListInterface } from '../../interfaces/film-list.interface';
 import { Observable } from 'rxjs';
+
+import { FilmListInterface } from '../../interfaces/film-list.interface';
+import { FavoriteFilmsService } from '../../services/favorite-films.service';
 
 @Component({
   selector: 'exp-favorite-films',
@@ -13,7 +14,7 @@ export class FavoriteFilmsComponent implements OnInit {
   public imagePath = 'https://image.tmdb.org/t/p/w500';
 
   constructor(
-    private filmService: FilmService
+    private favoriteFilmsService: FavoriteFilmsService
   ) { }
 
   public ngOnInit(): void {
@@ -25,10 +26,10 @@ export class FavoriteFilmsComponent implements OnInit {
   }
 
   public removeFromFavoriteFilms(film: FilmListInterface): void {
-    this.filmService.removeFromFavoriteFilms(film);
+    this.favoriteFilmsService.removeFromFavoriteFilms(film);
   }
 
   public get getFavoriteFilmsList(): Observable<FilmListInterface[]> {
-    return this.filmService.getFavoriteFilmsArray();
+    return this.favoriteFilmsService.getFavoriteFilmsArray();
   }
 }

@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FilmService } from '../../services/film.service';
 import { GenresListInterface } from '../../interfaces/genres-list.interface';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
+import {FavoriteFilmsService} from '../../services/favorite-films.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FilmsListComponent implements OnDestroy {
 
   constructor(
     private filmService: FilmService,
+    private favoriteFilmsService: FavoriteFilmsService
   ) {}
 
   public get foundedSearchFilm(): Observable<FilmListInterface[]> {
@@ -29,7 +31,7 @@ export class FilmsListComponent implements OnDestroy {
   }
 
   public setFavoriteFilm(film: FilmListInterface): void {
-    this.filmService.setFavoriteFilm(film);
+    this.favoriteFilmsService.setFavoriteFilm(film);
   }
 
   public loadMoreFilms(): void {
