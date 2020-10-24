@@ -19,16 +19,15 @@ export class FilmsInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    this.loaderService.show();
+    // this.loaderService.show();
 
     if (request.url.includes('genre')) {
       return next.handle(request);
     } else {
       return next.handle(request).pipe(
-        delay(1700),
-        tap(() => {
-          this.loaderService.hide();
-        })
+        // tap(() => {
+          // this.loaderService.hide();
+        // })
       );
     }
 
