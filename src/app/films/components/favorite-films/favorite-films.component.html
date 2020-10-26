@@ -1,4 +1,5 @@
-<div class="exp-favorite-films-wrapper" *ngIf="getFavoriteFilmsList | async as favoriteFilmsList">
+<div class="exp-favorite-films-wrapper"
+     *ngIf="getFavoriteFilmsList | async as favoriteFilmsList">
 
   <div *ngFor="let film of favoriteFilmsList" class="exp-film-container">
 

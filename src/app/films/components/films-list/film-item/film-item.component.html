@@ -21,7 +21,9 @@
   <span class="release">{{ film.release_date }}</span>
 
   <div class="genres">
-    <span *ngFor="let genre of genres" (click)="sortByGenres(genre.id)">{{ genre.name }}</span>
+    <span *ngFor="let genre of genres"
+          [class.active]="genre.id === genresId"
+          (click)="sortByGenres(genre.id)">{{ genre.name }}</span>
   </div>
 
 

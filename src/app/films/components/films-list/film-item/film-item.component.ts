@@ -21,6 +21,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
 
   public imagePath: string;
   public genres = [];
+  public genresId: number;
 
   private subscription: Subscription = new Subscription();
 
@@ -62,19 +63,16 @@ export class FilmItemComponent implements OnInit, OnDestroy {
   }
 
   public sortByGenres(id: number): void {
+    this.genresId = id;
+    const genresArray = [];
+
     this.filmService.foundedSearchFilm.pipe(
-      tap((data) => console.log(data)),
       switchMap((items: FilmListInterface[]) => {
         return from(items);
       }),
-      filter((film) => film.genre_ids.indexOf(id) > 0),
-      reduce((acc, item) => {
-        console.log('item: ', item);
-        return [...acc, item];
-      }, [])
-    ).subscribe((data) => {
-      console.log('DATA: ', data);
-      this.filmService.foundSearchFilm$.next(data);
-    });
+      filter((film) => film.genre_ids.indexOf(id) > 0)
+    ).subscribe((data) => genresArray.push(data));
+
+    this.filmService.foundSearchFilm$.next([...new Set(genresArray)]);
   }
 }

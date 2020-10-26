@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -13,16 +13,14 @@ import { FavoriteFilmsService } from '../../services/favorite-films.service';
 export class FavoriteFilmsComponent implements OnInit {
   public imagePath = 'https://image.tmdb.org/t/p/w500';
 
+  public favoriteFilms: FilmListInterface[] = JSON.parse(localStorage.getItem('favoriteFilmsList'));
+
   constructor(
     private favoriteFilmsService: FavoriteFilmsService
   ) { }
 
   public ngOnInit(): void {
-    console.log(JSON.parse(localStorage.getItem('favoriteFilmsList')));
-
-    // TODO favoriteService.getFilmListFromLS
-    // check if have favorite films and get
-    // from service or LS
+    this.checkLocalStorage();
   }
 
   public removeFromFavoriteFilms(film: FilmListInterface): void {
@@ -31,5 +29,11 @@ export class FavoriteFilmsComponent implements OnInit {
 
   public get getFavoriteFilmsList(): Observable<FilmListInterface[]> {
     return this.favoriteFilmsService.getFavoriteFilmsArray();
+  }
+
+  private checkLocalStorage(): void {
+    if (this.favoriteFilms && this.favoriteFilms.length) {
+      this.favoriteFilms.forEach((film: FilmListInterface) => this.favoriteFilmsService.setFavoriteFilm(film));
+    }
   }
 }

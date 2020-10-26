@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { FilmListInterface } from '../interfaces/film-list.interface';
 
@@ -18,6 +18,7 @@ export class FavoriteFilmsService {
   constructor() { }
 
   public setFavoriteFilm(film: FilmListInterface): void {
+
     if (film.isFavorite) {
       this.favoriteFilmsArray.push(film.id);
       this.setFavoriteFilmsArray(film);

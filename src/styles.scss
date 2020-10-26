@@ -75,6 +75,10 @@ body {
         background-color: darken(#ebebeb, 10%);
         color: #000;
       }
+
+      &.active {
+        background-color: #ffff00;
+      }
     }
   }
 
