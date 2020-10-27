@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import {fromEvent, Observable, of, Subscription} from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, skipWhile } from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
@@ -58,7 +58,10 @@ export class ToolbarComponent implements OnInit {
   }
 
   public get getFavoriteFilmsCount(): Observable<number> {
-    return this.favoriteFilmsService.getCountFavoriteFilm();
+    let favoriteFilmsArray = [];
+    this.favoriteFilmsService.getFavoriteFilmsArray().subscribe((favoriteFilms: FilmListInterface[]) => favoriteFilmsArray = favoriteFilms);
+    return of(favoriteFilmsArray.length);
+    // return this.favoriteFilmsService.getCountFavoriteFilm();
   }
 
   private getFilmList(): void { // todo .subscribe to another stream
