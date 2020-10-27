@@ -20,7 +20,6 @@
     background-repeat: no-repeat;
     background-position: 50% 50%;
     position: relative;
-    //filter: grayscale(80%);
 
     .film-info-content {
       width: calc(100% - 20px);
@@ -30,32 +29,32 @@
 
       h2 {
         padding-top: 20px;
-        font-size: 32px;
+        font-size: 40px;
         color: #fff;
         margin-bottom: 0;
 
         span {
-          color: #ccc;
+          color: #696969;
           font-size: 16px;
         }
       }
 
       h3 {
-        color: #ccc;
-        font-size: 13px;
+        color: #696969;
+        font-size: 14px;
       }
 
       h4 {
         color: #fff;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: bold;
         margin-top: 16px;
       }
 
       p {
-        font-size: 15px;
+        font-size: 16px;
         line-height: 24px;
-        color: #fff;
+        color: #101010;
       }
 
       .trailer {

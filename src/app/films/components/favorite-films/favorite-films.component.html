@@ -1,5 +1,5 @@
 <div class="exp-favorite-films-wrapper"
-     *ngIf="getFavoriteFilmsList | async as favoriteFilmsList">
+     *ngIf="getFavoriteFilmsList | async as favoriteFilmsList; else emptyTemplate">
 
   <div *ngFor="let film of favoriteFilmsList" class="exp-film-container">
 
@@ -39,3 +39,7 @@
   </div>
 
 </div>
+
+<ng-template #emptyTemplate>
+  No Favorite Films yet!
+</ng-template>
