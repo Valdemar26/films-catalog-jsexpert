@@ -25,9 +25,13 @@ export class FilmsListComponent implements OnDestroy {
     private favoriteFilmsService: FavoriteFilmsService
   ) {}
 
-  public get foundedSearchFilm(): Observable<FilmListInterface[]> {
-    return this.filmService.foundedSearchFilm;
+  public get getFilmList(): Observable<FilmListInterface[]> {
+    return this.filmService.getFilmList;
   }
+
+  // public get foundedSearchFilm(): Observable<FilmListInterface[]> {
+  //   return this.filmService.foundedSearchFilm;
+  // }
 
   public get getGenresList(): Observable<GenresListInterface[]> {
     return this.filmService.getGenresList;
