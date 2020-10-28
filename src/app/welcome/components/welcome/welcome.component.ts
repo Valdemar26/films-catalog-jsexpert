@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
@@ -12,9 +12,11 @@ import { FilmInterface } from '../../../films/interfaces/film.interface';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit, OnDestroy {
 
   public welcomeFilms: FilmListInterface[] = [];
+  public welcomeActors = [];
+
   public imagePath = 'https://image.tmdb.org/t/p/original';
 
   private subscription: Subscription = new Subscription();
@@ -25,10 +27,11 @@ export class WelcomeComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initWelcomeFilms();
+    this.initWelcomeActors();
   }
 
-  public openFilm(): void {
-
+  public openFilm(film: FilmListInterface): void {
+    console.log(film);
   }
 
   private initWelcomeFilms(): void {
@@ -36,5 +39,22 @@ export class WelcomeComponent implements OnInit {
       .subscribe((films: FilmInterface) => this.welcomeFilms = films.results);
 
     this.subscription.add(filmsSubscription);
+  }
+
+  private initWelcomeActors(): void {
+    const actorsSubscription = this.welcomeService.getWelcomeActors()
+      .subscribe((actors: any) => {
+        this.welcomeActors = actors.results;
+      });
+
+    this.subscription.add(actorsSubscription);
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  public openActor(actor): void {
+
   }
 }
