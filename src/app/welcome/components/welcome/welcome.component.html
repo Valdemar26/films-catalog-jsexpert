@@ -33,7 +33,7 @@
 
           <a (click)="openActor(actor)">
             <img [src]="imagePath + actor.profile_path" alt="{{ actor.name }}">
-            <h3>{{ i + 1 }}. {{ actor.name }}</h3>
+            <h3 *ngIf="i < 6">{{ i + 1 }}. {{ actor.name }}</h3>
           </a>
 
         </div>
