@@ -25,12 +25,12 @@ export class FilmService {
 
   private count = 1;
 
-  private filmList$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject(null);
+  public filmList$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
   private filmListArray: FilmListInterface[] = [];
 
   private genresList$: BehaviorSubject<any[]> = new BehaviorSubject(null);
 
-  public foundSearchFilm$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
+  // public foundSearchFilm$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>(null);
 
   private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
 
@@ -56,17 +56,18 @@ export class FilmService {
     if (list && list.length) {
       this.filmListArray = this.filmListArray.concat(list);
 
-      // todo   I have two same streams (need to be one)
+      // TODO   I have two same streams (need to be one)
       this.filmList$.next(this.filmListArray);
-      this.foundSearchFilm$.next(this.filmListArray);
+      // this.foundSearchFilm$.next(this.filmListArray);
     }
   }
 
   public updateFilmListAfterSearch(result: FilmListInterface[]): void {
     if (result && result.length) {
-      this.foundSearchFilm$.next(result);
+      // this.foundSearchFilm$.next(result);
+      this.filmList$.next(result);
     } else {
-      // todo show 'no results'
+      // TODO show block 'no results'
       console.log('no results');
     }
   }
@@ -75,9 +76,9 @@ export class FilmService {
     return this.filmList$.asObservable();
   }
 
-  public get foundedSearchFilm(): Observable<FilmListInterface[]> {
-    return this.foundSearchFilm$.asObservable();
-  }
+  // public get foundedSearchFilm(): Observable<FilmListInterface[]> {
+  //   return this.foundSearchFilm$.asObservable();
+  // }
 
   public get getGenresList(): Observable<GenresListInterface[]> {
     return this.genresList$.asObservable();
@@ -86,11 +87,17 @@ export class FilmService {
   public sortFilmByTitle(value): Subscription {
     const direction = !!parseInt(value, 10) ? -1 : 1;
 
-    return this.foundedSearchFilm.subscribe((films: FilmListInterface[]) => {
+    return this.getFilmList.subscribe((films: FilmListInterface[]) => {
       return films.sort(
         (a: FilmListInterface, b: FilmListInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
       );
     });
+
+    // return this.foundedSearchFilm.subscribe((films: FilmListInterface[]) => {
+    //   return films.sort(
+    //     (a: FilmListInterface, b: FilmListInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+    //   );
+    // });
   }
 
   public initGenresList(): Observable<any> {

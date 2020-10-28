@@ -66,13 +66,13 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     this.genresId = id;
     const genresArray = [];
 
-    this.filmService.foundedSearchFilm.pipe(
+    this.filmService.getFilmList.pipe(
       switchMap((items: FilmListInterface[]) => {
         return from(items);
       }),
       filter((film) => film.genre_ids.indexOf(id) > 0)
     ).subscribe((data) => genresArray.push(data));
 
-    this.filmService.foundSearchFilm$.next([...new Set(genresArray)]);
+    this.filmService.filmList$.next([...new Set(genresArray)]);
   }
 }
