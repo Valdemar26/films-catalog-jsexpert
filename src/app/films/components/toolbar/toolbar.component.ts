@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import {fromEvent, Observable, of, Subscription} from 'rxjs';
+import { fromEvent, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, skipWhile } from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
-import {FavoriteFilmsService} from '../../services/favorite-films.service';
+import { FavoriteFilmsService } from '../../services/favorite-films.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class ToolbarComponent implements OnInit {
     return this.filmService.sortFilmByTitle(value);
   }
 
-  public searchFilmByTitle(): void {
+  public searchFilmByTitle(): void { // TODO make search from real API
 
     const value = fromEvent(this.searchRef.nativeElement, 'keyup').pipe(
       skipWhile((data) => !data),
@@ -52,7 +52,6 @@ export class ToolbarComponent implements OnInit {
     const result = this.filmsList.filter((item: FilmListInterface) => {
       return item.original_title.toLowerCase().includes(inputValue.toLowerCase());
     });
-    console.log(result);
 
     this.filmService.updateFilmListAfterSearch(result);
   }
@@ -61,12 +60,10 @@ export class ToolbarComponent implements OnInit {
     let favoriteFilmsArray = [];
     this.favoriteFilmsService.getFavoriteFilmsArray().subscribe((favoriteFilms: FilmListInterface[]) => favoriteFilmsArray = favoriteFilms);
     return of(favoriteFilmsArray.length);
-    // return this.favoriteFilmsService.getCountFavoriteFilm();
   }
 
-  private getFilmList(): void { // todo .subscribe to another stream
+  private getFilmList(): void {
     this.filmService.getFilmList.subscribe((films) => this.filmsList = films);
-    // this.filmService.foundedSearchFilm.subscribe((films) => this.filmsList = films);
   }
 
 }
