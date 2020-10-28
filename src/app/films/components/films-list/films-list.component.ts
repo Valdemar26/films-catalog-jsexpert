@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FilmService } from '../../services/film.service';
 import { GenresListInterface } from '../../interfaces/genres-list.interface';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
-import {FavoriteFilmsService} from '../../services/favorite-films.service';
+import { FavoriteFilmsService } from '../../services/favorite-films.service';
 
 
 @Component({

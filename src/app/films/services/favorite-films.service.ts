@@ -12,27 +12,22 @@ export class FavoriteFilmsService {
   private favoriteFilmsArray = [];
 
   private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>([]);
-  private favoriteFilmsList = [];
 
   constructor() { }
 
   public setFavoriteFilm(film: FilmListInterface): void {
-    console.log(film, film.isFavorite);
 
     if (film.isFavorite) {
       this.setFavoriteFilmsArray(film);
     } else {
-      const index = this.favoriteFilmsArray.indexOf(film.id);
-      this.favoriteFilmsArray.splice(index, 1);
-      this.favoriteFilmsArray$.next(this.favoriteFilmsArray);
+      this.removeFromFavoriteFilms(film);
     }
   }
 
   public removeFromFavoriteFilms(film: FilmListInterface): void {
-    this.favoriteFilmsList = this.favoriteFilmsList.filter((item) => item.id !== film.id);
-    localStorage.setItem('favoriteFilmsList', JSON.stringify(this.favoriteFilmsList));
-
-    this.favoriteFilmsArray$.next(this.favoriteFilmsList);
+    film.isFavorite = false;
+    this.favoriteFilmsArray = this.favoriteFilmsArray.filter((item) => item.id !== film.id);
+    this.setFavoritesToLocalStorage(this.favoriteFilmsArray);
   }
 
   public getFavoriteFilmsArray(): Observable<FilmListInterface[]> {
@@ -41,8 +36,18 @@ export class FavoriteFilmsService {
 
   private setFavoriteFilmsArray(film: FilmListInterface): any {
 
-    this.favoriteFilmsList.push(film);
-    this.favoriteFilmsArray$.next([...new Set(this.favoriteFilmsList)]);
-    localStorage.setItem('favoriteFilmsList', JSON.stringify([...new Set(this.favoriteFilmsList)]));
+    this.favoriteFilmsArray.push(film);
+
+    this.setFavoritesToLocalStorage(this.favoriteFilmsArray);
+  }
+
+  setFavoritesToLocalStorage(favoritesArray: FilmListInterface[]): void {
+
+    const unique = [];
+
+    favoritesArray.map(film => unique.filter(f => f.id === film.id).length > 0 ? null : unique.push(film));
+
+    localStorage.setItem('favoriteFilmsList', JSON.stringify(unique));
+    this.favoriteFilmsArray$.next(unique);
   }
 }
