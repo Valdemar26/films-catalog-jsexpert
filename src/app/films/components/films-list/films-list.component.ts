@@ -1,11 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
+import { delay, tap, throttleTime } from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
 import { GenresListInterface } from '../../interfaces/genres-list.interface';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
 import { FavoriteFilmsService } from '../../services/favorite-films.service';
+import { FilmInterface} from '../../interfaces/film.interface';
 
 
 @Component({
@@ -15,6 +17,7 @@ import { FavoriteFilmsService } from '../../services/favorite-films.service';
 })
 export class FilmsListComponent implements OnDestroy {
 
+  public isButtonDisabled: boolean;
   private subscription: Subscription = new Subscription();
 
   constructor(
@@ -35,7 +38,13 @@ export class FilmsListComponent implements OnDestroy {
   }
 
   public loadMoreFilms(): void {
-    this.filmService.getMoreFilms();
+    this.filmService.getMoreFilms()
+      .pipe(
+        tap(() => this.isButtonDisabled = true),
+        delay(1000),
+        tap(() => this.isButtonDisabled = false)
+      )
+      .subscribe((films: FilmInterface) => this.filmService.updateFilmList(films.results));
   }
 
   public identify(index, item): number {

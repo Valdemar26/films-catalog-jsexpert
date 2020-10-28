@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {BehaviorSubject, Observable, Subject, Subscription, throwError} from 'rxjs';
+import {catchError, first, tap, throttle, throttleTime} from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
 
@@ -47,13 +47,9 @@ export class FilmService {
     );
   }
 
-  public getMoreFilms(): Subscription {
+  public getMoreFilms(): any {
     this.count++;
-    return this.http.get(`${this.nextPagePopularFilmUrl}${this.count}`)
-      .subscribe((films: FilmInterface) => {
-        console.log(films);
-        this.updateFilmList(films.results);
-      });
+    return this.http.get(`${this.nextPagePopularFilmUrl}${this.count}`);
   }
 
   public updateFilmList(list: FilmListInterface[]): void {
