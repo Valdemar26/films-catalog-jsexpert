@@ -2,19 +2,18 @@
 
     <h2>Welcome to the movie app</h2><br>
 
-<!--  {{ welcomeFilms | json}}-->
-
   <mat-tab-group mat-align-tabs="center">
 
+    // TODO make *ngFor for film and actors at one time (not two *ngFor's as now)
     <mat-tab label="Кращі фільми">
 
       <div class="films-wrapper">
 
-        <div *ngFor="let film of welcomeFilms | slice:0:6; let i = index"
+        <div *ngFor="let film of welcomeFilms | slice:0:9; let i = index"
              class="box"
              [ngClass]="['box-' + i]">
 
-          <a (click)="openFilm()">
+          <a (click)="openFilm(film)">
             <img [src]="imagePath + film.backdrop_path" alt="{{ film.original_title }}">
             <h3>{{ film.title }}</h3>
           </a>
@@ -25,7 +24,22 @@
 
     </mat-tab>
 
-    <mat-tab label="Кращі актори">Content 2</mat-tab>
+    <mat-tab label="Кращі актори">
+      <div class="actors-wrapper">
+
+        <div *ngFor="let actor of welcomeActors | slice:0:9; let i = index"
+             class="box"
+             [ngClass]="['box-' + i]">
+
+          <a (click)="openActor(actor)">
+            <img [src]="imagePath + actor.profile_path" alt="{{ actor.name }}">
+            <h3>{{ i + 1 }}. {{ actor.name }}</h3>
+          </a>
+
+        </div>
+
+      </div>
+    </mat-tab>
 
   </mat-tab-group>
 
