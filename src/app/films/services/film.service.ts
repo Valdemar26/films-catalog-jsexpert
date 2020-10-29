@@ -22,6 +22,7 @@ export class FilmService {
   private popularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
   private nextPagePopularFilmUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=uk-UA&page=`;
   private genresUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=uk-UA`;
+  private movieUrl = 'https://api.themoviedb.org/3/movie/';
 
   private count = 1;
 
@@ -52,9 +53,8 @@ export class FilmService {
 
   public updateFilmList(list: FilmListInterface[]): void {
     if (list && list.length) {
-      this.filmListArray = this.filmListArray.concat(list);
-
-      this.filmList$.next(this.filmListArray);
+      const result = [...new Set([...this.filmListArray, ...list])];
+      this.filmList$.next(result);
     }
   }
 
@@ -95,11 +95,13 @@ export class FilmService {
     );
   }
 
-  public getFilmById(id: number): any {
-    if (this.filmListArray && this.filmListArray.length) {
-      const currentFilm = this.filmListArray.find((film: FilmListInterface) => film.id === Number(id));
-      this.currentFilm$.next(currentFilm);
-    }
+  public getFilmById(id: number): Observable<any> {
+    return this.http.get(`${this.movieUrl}${id}?api_key=${this.apiKey}&language=uk-UA`).pipe(
+      tap((currentFilm: FilmListInterface) => {
+        this.currentFilm$.next(currentFilm);
+      }),
+      catchError( (error) => error)
+    );
   }
 
   public getFilmObservable(): Observable<FilmListInterface> {
