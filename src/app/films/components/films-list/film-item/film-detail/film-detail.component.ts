@@ -67,11 +67,11 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public initFilmDetail(): void {
-    this.filmService.getFilmById(this.filmId);
+    this.filmService.getFilmById(this.filmId).subscribe();
   }
 
   public back(): void {
-    this.location.back();
+    this.router.navigate(['/films']);
   }
 
   public openTrailerModal(): void {
@@ -103,7 +103,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
       if (film) {
         this.filmDetail = film;
       }
-      console.log('filmDetail: ', this.filmDetail);
     });
 
     this.subscription.add(filmSubscription);
@@ -111,10 +110,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   private initFilmHeroes(): void {
     const heroesSubscription = this.filmDetailService.getFilmHeroes(this.filmId)
-      .subscribe((heroes) => {
-        this.heroesList = heroes.cast;
-        console.log(this.heroesList);
-      });
+      .subscribe((heroes) => this.heroesList = heroes.cast);
 
     this.subscription.add(heroesSubscription);
   }
@@ -123,7 +119,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
     const trailerSubscription = this.filmDetailService.getTrailerByFilmId(this.filmId)
       .subscribe((trailer) => {
-        const youtubeId = trailer.results[0].key;
+        const youtubeId = trailer.results[0].key;  // TODO fix bug 'Cannot read property 'key' of undefined'
         const youtubePath = 'https://www.youtube.com/embed/';
 
         this.trailerPath = `${youtubePath}${youtubeId}`;
