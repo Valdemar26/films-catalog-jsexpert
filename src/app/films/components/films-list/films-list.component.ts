@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 
 import { Observable, Subscription } from 'rxjs';
-import { delay, tap, throttleTime } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
 import { FavoriteFilmsService } from '../../services/favorite-films.service';
@@ -30,10 +30,6 @@ export class FilmsListComponent implements OnDestroy {
   public get getFilmList(): Observable<FilmListInterface[]> {
     return this.filmService.getFilmList;
   }
-
-  // public get foundedSearchFilm(): Observable<FilmListInterface[]> {
-  //   return this.filmService.foundedSearchFilm;
-  // }
 
   public get getGenresList(): Observable<GenresListInterface[]> {
     return this.filmService.getGenresList;
