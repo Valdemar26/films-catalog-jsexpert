@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -17,12 +18,13 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public welcomeFilms: FilmListInterface[] = [];
   public welcomeActors = [];
 
-  public imagePath = 'https://image.tmdb.org/t/p/original';
+  public imagePath = 'https://image.tmdb.org/t/p/w500';
 
   private subscription: Subscription = new Subscription();
 
   constructor(
-    private welcomeService: WelcomeService
+    private welcomeService: WelcomeService,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -31,7 +33,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   public openFilm(film: FilmListInterface): void {
-    console.log(film);
+    this.router.navigate(['/films/' + film.id]);
   }
 
   private initWelcomeFilms(): void {

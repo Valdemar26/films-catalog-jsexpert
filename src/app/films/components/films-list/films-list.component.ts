@@ -4,9 +4,10 @@ import { Observable, Subscription } from 'rxjs';
 import { delay, tap, throttleTime } from 'rxjs/operators';
 
 import { FilmService } from '../../services/film.service';
+import { FavoriteFilmsService } from '../../services/favorite-films.service';
+import { LoaderService } from '../../../shared/services/loader.service';
 import { GenresListInterface } from '../../interfaces/genres-list.interface';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
-import { FavoriteFilmsService } from '../../services/favorite-films.service';
 import { FilmInterface} from '../../interfaces/film.interface';
 
 
@@ -22,7 +23,8 @@ export class FilmsListComponent implements OnDestroy {
 
   constructor(
     private filmService: FilmService,
-    private favoriteFilmsService: FavoriteFilmsService
+    private favoriteFilmsService: FavoriteFilmsService,
+    private loaderService: LoaderService
   ) {}
 
   public get getFilmList(): Observable<FilmListInterface[]> {
@@ -44,9 +46,15 @@ export class FilmsListComponent implements OnDestroy {
   public loadMoreFilms(): void {
     this.filmService.getMoreFilms()
       .pipe(
-        tap(() => this.isButtonDisabled = true),
+        tap(() => {
+          this.isButtonDisabled = true;
+          this.loaderService.show();
+        }),
         delay(1000),
-        tap(() => this.isButtonDisabled = false)
+        tap(() => {
+          this.isButtonDisabled = false;
+          this.loaderService.hide();
+        })
       )
       .subscribe((films: FilmInterface) => this.filmService.updateFilmList(films.results));
   }
