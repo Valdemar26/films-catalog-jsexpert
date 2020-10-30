@@ -179,3 +179,21 @@
   }
 
 }
+
+span.chips {
+  display: flex;
+  width: fit-content;
+  margin: 20px 10px;
+  font-weight: bold;
+  background-color: #f50;
+  color: #fff;
+  padding: 7px 12px;
+  align-items: center;
+  cursor: default;
+  transition: 0.3s ease-in;
+
+  &:hover {
+    background-color: darken(#f50, 10%);
+  }
+
+}

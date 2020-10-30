@@ -68,6 +68,39 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public initFilmDetail(): void {
     this.filmService.getFilmById(this.filmId).subscribe();
+
+    // TODO check if film is 'adult' or not - create notification service and modal
+
+    // public logout(): void {
+    //     this._notificationService.showNotificationModal(
+    //       {title: 'Abmelden', text: 'Möchten Sie sich abmelden?'}).confirm$.subscribe((confirmed: boolean) => {
+    //       if (confirmed) {
+    //         this._mainService.logout();
+    //         this._cdr.detectChanges();
+    //       }
+    //     });
+    //   }
+
+    // TODO create dynamic modal
+
+    // public showNotificationModal(
+    //   content: NotificationModalContentInterface,
+    //   configuration?: NotificationModalConfigInterface): NotificationModalInterface {
+    //
+    //   if (!this.overlayCreated) {
+    //     this.attachOverlay();
+    //   }
+    //
+    //   const config: NotificationModalConfigInterface = this.getModalNotificationConfig(configuration);
+    //   const confirm$ = new Subject<boolean>();
+    //
+    //   const modalNotification: NotificationModalInterface = {content, config, confirm$};
+    //
+    //   this._dataService.addModal(modalNotification);
+    //
+    //   return modalNotification;
+    // }
+
   }
 
   public back(): void {
@@ -119,10 +152,16 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
     const trailerSubscription = this.filmDetailService.getTrailerByFilmId(this.filmId)
       .subscribe((trailer) => {
-        const youtubeId = trailer.results[0].key;  // TODO fix bug 'Cannot read property 'key' of undefined'
-        const youtubePath = 'https://www.youtube.com/embed/';
+        console.log(trailer);
+        if (trailer.results && trailer.results.length) {
+          const youtubeId = trailer.results[0].key;  // TODO fix bug 'Cannot read property 'key' of undefined'
+          const youtubePath = 'https://www.youtube.com/embed/';
+          this.trailerPath = `${youtubePath}${youtubeId}`;
+        } else {
+          console.log('no results');
+        }
 
-        this.trailerPath = `${youtubePath}${youtubeId}`;
+
       });
 
     this.subscription.add(trailerSubscription);
