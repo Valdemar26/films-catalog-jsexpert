@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -10,7 +11,6 @@ import { GenresListInterface } from '../interfaces/genres-list.interface';
 import { GenresInterface } from '../interfaces/genres.interface';
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmInterface } from '../interfaces/film.interface';
-import {Router} from "@angular/router";
 
 
 @Injectable({
