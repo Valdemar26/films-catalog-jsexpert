@@ -19,6 +19,8 @@ import { FilmDetailService } from '../../../../services/film-detail.service';
 
 import { ModalComponent } from '../../../../../shared/components/modal/modal.component';
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
+import {NotificationService} from "../../../../../shared/services/notification.service";
+import {NotificationModalComponent} from "../../../../../shared/components/notification-modal/notification-modal.component";
 
 
 @Component({
@@ -32,6 +34,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   componentRef: ComponentRef<any>;
 
   public filmDetail: FilmListInterface;
+  public adultFilm: boolean;
 
   public imagePath = 'https://image.tmdb.org/t/p/w500';
   public backdropPath = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
@@ -48,11 +51,12 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   constructor(
     private filmService: FilmService,
     private filmDetailService: FilmDetailService,
+    private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
     private sanitizer: DomSanitizer,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
     ) { }
 
   public ngOnInit(): void {
@@ -68,39 +72,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public initFilmDetail(): void {
     this.filmService.getFilmById(this.filmId).subscribe();
-
-    // TODO check if film is 'adult' or not - create notification service and modal
-
-    // public logout(): void {
-    //     this._notificationService.showNotificationModal(
-    //       {title: 'Abmelden', text: 'Möchten Sie sich abmelden?'}).confirm$.subscribe((confirmed: boolean) => {
-    //       if (confirmed) {
-    //         this._mainService.logout();
-    //         this._cdr.detectChanges();
-    //       }
-    //     });
-    //   }
-
-    // TODO create dynamic modal
-
-    // public showNotificationModal(
-    //   content: NotificationModalContentInterface,
-    //   configuration?: NotificationModalConfigInterface): NotificationModalInterface {
-    //
-    //   if (!this.overlayCreated) {
-    //     this.attachOverlay();
-    //   }
-    //
-    //   const config: NotificationModalConfigInterface = this.getModalNotificationConfig(configuration);
-    //   const confirm$ = new Subject<boolean>();
-    //
-    //   const modalNotification: NotificationModalInterface = {content, config, confirm$};
-    //
-    //   this._dataService.addModal(modalNotification);
-    //
-    //   return modalNotification;
-    // }
-
   }
 
   public back(): void {
@@ -135,10 +106,20 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     const filmSubscription = this.filmService.getFilmObservable().subscribe((film: FilmListInterface) => {
       if (film) {
         this.filmDetail = film;
+        this.adultFilm = film.adult;  // TODO check if film is 'adult' - create notification service and modal
+        this.checkAdultFilm();
       }
     });
 
     this.subscription.add(filmSubscription);
+  }
+
+  private checkAdultFilm(): void {
+    if (!this.adultFilm) {  // TODO revert temporary solution
+      console.log('adultFilm: ', this.adultFilm);
+
+      // this.notificationModalComponent.initNotificationModal();
+    }
   }
 
   private initFilmHeroes(): void {
@@ -152,16 +133,11 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
     const trailerSubscription = this.filmDetailService.getTrailerByFilmId(this.filmId)
       .subscribe((trailer) => {
-        console.log(trailer);
         if (trailer.results && trailer.results.length) {
           const youtubeId = trailer.results[0].key;  // TODO fix bug 'Cannot read property 'key' of undefined'
           const youtubePath = 'https://www.youtube.com/embed/';
           this.trailerPath = `${youtubePath}${youtubeId}`;
-        } else {
-          console.log('no results');
         }
-
-
       });
 
     this.subscription.add(trailerSubscription);
