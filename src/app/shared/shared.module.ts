@@ -13,6 +13,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
+import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
     LoaderComponent,
     RatingComponent,
     ModalComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    NotificationModalComponent
   ],
   imports: [
     CommonModule,

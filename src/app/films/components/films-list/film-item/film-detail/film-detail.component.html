@@ -1,7 +1,12 @@
 <div class="exp-film-detail-wrapper" *ngIf="filmDetail">
-  <div class="poster">
+
+  <div class="poster" *ngIf="filmDetail.poster_path; else noPoster">
     <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">
   </div>
+
+  <ng-template #noPoster>
+    <img src="../../../../../../assets/images/not-available.jpg" alt="no-poster">
+  </ng-template>
 
   <div class="film-info" [ngStyle]="{'background-image': 'url(' + backdropPath + filmDetail.backdrop_path + ')'}">
     <div class="film-info-content">
@@ -14,11 +19,15 @@
 
       <exp-rating [filmDetail]="filmDetail"></exp-rating>
 
-      <div class="trailer">
+      <div class="trailer" *ngIf="trailerPath; else noTrailer">
         <img (click)="openTrailerModal()" src="../../../../../../assets/images/youtube-button.png" alt="youtube">
       </div>
 
-      <!-- todo get genres, budget, trailer, actors -->
+      <ng-template #noTrailer>
+        <span class="chips">No Trailer for this Movie yet!</span>
+      </ng-template>
+
+      <!-- todo get genres, budget, actors -->
       <!--    <div class="genres">{{ filmDetail.genres.name }}</div>-->
       <!--    <div class="budget">{{ filmDetail.budget }}</div>-->
 
@@ -32,7 +41,7 @@
 
 </div>
 
-<div class="film-heroes">
+<div class="film-heroes" *ngIf="heroesList && heroesList.length; else noHeroesTemplate">
   <h3>Series Cast:</h3>
 
   <div class="hero-wrapper">
@@ -49,7 +58,11 @@
 
 </div>
 
-<div class="film-similar">
+<ng-template #noHeroesTemplate>
+  <span class="chips">No Heroes for this Movie yet!</span>
+</ng-template>
+
+<div class="film-similar" *ngIf="similarList && similarList.length; else noSimilarTemplate">
   <h3>Similar Movies</h3>
 
   <div class="film-similar-wrapper">
@@ -72,5 +85,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #noSimilarTemplate>
+  <span class="chips">No similar movies for this Movie yet!</span> <!-- TODO show 'badge' or another for this message -->
+</ng-template>
 
 <ng-container #modalContainer></ng-container>

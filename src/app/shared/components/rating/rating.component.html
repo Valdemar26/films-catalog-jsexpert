@@ -8,4 +8,6 @@
   {{ filmDetail.vote_average.toString().length > 1 ? filmDetail.vote_average : (filmDetail.vote_average + '.0') }}
 </div>
 
-<ng-template class="no-rating" #templateNoRating>N/A</ng-template>
+<ng-template class="no-rating" #templateNoRating>
+  <img class="no-rating" src="../../../../assets/images/no-rating.png" alt="no-rating">
+</ng-template>

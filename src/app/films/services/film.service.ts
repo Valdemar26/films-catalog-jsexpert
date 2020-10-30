@@ -10,6 +10,7 @@ import { GenresListInterface } from '../interfaces/genres-list.interface';
 import { GenresInterface } from '../interfaces/genres.interface';
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmInterface } from '../interfaces/film.interface';
+import {Router} from "@angular/router";
 
 
 @Injectable({
@@ -33,7 +34,10 @@ export class FilmService {
 
   private currentFilm$: Subject<FilmListInterface> = new Subject<FilmListInterface>();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   public initFilmList(): Observable<any> {
 
@@ -100,7 +104,12 @@ export class FilmService {
       tap((currentFilm: FilmListInterface) => {
         this.currentFilm$.next(currentFilm);
       }),
-      catchError( (error) => error)
+      catchError( (error) => {
+        console.log('ERROR GET FILM');
+        this.router.navigate(['/', 'main']);
+        // TODO show notification modal for few seconds and redirect to main page
+        return error;
+      })
     );
   }
 
