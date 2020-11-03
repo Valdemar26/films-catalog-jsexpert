@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
 ## Demo
-See demo at https://films-catalog-jsexpert.firebaseapp.com/main
+See demo at https://films-catalog-jsexpert.firebaseapp.com
 
 ## Development server
 
