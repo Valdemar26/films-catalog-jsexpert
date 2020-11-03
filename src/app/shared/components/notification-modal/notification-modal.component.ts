@@ -26,8 +26,6 @@ export class NotificationModalComponent implements OnDestroy {
   private isConfirmed: boolean;
 
   constructor(
-    // private notificationService: NotificationService,
-    // private resolver: ComponentFactoryResolver,
     ) { }
 
   public initNotificationModal(): void {

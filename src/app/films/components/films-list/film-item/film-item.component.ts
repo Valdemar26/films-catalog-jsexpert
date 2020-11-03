@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { from, Subscription } from 'rxjs';
 import { FilmListInterface } from '../../../interfaces/film-list.interface';
 import { FilmService } from '../../../services/film.service';
-import { filter, reduce, switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -43,21 +43,6 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     this.favoriteFilm.emit(favoriteFilm);
   }
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  private fetchGenres(): void {
-    this.film.genre_ids.forEach((genre: number) => {
-
-      const item = this.genresList.filter((x) => x.id === genre);
-
-      if (item.length) {
-        this.genres.push(item[0]);
-      }
-    });
-  }
-
   public openFilm(film: FilmListInterface): any {
     this.router.navigate(['/films/' + film.id]);
   }
@@ -74,5 +59,20 @@ export class FilmItemComponent implements OnInit, OnDestroy {
     ).subscribe((data) => genresArray.push(data));
 
     this.filmService.filmList$.next([...new Set(genresArray)]);
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private fetchGenres(): void {
+    this.film.genre_ids.forEach((genre: number) => {
+
+      const item = this.genresList.filter((x) => x.id === genre);
+
+      if (item.length) {
+        this.genres.push(item[0]);
+      }
+    });
   }
 }
