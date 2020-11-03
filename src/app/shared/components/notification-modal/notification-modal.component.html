@@ -1,3 +1,30 @@
-<p #modalContainer>
-  notification-modal works!
-</p>
+<div class="ecc-notification-modal-content" [ngClass]="modalNotification.content.panelClass">
+
+  <h3 class="ecc-notification-modal-title">{{ modalNotification.content.title }}</h3>
+  <p>{{ modalNotification.content.text }}</p>
+
+  <ng-container *ngIf="modalNotification.content.template">
+    <ng-container *ngTemplateOutlet="modalNotification.content.template"></ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="!modalNotification.content.template">
+    <div class="ecc-close" *ngIf="modalNotification.config.closeButton">
+      <img src="./assets/ecc-icons/close.svg" alt="close" class="ecc-close-image gkh-close-image-delete-user"
+           (click)="dismiss()">
+    </div>
+
+    <div class="ecc-buttons-wrapper">
+
+      <button class="ecc-button ecc-button-dismiss" *ngIf="modalNotification.config.closeButton" (click)="dismiss()">
+        Cancel
+      </button>
+
+      <button class="ecc-button ecc-button-close" (click)="confirm()">
+        Ok
+      </button>
+    </div>
+  </ng-container>
+
+</div>
+
+<div class="ecc-notification-modal-backdrop"></div>

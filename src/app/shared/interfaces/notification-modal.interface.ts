@@ -5,6 +5,6 @@ import { NotificationModalConfigInterface } from './notification-modal-config.in
 
 export interface NotificationModalInterface {
   content: NotificationModalContentInterface;
-  config: NotificationModalConfigInterface;
+  config?: NotificationModalConfigInterface;
   confirm$: Subject<boolean>;
 }

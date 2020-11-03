@@ -19,8 +19,8 @@ import { FilmDetailService } from '../../../../services/film-detail.service';
 
 import { ModalComponent } from '../../../../../shared/components/modal/modal.component';
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
-import {NotificationService} from "../../../../../shared/services/notification.service";
-import {NotificationModalComponent} from "../../../../../shared/components/notification-modal/notification-modal.component";
+import { NotificationService } from '../../../../../shared/services/notification.service';
+import { NotificationModalComponent } from '../../../../../shared/components/notification-modal/notification-modal.component';
 
 
 @Component({
@@ -31,6 +31,7 @@ import {NotificationModalComponent} from "../../../../../shared/components/notif
 export class FilmDetailComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalContainer', { read: ViewContainerRef }) container;
+  @ViewChild('notificationContainer', { read: ViewContainerRef }) notification;
   componentRef: ComponentRef<any>;
 
   public filmDetail: FilmListInterface;
@@ -115,11 +116,18 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   private checkAdultFilm(): void {
-    if (!this.adultFilm) {  // TODO revert temporary solution
+    if (this.adultFilm) {  // TODO revert temporary solution
       console.log('adultFilm: ', this.adultFilm);
-
-      // this.notificationModalComponent.initNotificationModal();
+      this.createNotification();
     }
+  }
+
+  private createNotification(): void {
+    this.notification.clear();
+    const factory = this.resolver.resolveComponentFactory(NotificationModalComponent);
+    this.componentRef = this.notification.createComponent(factory);
+
+    this.componentRef.instance.modalNotification = this.notificationService.modalNotification;
   }
 
   private initFilmHeroes(): void {
@@ -134,7 +142,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     const trailerSubscription = this.filmDetailService.getTrailerByFilmId(this.filmId)
       .subscribe((trailer) => {
         if (trailer.results && trailer.results.length) {
-          const youtubeId = trailer.results[0].key;  // TODO fix bug 'Cannot read property 'key' of undefined'
+          const youtubeId = trailer.results[0].key;
           const youtubePath = 'https://www.youtube.com/embed/';
           this.trailerPath = `${youtubePath}${youtubeId}`;
         }

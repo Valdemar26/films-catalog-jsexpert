@@ -14,14 +14,28 @@ import {NotificationModalComponent} from '../components/notification-modal/notif
 })
 export class NotificationService {
 
+  public modalNotification: NotificationModalInterface;
+
   constructor(
     private resolver: ComponentFactoryResolver,
-  ) { }
+  ) {
+
+    this.initModal();
+  }
 
 
-  // public initModal(): void {
-  //   this.notificationModal.initNotificationModal();
-  // }
+  public initModal(): void {
+    const content: NotificationModalContentInterface = {
+      title: 'Test Notification'
+    };
+    const confirm$ = new Subject<boolean>();
+    const config: NotificationModalConfigInterface = {
+      backdropDismiss: false,
+      closeButton: false
+    };
+
+    this.modalNotification = {content, config, confirm$};
+  }
 
 
   // public createModal(container, componentRef): void {
