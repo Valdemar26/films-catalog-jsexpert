@@ -21,6 +21,8 @@ import { ModalComponent } from '../../../../../shared/components/modal/modal.com
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { NotificationModalComponent } from '../../../../../shared/components/notification-modal/notification-modal.component';
+import {LoaderService} from "../../../../../shared/services/loader.service";
+import {delay, tap} from "rxjs/operators";
 
 
 @Component({
@@ -53,6 +55,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private filmService: FilmService,
     private filmDetailService: FilmDetailService,
     private notificationService: NotificationService,
+    private loaderService: LoaderService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -104,19 +107,25 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   private initFilmSubscription(): void {
-    const filmSubscription = this.filmService.getFilmObservable().subscribe((film: FilmListInterface) => {
-      if (film) {
-        this.filmDetail = film;
-        this.adultFilm = film.adult;  // TODO check if film is 'adult' - create notification service and modal
-        this.checkAdultFilm();
-      }
+    const filmSubscription = this.filmService.getFilmObservable().pipe(
+      tap(() => this.loaderService.show()),
+      delay(800),
+    )
+      .subscribe((film: FilmListInterface) => {
+
+        if (film) {
+          this.filmDetail = film;
+          this.loaderService.hide();
+          this.adultFilm = film.adult;  // TODO check if film is 'adult' - create notification service and modal
+          this.checkAdultFilm();
+        }
     });
 
     this.subscription.add(filmSubscription);
   }
 
   private checkAdultFilm(): void {
-    if (this.adultFilm) {  // TODO revert temporary solution
+    if (this.adultFilm) {
       console.log('adultFilm: ', this.adultFilm);
       this.createNotification();
     }
