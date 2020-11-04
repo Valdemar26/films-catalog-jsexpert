@@ -63,7 +63,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   private getFilmList(): void {
-    this.filmService.getFilmList.subscribe((films) => this.filmsList = films);
+    this.filmService.getFilmList.subscribe((films: FilmListInterface[]) => this.filmsList = films);
   }
 
 }

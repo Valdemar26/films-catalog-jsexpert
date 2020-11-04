@@ -18,6 +18,11 @@
                (input)="searchFilmByTitle()">
         <mat-icon class="search-icon">search</mat-icon>
       </mat-form-field>
+
+      <div class="no-results" *ngIf="filmsList && !filmsList.length">
+        <span>No results...</span>
+      </div>
+
     </div>
 
     <span class="menu-spacing"></span>

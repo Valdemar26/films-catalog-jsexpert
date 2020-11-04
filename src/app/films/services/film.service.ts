@@ -67,8 +67,8 @@ export class FilmService {
     if (result && result.length) {
       this.filmList$.next(result);
     } else {
-      // TODO show block 'no results'
       console.log('no results');
+      this.filmList$.next([]);
     }
   }
 
