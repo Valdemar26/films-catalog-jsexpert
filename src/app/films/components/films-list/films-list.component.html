@@ -11,7 +11,7 @@
 
     <mat-grid-tile colspan="2" *ngFor="let film of filmsList; trackBy: identify">
 
-      <exp-film-item [film]="film"
+      <exp-film-item [filmList]="film"
                      [genresList]="getGenresList | async"
                      (favoriteFilm)="setFavoriteFilm($event)"></exp-film-item>
 

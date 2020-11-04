@@ -25,7 +25,9 @@ export class FilmsListComponent implements OnDestroy {
     private filmService: FilmService,
     private favoriteFilmsService: FavoriteFilmsService,
     private loaderService: LoaderService
-  ) {}
+  ) {
+    this.getFromLocalStorage();
+  }
 
   public get getFilmList(): Observable<FilmListInterface[]> {
     return this.filmService.getFilmList;
@@ -63,4 +65,10 @@ export class FilmsListComponent implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  private getFromLocalStorage(): void {
+    if (localStorage.getItem('favoriteFilmsList')) {
+      const favoriteFilms = JSON.parse(localStorage.getItem('favoriteFilmsList'));
+      console.log(favoriteFilms);
+    }  // TODO merge two arrays
+  }
 }

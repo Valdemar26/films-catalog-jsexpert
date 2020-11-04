@@ -14,11 +14,15 @@ import { filter, switchMap } from 'rxjs/operators';
 })
 export class FilmItemComponent implements OnInit, OnDestroy {
 
-  @Input() film: FilmListInterface;
+  @Input() set filmList(value: FilmListInterface) {
+    this.film = value;
+  }
+
   @Input() genresList: any;
 
   @Output() favoriteFilm: EventEmitter<FilmListInterface> = new EventEmitter<FilmListInterface>();
 
+  public film: FilmListInterface;
   public imagePath: string;
   public genres = [];
   public genresId: number;
@@ -48,6 +52,7 @@ export class FilmItemComponent implements OnInit, OnDestroy {
   }
 
   public sortByGenres(id: number): void {
+    console.log('id: ', id);
     this.genresId = id;
     const genresArray = [];
 
@@ -55,8 +60,14 @@ export class FilmItemComponent implements OnInit, OnDestroy {
       switchMap((items: FilmListInterface[]) => {
         return from(items);
       }),
-      filter((film) => film.genre_ids.indexOf(id) > 0)
-    ).subscribe((data) => genresArray.push(data));
+      filter((film) => {
+        console.log(film.genre_ids.indexOf(id) > 0);
+        return film.genre_ids.indexOf(id) > 0;
+      })
+    ).subscribe((data) => {
+      console.log(data);  // DOESN'T GET DATA
+      genresArray.push(data);
+    });
 
     this.filmService.filmList$.next([...new Set(genresArray)]);
   }

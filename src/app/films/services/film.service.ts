@@ -11,6 +11,7 @@ import { GenresListInterface } from '../interfaces/genres-list.interface';
 import { GenresInterface } from '../interfaces/genres.interface';
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmInterface } from '../interfaces/film.interface';
+import {FavoriteFilmsService} from './favorite-films.service';
 
 
 @Injectable({
