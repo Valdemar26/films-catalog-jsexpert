@@ -45,7 +45,7 @@ export class FavoriteFilmsService {
 
     const unique = [];
 
-    favoritesArray.map(film => unique.filter(f => f.id === film.id).length > 0 ? null : unique.push(film));
+    favoritesArray.forEach(film => unique.filter(f => f.id === film.id).length > 0 ? null : unique.push(film));
 
     localStorage.setItem('favoriteFilmsList', JSON.stringify(unique));
     this.favoriteFilmsArray$.next(unique);
