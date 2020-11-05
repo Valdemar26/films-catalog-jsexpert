@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { MenuItemInterface } from '../../interfaces/menu-item.interface';
 
 @Component({
   selector: 'exp-header',
@@ -7,11 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent {
 
-  links: object[] = [
-    { path: '/welcome', label: 'Main Page', active: 'button-active', icon: 'home'},
-    { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt'},
-    { path: '/actors', label: 'All Actors', active: 'button-active', icon: 'face'},
-    { path: '/favorite-films', label: 'Favorite', active: 'button-active', icon: 'stars'}
+  public linkId = 0;
+
+  links: MenuItemInterface[] = [
+    { path: '/welcome', label: 'Main Page', active: 'button-active', icon: 'home', id: 0 },
+    { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt', id: 1 },
+    { path: '/actors', label: 'All Actors', active: 'button-active', icon: 'face', id: 2 },
+    { path: '/favorite-films', label: 'Favorite', active: 'button-active', icon: 'stars', id: 3 }
   ];
 
+  public chooseLink(id: number): void {
+    this.linkId = id;
+  }
 }

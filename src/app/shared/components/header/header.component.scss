@@ -16,8 +16,19 @@ mat-toolbar {
       outline: none;
     }
 
-    a.disabled {
-      pointer-events: none;
+    a {
+      border: 2px solid transparent;
+
+      &.disabled {
+        pointer-events: none;
+      }
+
+      &.active {
+        border: 2px solid #fff;
+        cursor: default;
+        pointer-events: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
     }
   }
 }
