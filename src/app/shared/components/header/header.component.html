@@ -1,13 +1,19 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
+
     <span class="logo" routerLink="">Film Catalog</span>
+
     <span class="example-spacer"></span>
+
     <a mat-button
        *ngFor="let link of links"
        [routerLink]="link.path"
        [routerLinkActive]="link.active"
-       [class.disabled]="link.path === '/actors'">
+       [class.disabled]="link.path === '/actors'"
+       [class.active]="link.id === linkId"
+       (click)="chooseLink(link.id)">
       <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
     </a>
+
   </mat-toolbar-row>
 </mat-toolbar>
