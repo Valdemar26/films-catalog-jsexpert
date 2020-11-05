@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
@@ -98,12 +98,21 @@ export class FilmService {
   }
 
   public initGenresList(): Observable<any> {
-    return this.http.get(this.genresUrl).pipe(
-      tap((genres: GenresInterface) => {
-        this.genresList$.next(genres.genres);
-      }),
-      catchError( (error) => error)
-    );
+
+    if (localStorage.getItem('genres')) {
+      this.genresList$.next(JSON.parse(localStorage.getItem('genres')));
+      return of(JSON.parse(localStorage.getItem('genres')));
+    } else {
+      return this.http.get(this.genresUrl).pipe(
+        tap((genres: GenresInterface) => {
+
+          localStorage.setItem('genres', JSON.stringify(genres.genres));
+
+          this.genresList$.next(genres.genres);
+        }),
+        catchError( (error) => error)
+      );
+    }
   }
 
   public getFilmById(id: number): Observable<any> {
