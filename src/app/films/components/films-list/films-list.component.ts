@@ -70,5 +70,6 @@ export class FilmsListComponent implements OnDestroy {
       const favoriteFilms = JSON.parse(localStorage.getItem('favoriteFilmsList'));
       console.log(favoriteFilms);
     }  // TODO merge two arrays
+    // TODO or set all films list to localStorage and get it if exist
   }
 }

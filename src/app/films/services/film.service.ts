@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject, Subscription} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
@@ -42,6 +42,12 @@ export class FilmService {
 
   public initFilmList(): Observable<any> {
 
+    // get FIlmList from LocalStorage (if exist)
+    if (localStorage.getItem('filmListArray')) {
+      this.updateFilmList(JSON.parse(localStorage.getItem('filmListArray')));
+      return of(true);
+    }
+
     return this.http.get(this.popularFilmUrl).pipe(
       tap((filmList: FilmInterface) => {
         console.log(filmList);
@@ -49,6 +55,7 @@ export class FilmService {
       }),
       catchError( (error) => error)
     );
+
   }
 
   public getMoreFilms(): any {
@@ -59,6 +66,10 @@ export class FilmService {
   public updateFilmList(list: FilmListInterface[]): void {
     if (list && list.length) {
       const result = [...new Set([...this.filmListArray, ...list])];
+      console.log(result);
+
+      localStorage.setItem('filmListArray', JSON.stringify(result));
+
       this.filmList$.next(result);
     }
   }
