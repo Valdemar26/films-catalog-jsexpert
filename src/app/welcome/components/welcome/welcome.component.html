@@ -14,7 +14,7 @@
              [ngClass]="['box-' + (i + 1)]">
 
           <a (click)="openFilm(film)">
-            <img [src]="imagePath + film.backdrop_path" alt="{{ film.original_title }}">
+            <img *ngIf="film.backdrop_path" [src]="imagePath + film.backdrop_path" alt="{{ film.original_title }}">
             <h3 *ngIf="i < 6">{{ i + 1 }}. {{ film.title }}</h3>
           </a>
 
@@ -32,7 +32,7 @@
              [ngClass]="['box-' + (i + 1)]">
 
           <a (click)="openActor(actor)">
-            <img [src]="imagePath + actor.profile_path" alt="{{ actor.name }}">
+            <img *ngIf="actor.profile_path" [src]="imagePath + actor.profile_path" alt="{{ actor.name }}">
             <h3 *ngIf="i < 6">{{ i + 1 }}. {{ actor.name }}</h3>
           </a>
 
