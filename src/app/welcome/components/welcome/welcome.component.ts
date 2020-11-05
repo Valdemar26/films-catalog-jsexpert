@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import {of, Subscription} from 'rxjs';
 
 import { WelcomeService } from '../../services/welcome.service';
 import { FilmListInterface } from '../../../films/interfaces/film-list.interface';
@@ -38,7 +38,18 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   private initWelcomeFilms(): void {
     const filmsSubscription = this.welcomeService.getWelcomeFilms()
-      .subscribe((films: FilmInterface) => this.welcomeFilms = films.results);
+      .subscribe((films: FilmInterface) => {
+
+        if (localStorage.getItem('popularMovie')) {
+          console.log('popular from LS');
+          this.welcomeFilms = JSON.parse(localStorage.getItem('popularMovie'));
+        } else {
+          console.log('popular from API');
+          localStorage.setItem('popularMovie', JSON.stringify(films.results));
+          this.welcomeFilms = films.results;
+        }
+
+      });
 
     this.subscription.add(filmsSubscription);
   }
@@ -46,7 +57,16 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   private initWelcomeActors(): void {
     const actorsSubscription = this.welcomeService.getWelcomeActors()
       .subscribe((actors: any) => {
-        this.welcomeActors = actors.results;
+
+        if (localStorage.getItem('popularActors')) {
+          console.log('popular actor from LS');
+          this.welcomeActors = JSON.parse(localStorage.getItem('popularActors'));
+        } else {
+          console.log('popular actor from API');
+          localStorage.setItem('popularActors', JSON.stringify(actors.results));
+          this.welcomeActors = actors.results;
+        }
+
       });
 
     this.subscription.add(actorsSubscription);
