@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import {BehaviorSubject, Observable, of, Subject, Subscription} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
@@ -11,7 +11,6 @@ import { GenresListInterface } from '../interfaces/genres-list.interface';
 import { GenresInterface } from '../interfaces/genres.interface';
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmInterface } from '../interfaces/film.interface';
-import {FavoriteFilmsService} from './favorite-films.service';
 
 
 @Injectable({
@@ -41,21 +40,14 @@ export class FilmService {
   ) { }
 
   public initFilmList(): Observable<any> {
-
-    // get FIlmList from LocalStorage (if exist)
-    if (localStorage.getItem('filmListArray')) {
-      this.updateFilmList(JSON.parse(localStorage.getItem('filmListArray')));
-      return of(true);
-    }
-
     return this.http.get(this.popularFilmUrl).pipe(
       tap((filmList: FilmInterface) => {
-        console.log(filmList);
-        this.updateFilmList(filmList.results);
+        this.filmListArray = filmList.results;
+        this.updateFilmList(this.filmListArray);
+        localStorage.setItem('filmListArray', JSON.stringify(this.filmListArray));
       }),
       catchError( (error) => error)
     );
-
   }
 
   public getMoreFilms(): any {
@@ -64,12 +56,15 @@ export class FilmService {
   }
 
   public updateFilmList(list: FilmListInterface[]): void {
+    console.log('updateFilmList');
+    if (localStorage.getItem('filmListArray')) {
+      this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
+    }
+
     if (list && list.length) {
       const result = [...new Set([...this.filmListArray, ...list])];
-      console.log(result);
-
       localStorage.setItem('filmListArray', JSON.stringify(result));
-
+      console.log('result: ', result);
       this.filmList$.next(result);
     }
   }
