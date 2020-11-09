@@ -37,39 +37,33 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   private initWelcomeFilms(): void {
-    const filmsSubscription = this.welcomeService.getWelcomeFilms()
-      .subscribe((films: FilmInterface) => {
 
-        if (localStorage.getItem('popularMovie')) {
-          console.log('popular from LS');
-          this.welcomeFilms = JSON.parse(localStorage.getItem('popularMovie'));
-        } else {
-          console.log('popular from API');
+    if (localStorage.getItem('popularMovie')) {
+      this.welcomeFilms = JSON.parse(localStorage.getItem('popularMovie'));
+    } else {
+      const filmsSubscription = this.welcomeService.getWelcomeFilms()
+        .subscribe((films: FilmInterface) => {
           localStorage.setItem('popularMovie', JSON.stringify(films.results));
           this.welcomeFilms = films.results;
-        }
+        });
 
-      });
-
-    this.subscription.add(filmsSubscription);
+      this.subscription.add(filmsSubscription);
+    }
   }
 
   private initWelcomeActors(): void {
-    const actorsSubscription = this.welcomeService.getWelcomeActors()
-      .subscribe((actors: any) => {
 
-        if (localStorage.getItem('popularActors')) {
-          console.log('popular actor from LS');
-          this.welcomeActors = JSON.parse(localStorage.getItem('popularActors'));
-        } else {
-          console.log('popular actor from API');
+    if (localStorage.getItem('popularActors')) {
+      this.welcomeActors = JSON.parse(localStorage.getItem('popularActors'));
+    } else {
+      const actorsSubscription = this.welcomeService.getWelcomeActors()
+        .subscribe((actors: any) => {
           localStorage.setItem('popularActors', JSON.stringify(actors.results));
           this.welcomeActors = actors.results;
-        }
+        });
 
-      });
-
-    this.subscription.add(actorsSubscription);
+      this.subscription.add(actorsSubscription);
+    }
   }
 
   public ngOnDestroy(): void {
