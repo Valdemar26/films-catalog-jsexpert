@@ -40,14 +40,21 @@ export class FilmService {
   ) { }
 
   public initFilmList(): Observable<any> {
-    return this.http.get(this.popularFilmUrl).pipe(
-      tap((filmList: FilmInterface) => {
-        this.filmListArray = filmList.results;
-        this.updateFilmList(this.filmListArray);
-        localStorage.setItem('filmListArray', JSON.stringify(this.filmListArray));
-      }),
-      catchError( (error) => error)
-    );
+
+    if (localStorage.getItem('filmListArray')) {
+      this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
+      this.updateFilmList(this.filmListArray);
+      return of(false);
+    } else {
+      return this.http.get(this.popularFilmUrl).pipe(
+        tap((filmList: FilmInterface) => {
+          this.filmListArray = filmList.results;
+          this.updateFilmList(this.filmListArray);
+          localStorage.setItem('filmListArray', JSON.stringify(this.filmListArray));
+        }),
+        catchError( (error) => error)
+      );
+    }
   }
 
   public getMoreFilms(): any {
@@ -56,16 +63,19 @@ export class FilmService {
   }
 
   public updateFilmList(list: FilmListInterface[]): void {
-    console.log('updateFilmList');
+
     if (localStorage.getItem('filmListArray')) {
       this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
     }
 
     if (list && list.length) {
-      const result = [...new Set([...this.filmListArray, ...list])];
-      localStorage.setItem('filmListArray', JSON.stringify(result));
-      console.log('result: ', result);
-      this.filmList$.next(result);
+      const result = [...this.filmListArray, ...list];
+
+      const unique = [];
+      result.forEach(film => unique.filter(f => f.id === film.id).length > 0 ? null : unique.push(film));
+
+      localStorage.setItem('filmListArray', JSON.stringify(unique));
+      this.filmList$.next(unique);
     }
   }
 
