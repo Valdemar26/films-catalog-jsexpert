@@ -10,7 +10,7 @@
        [routerLink]="link.path"
        [routerLinkActive]="link.active"
        [class.active]="link.id === linkId"
-       (click)="chooseLink(link.id)"> <!-- [class.disabled]="link.path === '/actors'" -->
+       (click)="chooseLink(link.id)">
       <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
     </a>
 
