@@ -1,0 +1,35 @@
+<div class="login-wrapper">
+
+  <form class="login" [formGroup]="loginForm">
+    <section class="title">
+      <h3 class="welcome">Login</h3>
+      <h5 class="hint">To get more functionality - you need to login</h5>
+    </section>
+    <div class="login-group">
+
+      <input
+        class="username"
+        type="text"
+        id="login_username"
+        placeholder="Username"
+        name="name"
+        formControlName="username">
+
+      <input
+        class="password"
+        type="password"
+        id="login_password"
+        placeholder="Password"
+        name="password"
+        formControlName="password">
+
+      <div class="error active" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-primary" mat-raised-button color="primary" mat-button (click)="login()">Login</button>
+      <button class="btn btn-info" mat-raised-button color="primary" mat-button (click)="goToRegistration()">Register</button>
+    </div>
+  </form>
+
+</div>

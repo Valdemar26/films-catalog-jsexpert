@@ -9,9 +9,8 @@
        *ngFor="let link of links"
        [routerLink]="link.path"
        [routerLinkActive]="link.active"
-       [class.disabled]="link.path === '/actors'"
        [class.active]="link.id === linkId"
-       (click)="chooseLink(link.id)">
+       (click)="chooseLink(link.id)"> <!-- [class.disabled]="link.path === '/actors'" -->
       <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
     </a>
 

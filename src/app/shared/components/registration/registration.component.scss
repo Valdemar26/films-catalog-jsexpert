@@ -1,0 +1,16 @@
+.login-wrapper {
+  padding: 20px;
+
+  .login-group {
+    display: flex;
+    flex-direction: column;
+
+    .button-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+  }
+}
+
+

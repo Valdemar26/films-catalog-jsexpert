@@ -1,0 +1,118 @@
+<div class="login-wrapper">
+  <form class="login" [formGroup]="registerForm">
+
+    <section class="title">
+      <h3 class="welcome">Welcome to Registration!</h3>
+    </section>
+
+    <div class="login-group">
+
+      <label
+        for="login_username"
+        aria-haspopup="true"
+        role="tooltip"
+        class="tooltip tooltip-validation tooltip-sm"
+        [ngClass]="{invalid: registerForm.value.username.invalid && (registerForm.value.username.touched && registerForm.value.username.dirty)}">
+
+        <input
+          class="username"
+          type="text"
+          id="login_username"
+          placeholder="Login"
+          name="username"
+          required
+          formControlName="login">
+
+        <span class="tooltip-content">
+            Login field can't be empty!
+        </span>
+      </label>
+
+
+      <label
+        for="email"
+        aria-haspopup="true"
+        role="tooltip"
+        class="tooltip tooltip-validation tooltip-sm"
+        [ngClass]="{invalid: registerForm.value.login.invalid && (registerForm.value.login.touched && registerForm.value.login.dirty)}">
+
+        <input
+          class="username"
+          type="email"
+          id="email"
+          placeholder="E-mail"
+          name="email"
+          required
+          email
+          formControlName="username">
+
+        <span class="tooltip-content">
+            Email should be valid
+        </span>
+      </label>
+
+      <label
+        for="login_password"
+        aria-haspopup="true"
+        role="tooltip"
+        class="tooltip tooltip-validation tooltip-sm"
+        [ngClass]="{invalid: registerForm.value.password.invalid && (registerForm.value.password.touched && registerForm.value.password.dirty)}">
+
+        <input
+          class="password"
+          type="password"
+          id="login_password"
+          placeholder="Password"
+          name="password"
+          required
+          minlength="6"
+          formControlName="password">
+
+        <ng-container *ngIf="registerForm.value.password?.invalid">
+          <span
+            class="tooltip-content"
+            *ngIf="registerForm.value.password?.errors['minlength']">
+            Необхідна довжина пароля {{ registerForm.value.password?.errors['minlength']['requiredLength'] }},
+            введено {{ registerForm.value.password?.errors['minlength']['actualLength'] }}
+          </span>
+          <span
+            class="tooltip-content"
+            *ngIf="registerForm.value.password?.errors['required']">
+            Password can't be empty!
+          </span>
+        </ng-container>
+      </label>
+
+      <div class="form-group">
+        <label for="role" class="required">Choose User Role</label>
+        <div class="select">
+          <select
+            id="role"
+            name="role"
+            required>
+
+            <option
+              *ngFor="let role of userRoles"
+              [value]="role">{{role}}</option>
+
+          </select>
+        </div>
+      </div>
+
+      <div class="button-wrapper">
+        <button
+          mat-raised-button color="primary" mat-button
+          class="btn btn-primary"
+          type="submit"
+          (click)="registration()">Register</button> <!-- [disabled]="registerForm.invalid" -->
+
+        <button
+          mat-raised-button color="primary" mat-button
+          class="btn btn-info"
+          type="button"
+          (click)="goToLogin()">LogIn</button>
+      </div>
+
+    </div>
+  </form>
+</div>
