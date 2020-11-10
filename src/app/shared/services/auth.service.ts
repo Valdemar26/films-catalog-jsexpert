@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { retry, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -28,6 +28,21 @@ export class AuthService {
     return this.http.post(`${this.authUrl}/login`, {username, password})
       .pipe(
         retry(2),
+        tap(res => {
+          console.log('res: ', res);
+          if (res.token) {
+            localStorage.setItem('auth_token', res.token);
+            this.loggedIn = true;
+          }
+        }),
+      );
+  }
+
+  public register(username: string, password: string): Observable<any> {
+    console.log(username, password);
+
+    return this.http.post(`${this.authUrl}/register`, {username, password})
+      .pipe(
         tap(res => {
           console.log('res: ', res);
           if (res.token) {
