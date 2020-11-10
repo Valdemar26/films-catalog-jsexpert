@@ -93,21 +93,20 @@
 
             <option
               *ngFor="let role of userRoles"
-              [value]="role">{{role}}</option>
+              [value]="role">{{ role }}</option>
 
           </select>
         </div>
       </div>
 
       <div class="button-wrapper">
-        <button
-          mat-raised-button color="primary" mat-button
+        <button mat-raised-button color="primary" mat-button
           class="btn btn-primary"
           type="submit"
-          (click)="registration()">Register</button> <!-- [disabled]="registerForm.invalid" -->
+          (click)="registration()"
+          [disabled]="registerForm.invalid">Register</button>
 
-        <button
-          mat-raised-button color="primary" mat-button
+        <button mat-raised-button color="primary" mat-button
           class="btn btn-info"
           type="button"
           (click)="goToLogin()">LogIn</button>
