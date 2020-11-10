@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +15,8 @@ import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import { NotificationModalComponent } from './components/notification-modal/noti
     RatingComponent,
     ModalComponent,
     SafeUrlPipe,
-    NotificationModalComponent
+    NotificationModalComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,9 @@ import { NotificationModalComponent } from './components/notification-modal/noti
     MatIconModule,
     MatButtonModule,
     MatSlideToggleModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     FooterComponent,

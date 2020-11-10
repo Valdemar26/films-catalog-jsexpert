@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FilmsResolver } from './films/resolvers/film.resolver';
+import { AuthGuard } from './shared/guards/auth-guard.service';
+
+import { LoginComponent } from './shared/components/login/login.component';
+import { RegistrationComponent } from './shared/components/registration/registration.component';
 
 import { FilmsListComponent } from './films/components/films-list/films-list.component';
 import { ActorsListComponent } from './actors/components/actors-list/actors-list.component';
@@ -19,8 +23,10 @@ const routes: Routes = [
     resolve: { data: FilmsResolver }
   },
   { path: 'films/:id', component: FilmDetailComponent},
-  { path: 'actors', component: ActorsListComponent },
+  { path: 'actors', component: ActorsListComponent, canActivate: [AuthGuard] },
   { path: 'favorite-films', component: FavoriteFilmsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: RegistrationComponent },
   { path: '**', redirectTo: 'main' }
 ];
 
