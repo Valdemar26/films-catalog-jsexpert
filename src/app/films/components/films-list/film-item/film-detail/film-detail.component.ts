@@ -66,6 +66,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     window.scroll(0, 0);
 
+    // TODO combine it to mergeMap  initFilmHeroes + getFilmTrailer + getSimilarFilms
     this.initFilmSubscription();
     this.getFilmIdFromUrl();
     this.initFilmDetail();
@@ -74,7 +75,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.getSimilarFilms();
   }
 
-  public initFilmDetail(): void {
+  private initFilmDetail(): void {
     this.filmService.getFilmById(this.filmId).subscribe();
   }
 
