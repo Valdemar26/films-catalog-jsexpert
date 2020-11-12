@@ -7,7 +7,7 @@
   </mat-card>
 
 
-  <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmList | async as filmsList">
+  <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmList | async as filmsList"> <!-- TODO remove and use custom grid -->
 
     <mat-grid-tile colspan="2" *ngFor="let film of filmsList; trackBy: identify">
 
