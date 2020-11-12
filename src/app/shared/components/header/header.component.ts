@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
     { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt', id: 1 },
     { path: '/actors', label: 'All Actors', active: 'button-active', icon: 'face', id: 2 },
     { path: '/favorite-films', label: 'Favorite', active: 'button-active', icon: 'stars', id: 3 },
-    { path: '/login', label: 'LogIn', active: 'button-active', icon: 'login', id: 4 },
-    { path: '/logout', label: 'LogOut', active: 'button-active', icon: '', id: 5 }
+    // { path: '/login', label: 'LogIn', active: 'button-active', icon: 'login', id: 4 },
+    // { path: '/logout', label: 'LogOut', active: 'button-active', icon: '', id: 5 }
   ];
 
   constructor(private authService: AuthService) {
