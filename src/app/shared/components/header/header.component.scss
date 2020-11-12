@@ -26,23 +26,29 @@ mat-toolbar {
 
 
     .exp-header-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
       span.logo {
         cursor: pointer;
         outline: none;
       }
 
-      a {
-        border: 2px solid transparent;
+      .exp-menu-wrapper {
+        a {
+          border: 2px solid transparent;
 
-        &.disabled {
-          pointer-events: none;
-        }
+          &.disabled {
+            pointer-events: none;
+          }
 
-        &.active {
-          border: 2px solid #fff;
-          cursor: default;
-          pointer-events: none;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+          &.active {
+            border: 2px solid #fff;
+            cursor: default;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+          }
         }
       }
     }

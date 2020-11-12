@@ -1,6 +1,6 @@
 .exp-films-list-wrapper {
   position: relative;
-  margin: 65px 0;
+  padding: 65px 0 100px;
 
   .menu-card {
     padding: 20px;
@@ -15,7 +15,7 @@
 
   button.more {
     position: relative;
-    bottom: -45px;
+    bottom: -20px;
     left: calc(50% - 50px);
   }
 }
