@@ -4,16 +4,17 @@
     <div class="exp-header-wrapper">
       <span class="logo" routerLink="">Film Catalog</span>
 
-      <span class="example-spacer"></span>
+      <div class="exp-menu-wrapper">
+        <a mat-button
+           *ngFor="let link of links"
+           [routerLink]="link.path"
+           [routerLinkActive]="link.active"
+           [class.active]="link.id === linkId"
+           (click)="chooseLink(link.id)">
+          <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
+        </a>
+      </div>
 
-      <a mat-button
-         *ngFor="let link of links"
-         [routerLink]="link.path"
-         [routerLinkActive]="link.active"
-         [class.active]="link.id === linkId"
-         (click)="chooseLink(link.id)">
-        <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
-      </a>
     </div>
 
     <nav role="navigation" class="navigation">
