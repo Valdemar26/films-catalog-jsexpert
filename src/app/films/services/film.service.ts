@@ -41,14 +41,14 @@ export class FilmService {
 
   public initFilmList(): Observable<any> {
 
-    if (localStorage.getItem('filmListArray')) {
+    if (JSON.parse(localStorage.getItem('filmListArray')) && JSON.parse(localStorage.getItem('filmListArray')).length) {
       this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
       this.updateFilmList(this.filmListArray);
       return of(false);
     } else {
       return this.http.get(this.popularFilmUrl).pipe(
         tap((filmList: FilmInterface) => {
-          this.filmListArray = filmList.results;
+          this.filmListArray = filmList.results.map((e => ({...e, isFavorite: false})));
           this.updateFilmList(this.filmListArray);
           localStorage.setItem('filmListArray', JSON.stringify(this.filmListArray));
         }),

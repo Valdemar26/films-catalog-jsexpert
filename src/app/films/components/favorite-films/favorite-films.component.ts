@@ -20,7 +20,7 @@ export class FavoriteFilmsComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.checkLocalStorage();
+    // this.checkLocalStorage();
   }
 
   public removeFromFavoriteFilms(film: FilmListInterface): void {
@@ -31,9 +31,9 @@ export class FavoriteFilmsComponent implements OnInit {
     return this.favoriteFilmsService.getFavoriteFilmsArray();
   }
 
-  private checkLocalStorage(): void {
-    if (this.favoriteFilms && this.favoriteFilms.length) {
-      this.favoriteFilms.forEach((film: FilmListInterface) => this.favoriteFilmsService.setFavoriteFilm(film));
-    }
-  }
+  // private checkLocalStorage(): void {
+  //   if (this.favoriteFilms && this.favoriteFilms.length) {
+  //     this.favoriteFilms.forEach((film: FilmListInterface) => this.favoriteFilmsService.setFavoriteFilm(film));
+  //   }
+  // }
 }
