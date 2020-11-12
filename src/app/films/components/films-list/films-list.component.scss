@@ -1,34 +1,21 @@
 .exp-films-list-wrapper {
   position: relative;
-  margin-top: 65px;
+  margin: 65px 0;
 
   .menu-card {
     padding: 20px;
   }
 
-  mat-grid-tile {
-    margin-bottom: 50px;
-  }
-
-  mat-grid-list {
-    margin-bottom: 100px;
+  .film-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
 
   button.more {
     position: relative;
-    bottom: 80px;
+    bottom: -45px;
     left: calc(50% - 50px);
   }
 }
-
-
-@media all and (max-width: 900px) and (min-width: 420px) {
-  .exp-films-list-wrapper {
-    .mat-card {
-      .mat-grid-tile {
-        width: calc(50% - 50px);  // todo fix this
-      }
-    }
-  }
-}
-

@@ -6,18 +6,17 @@
 
   </mat-card>
 
+  <div class="film-list-wrapper" *ngIf="getFilmList | async as filmsList">
 
-  <mat-grid-list cols="6" rowHeight="600px" *ngIf="getFilmList | async as filmsList"> <!-- TODO remove and use custom grid -->
-
-    <mat-grid-tile colspan="2" *ngFor="let film of filmsList; trackBy: identify">
+    <ng-container *ngFor="let film of filmsList; trackBy: identify">
 
       <exp-film-item [filmList]="film"
                      [genresList]="getGenresList | async"
                      (favoriteFilm)="setFavoriteFilm($event)"></exp-film-item>
 
-    </mat-grid-tile>
+    </ng-container>
 
-  </mat-grid-list>
+  </div>
 
   <button *ngIf="getFilmList | async as filmsList"
           mat-raised-button color="accent" mat-button class="more"
