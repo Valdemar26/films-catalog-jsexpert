@@ -38,7 +38,7 @@ export class FilmsListComponent implements OnDestroy {
   }
 
   public setFavoriteFilm(film: FilmListInterface): void {
-    this.favoriteFilmsService.setFavoriteFilm(film);
+    this.favoriteFilmsService.setFavoriteFilm();
   }
 
   public loadMoreFilms(): void {
