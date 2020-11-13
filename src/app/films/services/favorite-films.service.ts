@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs';
-
 import { FilmListInterface } from '../interfaces/film-list.interface';
 import { FilmService } from './film.service';
 
@@ -9,8 +7,6 @@ import { FilmService } from './film.service';
   providedIn: 'root'
 })
 export class FavoriteFilmsService {
-
-  private favoriteFilmsArray$: BehaviorSubject<FilmListInterface[]> = new BehaviorSubject<FilmListInterface[]>([]);
 
   constructor(public filmService: FilmService) { }
 
@@ -31,9 +27,5 @@ export class FavoriteFilmsService {
 
     this.filmService.filmList$.next(allFilms);
     localStorage.setItem('filmListArray', JSON.stringify(allFilms));
-  }
-
-  public getFavoriteFilmsArray(): Observable<FilmListInterface[]> {
-    return this.favoriteFilmsArray$.asObservable();
   }
 }

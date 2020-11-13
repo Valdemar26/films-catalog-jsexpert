@@ -19,10 +19,10 @@ export class ToolbarComponent implements OnInit {
 
   public filmsList: FilmListInterface[];
   public sortingMethod: number;
+  public favoriteFilmsCount = 0;
 
   constructor(
-    public filmService: FilmService,
-    private favoriteFilmsService: FavoriteFilmsService
+    private filmService: FilmService
   ) { }
 
   ngOnInit(): void {
@@ -57,8 +57,16 @@ export class ToolbarComponent implements OnInit {
   }
 
   public get getFavoriteFilmsCount(): Observable<number> {
-    let favoriteFilmsArray = [];
-    this.favoriteFilmsService.getFavoriteFilmsArray().subscribe((favoriteFilms: FilmListInterface[]) => favoriteFilmsArray = favoriteFilms);
+    let allFilms = [];
+    const favoriteFilmsArray = [];
+
+    this.filmService.getFilmList.subscribe((films: FilmListInterface[]) => allFilms = films);
+    allFilms.forEach((film: FilmListInterface) => {
+      if (film.isFavorite) {
+        favoriteFilmsArray.push(film);
+      }
+    });
+
     return of(favoriteFilmsArray.length);
   }
 
