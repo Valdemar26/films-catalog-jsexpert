@@ -1,6 +1,6 @@
 <div class="exp-favorite-films-wrapper" *ngIf="getFilmsList | async as favoriteFilmsList">
 
-    <ng-container *ngIf="favoriteFilmsList | favoriteFilms; else emptyTemplate">
+    <ng-container *ngIf="favoriteFilmsList; else emptyTemplate">
       <div *ngFor="let film of favoriteFilmsList | favoriteFilms" class="exp-film-container">
             <mat-card class="example-card">
 
