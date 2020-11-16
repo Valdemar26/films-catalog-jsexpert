@@ -17,6 +17,7 @@ import { SafeUrlPipe } from './pipe/safe-url.pipe';
 import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     SafeUrlPipe,
     NotificationModalComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     HeaderComponent,
     LoaderComponent,
     RatingComponent,
-    ModalComponent
+    ModalComponent,
+    CommentsComponent
   ],
   entryComponents: [ModalComponent]
 })

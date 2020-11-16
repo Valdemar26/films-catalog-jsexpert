@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Subscription} from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 import { FilmService } from '../../../../services/film.service';
 import { FilmDetailService } from '../../../../services/film-detail.service';
@@ -21,8 +22,7 @@ import { ModalComponent } from '../../../../../shared/components/modal/modal.com
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { NotificationModalComponent } from '../../../../../shared/components/notification-modal/notification-modal.component';
-import {LoaderService} from "../../../../../shared/services/loader.service";
-import {delay, tap} from "rxjs/operators";
+import { LoaderService } from '../../../../../shared/services/loader.service';
 
 
 @Component({
@@ -42,7 +42,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public imagePath = 'https://image.tmdb.org/t/p/w500';
   public backdropPath = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
 
-  public trailerPath;
+  public trailerPath: string;
+  public movieReview: any;
 
   private filmId: number;
   private subscription: Subscription = new Subscription();
@@ -66,13 +67,14 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     window.scroll(0, 0);
 
-    // TODO combine it to mergeMap  initFilmHeroes + getFilmTrailer + getSimilarFilms
+    // TODO combine it to mergeMap  initFilmHeroes + getFilmTrailer + getSimilarFilms + getFilmReviews
     this.initFilmSubscription();
     this.getFilmIdFromUrl();
     this.initFilmDetail();
     this.initFilmHeroes();
     this.getFilmTrailer();
     this.getSimilarFilms();
+    this.getFilmReviews();
   }
 
   private initFilmDetail(): void {
@@ -173,6 +175,21 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
       });
 
     this.subscription.add(similarFilmsSubscription);
+  }
+
+  private getFilmReviews(): any {
+    const filmReviewsSubscription = this.filmDetailService.getFilmReviews(this.filmId)
+      .subscribe((review) => {
+        console.log(review);
+        this.movieReview = review.results;
+
+        localStorage.setItem('review', JSON.stringify({
+          id: this.filmId,
+          comments: [...this.movieReview]
+        }));
+      });
+
+    this.subscription.add(filmReviewsSubscription);
   }
 
 }
