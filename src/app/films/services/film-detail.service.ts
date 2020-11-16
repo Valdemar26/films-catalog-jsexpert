@@ -26,5 +26,9 @@ export class FilmDetailService {
     return this.http.get(`${this.themoviedbUrl}${id}/similar?api_key=${this.apiKey}&language=uk-UA&page=1`);
   }
 
+  public getFilmReviews(id: number): any {
+    return this.http.get(`${this.themoviedbUrl}${id}/reviews?api_key=${this.apiKey}&language=uk-UA&page=1`);
+  }
+
   // todo get genres, budget, same films
 }

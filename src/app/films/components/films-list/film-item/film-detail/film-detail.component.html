@@ -1,95 +1,105 @@
-<div class="exp-film-detail-wrapper" *ngIf="filmDetail">
+<div class="exp-film-detail">
+  <div class="exp-film-detail-wrapper" *ngIf="filmDetail">
 
-  <div class="poster" *ngIf="filmDetail.poster_path; else noPoster">
-    <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">
+    <div class="poster" *ngIf="filmDetail.poster_path; else noPoster">
+      <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">
+    </div>
+
+    <ng-template #noPoster>
+      <img src="../../../../../../assets/images/not-available.jpg" alt="no-poster">
+    </ng-template>
+
+    <div class="film-info" [ngStyle]="{'background-image': 'url(' + backdropPath + filmDetail.backdrop_path + ')'}">
+      <div class="film-info-content">
+        <h2>
+          {{ filmDetail.title }}
+          <span>({{ filmDetail.release_date.slice(0,4) }})</span>
+        </h2>
+
+        <h3>{{ filmDetail.original_title }}</h3>
+
+        <exp-rating [filmDetail]="filmDetail"></exp-rating>
+
+        <div class="trailer" *ngIf="trailerPath; else noTrailer">
+          <img (click)="openTrailerModal()" src="../../../../../../assets/images/youtube-button.png" alt="youtube">
+        </div>
+
+        <ng-template #noTrailer>
+          <span class="chips">No Trailer for this Movie yet!</span>
+        </ng-template>
+
+        <!-- todo get genres, budget, actors -->
+        <!--    <div class="genres">{{ filmDetail.genres.name }}</div>-->
+        <!--    <div class="budget">{{ filmDetail.budget }}</div>-->
+
+        <h4>Опис</h4>
+        <p>{{ filmDetail.overview.length ? filmDetail.overview : 'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}</p>
+
+      </div>
+
+      <button mat-raised-button color="primary" mat-button (click)="back()">Back</button>
+    </div>
+
   </div>
 
-  <ng-template #noPoster>
-    <img src="../../../../../../assets/images/not-available.jpg" alt="no-poster">
+  <div class="film-heroes" *ngIf="heroesList && heroesList.length; else noHeroesTemplate">
+    <h3>Series Cast:</h3>
+
+    <div class="hero-wrapper">
+      <div class="hero" *ngFor="let hero of heroesList">
+        <div class="hero-info">
+          <span class="actor-name">{{ hero.name.toString().length ? hero.name : 'No Actor Name' }}</span>
+          <span>{{ hero.character.toString().length ? hero.character : 'No Character Name' }}</span>
+        </div>
+
+        <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path">
+        <img src="../../../../../../assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #noHeroesTemplate>
+    <span class="chips">No Heroes for this Movie yet!</span>
   </ng-template>
 
-  <div class="film-info" [ngStyle]="{'background-image': 'url(' + backdropPath + filmDetail.backdrop_path + ')'}">
-    <div class="film-info-content">
-      <h2>
-        {{ filmDetail.title }}
-        <span>({{ filmDetail.release_date.slice(0,4) }})</span>
-      </h2>
+  <div class="film-similar" *ngIf="similarList && similarList.length; else noSimilarTemplate">
+    <h3>Similar Movies</h3>
 
-      <h3>{{ filmDetail.original_title }}</h3>
+    <div class="film-similar-wrapper">
 
-      <exp-rating [filmDetail]="filmDetail"></exp-rating>
+      <div class="similar" *ngFor="let similar of similarList">
 
-      <div class="trailer" *ngIf="trailerPath; else noTrailer">
-        <img (click)="openTrailerModal()" src="../../../../../../assets/images/youtube-button.png" alt="youtube">
+        <div class="similar-info">
+          <span>{{ similar.title }}</span>
+          <span>{{ similar.vote_average }}</span>
+        </div>
+
+        <div class="poster">
+          <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">
+        </div>
+
+        <div class="overview">
+          <span>{{ similar.overview | slice:0:80 }}</span>
+        </div>
+
       </div>
-
-      <ng-template #noTrailer>
-        <span class="chips">No Trailer for this Movie yet!</span>
-      </ng-template>
-
-      <!-- todo get genres, budget, actors -->
-      <!--    <div class="genres">{{ filmDetail.genres.name }}</div>-->
-      <!--    <div class="budget">{{ filmDetail.budget }}</div>-->
-
-      <h4>Опис</h4>
-      <p>{{ filmDetail.overview.length ? filmDetail.overview : 'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}</p>
-
-    </div>
-
-    <button mat-raised-button color="primary" mat-button (click)="back()">Back</button>
-  </div>
-
-</div>
-
-<div class="film-heroes" *ngIf="heroesList && heroesList.length; else noHeroesTemplate">
-  <h3>Series Cast:</h3>
-
-  <div class="hero-wrapper">
-    <div class="hero" *ngFor="let hero of heroesList">
-      <div class="hero-info">
-        <span class="actor-name">{{ hero.name.toString().length ? hero.name : 'No Actor Name' }}</span>
-        <span>{{ hero.character.toString().length ? hero.character : 'No Character Name' }}</span>
-      </div>
-
-      <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path">
-      <img src="../../../../../../assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
     </div>
   </div>
 
-</div>
-
-<ng-template #noHeroesTemplate>
-  <span class="chips">No Heroes for this Movie yet!</span>
-</ng-template>
-
-<div class="film-similar" *ngIf="similarList && similarList.length; else noSimilarTemplate">
-  <h3>Similar Movies</h3>
-
-  <div class="film-similar-wrapper">
-
-    <div class="similar" *ngFor="let similar of similarList">
-
-      <div class="similar-info">
-        <span>{{ similar.title }}</span>
-        <span>{{ similar.vote_average }}</span>
-      </div>
-
-      <div class="poster">
-        <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">
-      </div>
-
-      <div class="overview">
-        <span>{{ similar.overview | slice:0:80 }}</span>
-      </div>
-
-    </div>
+  <div *ngIf="movieReview">
+    {{ movieReview.comments }}
   </div>
+
+  <exp-comments></exp-comments>
+
+  <ng-template #noSimilarTemplate>
+    <span class="chips">No similar movies for this Movie yet!</span>
+  </ng-template>
+
+  <ng-container #modalContainer></ng-container>
+
+  <ng-container #notificationContainer></ng-container>
 </div>
 
-<ng-template #noSimilarTemplate>
-  <span class="chips">No similar movies for this Movie yet!</span> <!-- TODO show 'badge' or another for this message -->
-</ng-template>
 
-<ng-container #modalContainer></ng-container>
-
-<ng-container #notificationContainer></ng-container>

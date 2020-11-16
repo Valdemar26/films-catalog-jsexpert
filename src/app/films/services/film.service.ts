@@ -80,7 +80,7 @@ export class FilmService {
   }
 
   public updateFilmListAfterSearch(result: FilmListInterface[]): void {
-    console.log('search result: ', result);
+
     if (result && result.length) {
       this.filmList$.next(result);
     } else {
