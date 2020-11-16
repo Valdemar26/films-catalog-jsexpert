@@ -48,6 +48,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   private getFilteredFilms(inputValue): void {
+    this.filmsList = JSON.parse(localStorage.getItem('filmListArray'));
 
     const result = this.filmsList.filter((item: FilmListInterface) => {
       return item.original_title.toLowerCase().includes(inputValue.toLowerCase());
