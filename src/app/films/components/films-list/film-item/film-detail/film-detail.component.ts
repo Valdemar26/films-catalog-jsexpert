@@ -45,7 +45,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public trailerPath: string;
   public movieReview: any;
 
-  private filmId: number;
+  public filmId: number;
   private subscription: Subscription = new Subscription();
 
   public heroesList;

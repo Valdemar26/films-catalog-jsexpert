@@ -91,7 +91,7 @@
     {{ movieReview.comments }}
   </div>
 
-  <exp-comments></exp-comments>
+  <exp-comments [subjectId]="+filmId"></exp-comments>
 
   <ng-template #noSimilarTemplate>
     <span class="chips">No similar movies for this Movie yet!</span>
