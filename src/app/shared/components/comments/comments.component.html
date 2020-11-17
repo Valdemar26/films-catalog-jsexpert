@@ -20,12 +20,35 @@
 
   </form>
 
-  <!-- TODO get comment date and formated to real date. -->
+  <!-- TODO get comment date and formatted to real date. -->
   <!-- TODO create markup for single comment -->
   <!-- TODO create getter to get all comments on page init -->
   <div *ngIf="getCommentsList | async as commentsList">
-    <div *ngFor="let comment of commentsList" class="exp-comments">
-      {{ currentDate | date:'MMM d, y, h:mm:ss' }} {{ comment.username }} {{ comment.comment }}
+    <div *ngFor="let comment of commentsList" class="exp-comment">
+<!--      {{ currentDate | date:'MMM d, y, h:mm:ss' }} {{ comment.username }} {{ comment.comment }}-->
+
+      <div class="exp-comment-avatar">
+        <img src="https://www.gravatar.com/avatar/#" alt="avatar">
+      </div>
+
+      <div class="exp-comment-name">{{ comment.username }}</div>
+
+      <div class="exp-comment-reply">
+        <button>Reply</button>
+      </div>
+
+      <div class="exp-comment-date">{{ currentDate | date:'MMM d, y, h:mm:ss' }}</div>
+
+      <div class="exp-comment-content">
+        {{ comment.comment }}
+      </div>
+
+      <div class="exp-comment-vote">
+        <span class="material-icons">thumb_up</span>
+        <span class="material-icons">thumb_down</span>
+
+      </div>
+
     </div>
   </div>
 
