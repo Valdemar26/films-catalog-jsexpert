@@ -1,6 +1,7 @@
 export interface FilmListInterface {
   adult: boolean;
   backdrop_path: string;
+  budget: string;
   genre_ids: number[];
   id: number;
   original_language: string;

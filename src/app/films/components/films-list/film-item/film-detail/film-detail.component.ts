@@ -23,7 +23,7 @@ import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { NotificationModalComponent } from '../../../../../shared/components/notification-modal/notification-modal.component';
 import { LoaderService } from '../../../../../shared/services/loader.service';
-import {FilmReviewInterface} from "../../../../interfaces/film-review.interface";
+import { FilmReviewInterface } from '../../../../interfaces/film-review.interface';
 
 
 @Component({

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { BehaviorSubject, Observable } from 'rxjs';
+
 import { environment } from '../../../environments/environment.prod';
-import {BehaviorSubject, Observable} from "rxjs";
-import {CommentsInterface} from "../../shared/interfaces/comments.interface";
+import { CommentsInterface } from '../../shared/interfaces/comments.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -56,5 +57,5 @@ export class FilmDetailService {
     return this.commentsList$.asObservable();
   }
 
-  // todo get genres, budget, same films
+  // todo get budget
 }

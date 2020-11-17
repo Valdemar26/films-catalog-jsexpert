@@ -42,9 +42,21 @@
           }
         }
 
-        h3 {
-          color: #696969;
-          font-size: 14px;
+        .original-title {
+          display: flex;
+          justify-content: start;
+          align-items: center;
+
+          h3 {
+            color: #696969;
+            font-size: 14px;
+            margin: 0 20px 0 0;
+          }
+
+          .budget {
+            display: flex;
+            align-items: center;
+          }
         }
 
         h4 {
