@@ -45,7 +45,7 @@ export class FilmDetailService {
 
     if (comment && Object.keys(comment).length) {
 
-      const result = [this.commentsListArray, comment];  // TODO fix this line!
+      const result = [...this.commentsListArray, {...comment}];
 
       localStorage.setItem('comments', JSON.stringify([...result]));
       this.commentsList$.next(result);
@@ -56,6 +56,4 @@ export class FilmDetailService {
   public get getComments(): Observable<any> {
     return this.commentsList$.asObservable();
   }
-
-  // todo get budget
 }

@@ -20,15 +20,14 @@
 
   </form>
 
+  <!-- TODO get comment date and formated to real date. -->
+  <!-- TODO create markup for single comment -->
+  <!-- TODO create getter to get all comments on page init -->
   <div *ngIf="getCommentsList | async as commentsList">
-    {{ commentsList | json }}
+    <div *ngFor="let comment of commentsList" class="exp-comments">
+      {{ currentDate | date:'MMM d, y, h:mm:ss' }} {{ comment.username }} {{ comment.comment }}
+    </div>
   </div>
-
-  <!--<div class="exp-comments" *ngIf="comments">-->
-  <!--  {{ comments.username }}-->
-  <!--  {{ comments.comment }}-->
-  <!--  {{ currentDate | date:'MMM d, y, h:mm:ss' }}-->
-  <!--</div>-->
 
 </div>
 
