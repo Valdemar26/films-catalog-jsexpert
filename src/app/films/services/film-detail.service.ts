@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 
 import { environment } from '../../../environments/environment.prod';
 import { CommentsInterface } from '../../shared/interfaces/comments.interface';
@@ -36,18 +36,18 @@ export class FilmDetailService {
     return this.http.get(`${this.themoviedbUrl}${id}/reviews?api_key=${this.apiKey}`);
   }
 
-  public updateCommentsList(comment: CommentsInterface[]): void {
+  public updateCommentsList(comment: CommentsInterface[], id: number): void {
     console.log(comment);
 
-    if (localStorage.getItem('comments')) {
-      this.commentsListArray = JSON.parse(localStorage.getItem('comments'));
+    if (localStorage.getItem(`comments-${id}`)) {
+      this.commentsListArray = JSON.parse(localStorage.getItem(`comments-${id}`));
     }
 
     if (comment && Object.keys(comment).length) {
 
       const result = [...this.commentsListArray, {...comment}];
 
-      localStorage.setItem('comments', JSON.stringify([...result]));
+      localStorage.setItem(`comments-${id}`, JSON.stringify([...result]));
       this.commentsList$.next(result);
 
     }

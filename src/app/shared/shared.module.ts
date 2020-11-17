@@ -18,6 +18,7 @@ import { NotificationModalComponent } from './components/notification-modal/noti
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { CommentsPipe } from './pipe/comments.pipe';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     NotificationModalComponent,
     LoginComponent,
     RegistrationComponent,
-    CommentsComponent
+    CommentsComponent,
+    CommentsPipe
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     LoaderComponent,
     RatingComponent,
     ModalComponent,
-    CommentsComponent
+    CommentsComponent,
+    CommentsPipe
   ],
   entryComponents: [ModalComponent]
 })
