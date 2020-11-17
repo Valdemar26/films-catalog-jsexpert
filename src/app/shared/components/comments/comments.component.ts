@@ -20,6 +20,9 @@ export class CommentsComponent implements OnInit {
   public comments: CommentsInterface[] = [];
   public currentDate: any;
 
+  public avatarPath: string;
+  public commentsLength: number;
+
   constructor(private formBuilder: FormBuilder, private filmDetailService: FilmDetailService) { }
 
   ngOnInit(): void {
@@ -40,9 +43,13 @@ export class CommentsComponent implements OnInit {
 
     this.updateForm();
 
+    this.generateGravatarPath();
+
+    this.getCommentsLength(this.subjectId);
+
     const singleComment = this.commentsForm.value;
 
-    this.filmDetailService.updateCommentsList(singleComment);
+    this.filmDetailService.updateCommentsList(singleComment, this.subjectId);
 
     // TODO show loader and after clear form
     this.cancel();
@@ -76,4 +83,14 @@ export class CommentsComponent implements OnInit {
     });
   }
 
+
+  private generateGravatarPath(): void {
+    const random = Math.floor(1000 + Math.random() * 9000);
+    this.avatarPath = `https://www.gravatar.com/avatar/94d093eda664addd6e450d7e${random}bcad?s=80&d=identicon&r=PG`;
+  }
+
+
+  public getCommentsLength(id): void {
+    this.commentsLength = JSON.parse(localStorage.getItem(`comments-${id}`)).length;
+  }
 }
