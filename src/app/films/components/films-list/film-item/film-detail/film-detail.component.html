@@ -16,7 +16,14 @@
           <span>({{ filmDetail.release_date.slice(0,4) }})</span>
         </h2>
 
-        <h3>{{ filmDetail.original_title }}</h3>
+        <div class="original-title">
+          <h3>{{ filmDetail.original_title }}</h3>
+
+          <div class="budget">
+            <span class="material-icons">monetization_on</span>
+            <span>{{ filmDetail.budget |currency:'USD':'symbol'}}</span>
+          </div>
+        </div>
 
         <exp-rating [filmDetail]="filmDetail"></exp-rating>
 

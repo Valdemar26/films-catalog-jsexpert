@@ -128,6 +128,7 @@ export class FilmService {
   public getFilmById(id: number): Observable<any> {
     return this.http.get(`${this.movieUrl}${id}?api_key=${this.apiKey}&language=uk-UA`).pipe(
       tap((currentFilm: FilmListInterface) => {
+        console.log('currentFilm: ', currentFilm);
         this.currentFilm$.next(currentFilm);
       }),
       catchError( (error) => {
