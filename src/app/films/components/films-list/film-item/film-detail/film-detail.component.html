@@ -19,7 +19,7 @@
         <div class="original-title">
           <h3>{{ filmDetail.original_title }}</h3>
 
-          <div class="budget">
+          <div class="budget" *ngIf="filmDetail.budget">
             <span class="material-icons">monetization_on</span>
             <span>{{ filmDetail.budget |currency:'USD':'symbol'}}</span>
           </div>
