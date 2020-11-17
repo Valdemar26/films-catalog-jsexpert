@@ -1,27 +1,34 @@
-<h3>Comments: (0)</h3> <!-- {{comments.length}} -->
-<form class="exp-comments-form"
-      [formGroup]="commentsForm">
+<div class="exp-comments-wrapper">
 
-  <input type="text" formControlName="username">
-  <textarea name="" formControlName="comment"></textarea>
+  <h3>Comments: (0)</h3> <!-- {{comments.length}} -->
+  <form class="exp-comments-form"
+        [formGroup]="commentsForm">
 
-  <div class="exp-comments-buttons-wrapper">
-    <button mat-raised-button color="danger" mat-button (click)="cancel()">Cancel</button>
+    <input type="text" formControlName="username" placeholder="Username">
+    <textarea name="" formControlName="comment" placeholder="Leave a Comment..."></textarea>
 
-    <button class="btn-comment"
-            type="button"
-            mat-raised-button color="primary" mat-button
-            (click)="confirm()">
-      Leave comment
-    </button>
+    <div class="exp-comments-buttons-wrapper">
+      <button class="button-cancel" mat-raised-button color="danger" mat-button (click)="cancel()">Cancel</button>
+
+      <button class="btn-comment"
+              type="button"
+              mat-raised-button color="primary" mat-button
+              (click)="confirm()">
+        Leave comment
+      </button>
+    </div>
+
+  </form>
+
+  <div *ngIf="getCommentsList | async as commentsList">
+    {{ commentsList | json }}
   </div>
 
-</form>
+  <!--<div class="exp-comments" *ngIf="comments">-->
+  <!--  {{ comments.username }}-->
+  <!--  {{ comments.comment }}-->
+  <!--  {{ currentDate | date:'MMM d, y, h:mm:ss' }}-->
+  <!--</div>-->
 
-<div class="exp-comments" *ngIf="comments">
-  {{ comments.username }}
-  {{ comments.comment }}
-  {{ currentDate | date:'MMM d, y, h:mm:ss' }}
 </div>
-
 

@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Observable } from 'rxjs';
+
 import { CommentsInterface } from '../../interfaces/comments.interface';
+import { FilmDetailService } from '../../../films/services/film-detail.service';
 
 
 @Component({
@@ -14,10 +17,10 @@ export class CommentsComponent implements OnInit {
   @Input() subjectId: number;
 
   public commentsForm: FormGroup;
-  public comments: CommentsInterface[];
+  public comments: CommentsInterface[] = [];
   public currentDate: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private filmDetailService: FilmDetailService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -38,21 +41,15 @@ export class CommentsComponent implements OnInit {
     this.updateForm();
 
     const singleComment = this.commentsForm.value;
-    console.log(this.commentsForm.value);
 
-
-    this.comments = this.commentsForm.value;
-    // this.comments.push(
-    //   {
-    //     username: this.commentsForm.value.username,
-    //     text: this.commentsForm.value.text,
-    //     commentId: this.commentsForm.value.commentId,
-    //     subjectId: this.commentsForm.value.subjectId
-    //   });
-    // this.comments.push({comment: this.commentsForm.value}); // TODO push comment-object in Array of comments
+    this.filmDetailService.updateCommentsList(singleComment);
 
     // TODO show loader and after clear form
     this.cancel();
+  }
+
+  public get getCommentsList(): Observable<any[]> {
+    return this.filmDetailService.getComments;
   }
 
   public cancel(): void {
