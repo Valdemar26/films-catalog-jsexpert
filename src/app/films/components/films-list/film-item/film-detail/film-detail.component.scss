@@ -198,6 +198,34 @@
 
   }
 
+  .exp-film-review {
+    margin: 0 20px;
+
+
+    h3 {
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    p {
+      border-radius: 10px;
+      background-color: #F5F8F8;
+      padding: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-height: 21px;
+      max-height: 100px;
+      -webkit-line-clamp: 5;  // TODO on click - show all info
+      -webkit-box-orient: vertical;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
   span.chips {
     display: flex;
     width: fit-content;

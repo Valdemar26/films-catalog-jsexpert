@@ -87,8 +87,9 @@
     </div>
   </div>
 
-  <div *ngIf="movieReview">
-    {{ movieReview.comments }}
+  <div class="exp-film-review" *ngIf="movieReview && movieReview.length">
+    <h3>Movie Review</h3>
+    <p *ngFor="let review of movieReview"><span>{{ review.author }}:</span> {{ review.content }}</p>
   </div>
 
   <exp-comments [subjectId]="+filmId"></exp-comments>

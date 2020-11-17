@@ -23,6 +23,7 @@ import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 import { NotificationService } from '../../../../../shared/services/notification.service';
 import { NotificationModalComponent } from '../../../../../shared/components/notification-modal/notification-modal.component';
 import { LoaderService } from '../../../../../shared/services/loader.service';
+import {FilmReviewInterface} from "../../../../interfaces/film-review.interface";
 
 
 @Component({
@@ -43,7 +44,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public backdropPath = 'https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/';
 
   public trailerPath: string;
-  public movieReview: any;
+  public movieReview: FilmReviewInterface[];
 
   public filmId: number;
   private subscription: Subscription = new Subscription();
@@ -180,13 +181,13 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private getFilmReviews(): any {
     const filmReviewsSubscription = this.filmDetailService.getFilmReviews(this.filmId)
       .subscribe((review) => {
-        console.log(review);
         this.movieReview = review.results;
+        console.log(this.movieReview);
 
-        localStorage.setItem('review', JSON.stringify({
-          id: this.filmId,
-          comments: [...this.movieReview]
-        }));
+        // localStorage.setItem('review', JSON.stringify({
+        //   id: this.filmId,
+        //   comments: [...this.movieReview]
+        // }));
       });
 
     this.subscription.add(filmReviewsSubscription);
