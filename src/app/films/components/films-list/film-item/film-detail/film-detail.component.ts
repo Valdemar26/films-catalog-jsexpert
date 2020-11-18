@@ -97,11 +97,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.componentRef.instance.filmTitle = this.filmDetail.original_title;
   }
 
-  public modalClosed(isClosed): void {
-    console.log(isClosed);
-    this.container.clear();
-  }
-
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
 
