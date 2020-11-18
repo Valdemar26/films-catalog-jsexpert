@@ -189,6 +189,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public openFilm(film: FilmListInterface): any {
     console.log(film.id);
-    // this.router.navigate(['/films/' + film.id]);  // TODO check why this doesn't work!
+    this.router.navigate(['/films/' + film.id]);
+    // TODO check why this doesn't work!
+    // router.navigate changes url but the view won't change
   }
 }

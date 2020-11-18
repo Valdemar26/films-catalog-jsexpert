@@ -20,8 +20,7 @@
       width: 100%;
       height: calc(100% - 4px);
       background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
+      background: 50% 50% no-repeat;
       position: relative;
 
       .film-info-content {
@@ -193,6 +192,7 @@
             opacity: 0;
             transition: .5s ease;
             background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2;
 
             span {
               width: 90%;
