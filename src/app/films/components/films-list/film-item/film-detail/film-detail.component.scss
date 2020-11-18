@@ -158,39 +158,54 @@
         }
 
         .poster {
-          span {
-            display: none;
+          position: relative;
+          width: 100%;
+
+          &:hover {
+            .overview {
+              opacity: 1;
+              cursor: default;
+            }
           }
 
           img {
-            .overview {
-              span {
-                display: none;
-              }
-            }
-
-            &:hover {
-              .overview {
-                span {
-                  display: flex;
-                }
-              }
-            }
+            display: block;
+            width: 150px;
+            height: auto;
           }
 
-        }
-
-        .overview {
-          span {
-            display: none;
-            font-size: 13px;
-            color: #fff;
-            line-height: 16px;
+          .overview {
             position: absolute;
             top: 0;
+            bottom: 0;
             left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: #008CBA;
+
+            span {
+              width: 90%;
+
+              // TODO make text overflow on vertical
+
+              //white-space: nowrap;
+              //overflow: hidden;
+              //text-overflow: ellipsis;
+
+              color: white;
+              font-size: 13px;
+              position: absolute;
+              top: 40%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+            }
           }
         }
+
 
         img {
           width: 150px;
@@ -204,22 +219,14 @@
             opacity: 0.4;
           }
         }
-
-        &:hover {
-          .overview {
-            span {
-              display: flex;
-            }
-          }
-        }
       }
     }
 
   }
 
   .exp-film-review {
+    width: 70%;
     margin: 0 20px;
-
 
     h3 {
       color: #333;
