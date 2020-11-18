@@ -84,11 +84,18 @@
 
         <div class="poster">
           <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">
-        </div>
 
-        <div class="overview">
-          <span>{{ similar.overview | slice:0:80 }}</span>
+          <div class="overview">
+            <span>{{ similar.overview }}</span>
+          </div>
         </div>
+<!--        <div class="poster">-->
+<!--          <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">-->
+<!--        </div>-->
+
+<!--        <div class="overview">-->
+<!--          <span>{{ similar.overview | slice:0:80 }}</span>-->
+<!--        </div>-->
 
       </div>
     </div>

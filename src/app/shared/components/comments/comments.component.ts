@@ -27,6 +27,9 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+
+    const getter = this.getCommentsList;
+    console.log(getter);
   }
 
   public confirm(): void {
@@ -91,6 +94,10 @@ export class CommentsComponent implements OnInit {
 
 
   public getCommentsLength(id): void {
-    this.commentsLength = JSON.parse(localStorage.getItem(`comments-${id}`)).length;
+    const currentComments = JSON.parse(localStorage.getItem(`comments-${id}`));
+
+    if (currentComments) {
+      this.commentsLength = currentComments.length;
+    }
   }
 }
