@@ -182,15 +182,13 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     const filmReviewsSubscription = this.filmDetailService.getFilmReviews(this.filmId)
       .subscribe((review) => {
         this.movieReview = review.results;
-        console.log(this.movieReview);
-
-        // localStorage.setItem('review', JSON.stringify({
-        //   id: this.filmId,
-        //   comments: [...this.movieReview]
-        // }));
       });
 
     this.subscription.add(filmReviewsSubscription);
   }
 
+  public openFilm(film: FilmListInterface): any {
+    console.log(film.id);
+    // this.router.navigate(['/films/' + film.id]);  // TODO check why this doesn't work!
+  }
 }

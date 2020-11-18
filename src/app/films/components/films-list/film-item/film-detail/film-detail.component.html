@@ -75,11 +75,14 @@
 
     <div class="film-similar-wrapper">
 
-      <div class="similar" *ngFor="let similar of similarList">
+      <div class="similar" *ngFor="let similar of similarList" (click)="openFilm(similar)">
 
         <div class="similar-info">
           <span>{{ similar.title }}</span>
-          <span>{{ similar.vote_average }}</span>
+
+          <div class="similar-info-rating">
+            <exp-rating [filmDetail]="similar"></exp-rating>
+          </div>
         </div>
 
         <div class="poster">
@@ -89,13 +92,6 @@
             <span>{{ similar.overview }}</span>
           </div>
         </div>
-<!--        <div class="poster">-->
-<!--          <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">-->
-<!--        </div>-->
-
-<!--        <div class="overview">-->
-<!--          <span>{{ similar.overview | slice:0:80 }}</span>-->
-<!--        </div>-->
 
       </div>
     </div>

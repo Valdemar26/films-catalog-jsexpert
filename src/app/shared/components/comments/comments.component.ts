@@ -27,15 +27,10 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-
-    const getter = this.getCommentsList;
-    console.log(getter);
   }
 
   public confirm(): void {
 
-    // TODO get 'id' from URL and set 'comment' to this 'id'
-    // TODO get 'Data' and show in comment line
     // TODO add 'username' and 'honeycomb' to prevent 'bots attack'
 
     if (this.commentsForm.invalid) {
