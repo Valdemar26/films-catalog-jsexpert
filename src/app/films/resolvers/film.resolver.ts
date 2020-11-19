@@ -32,9 +32,9 @@ export class FilmsResolver implements Resolve<boolean> {
         return this.filmService.initGenresList();
       }),
       catchError(async err => {
-        console.log(err);
+        console.log('resolver error: ', err);
         await this.router.navigate(['/', 'main']);
-        // TODO call service to show "error" modal
+        // TODO call service to show "error" tooltip
         return of(false);
       })
     );

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { FilmService } from '../../services/film.service';
   templateUrl: './favorite-films.component.html',
   styleUrls: ['./favorite-films.component.scss']
 })
-export class FavoriteFilmsComponent implements OnInit {
+export class FavoriteFilmsComponent {
   public imagePath = 'https://image.tmdb.org/t/p/w500';
 
   public filmListArray: FilmListInterface[] = [];
@@ -21,17 +21,6 @@ export class FavoriteFilmsComponent implements OnInit {
     private filmService: FilmService
   ) { }
 
-  public ngOnInit(): void {
-    // TODO get favorite films from LS?
-    // console.log('init');
-    // this.filmService.getFilmList.subscribe((films: FilmListInterface[]) => console.log('films: ', films));
-    //
-    // if (localStorage.getItem('filmListArray')) {
-    //   this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
-    //   console.log(this.filmListArray);
-    // }
-  }
-
   public removeFromFavoriteFilms(film: FilmListInterface): void {
     this.favoriteFilmsService.removeFromFavoriteFilms(film);
   }
@@ -39,6 +28,4 @@ export class FavoriteFilmsComponent implements OnInit {
   public get getFilmsList(): Observable<FilmListInterface[]> {
     return this.filmService.getFilmList;
   }
-
-
 }

@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   { path: 'films/:id', component: FilmDetailComponent},
   { path: 'actors', component: ActorsListComponent, canActivate: [AuthGuard] },
-  { path: 'favorite-films', component: FavoriteFilmsComponent },
+  { path: 'favorite-films', component: FavoriteFilmsComponent, resolve: { data: FilmsResolver } },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: '**', redirectTo: 'main' }

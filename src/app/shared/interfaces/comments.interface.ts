@@ -1,4 +1,4 @@
-export interface CommentsInterface {
+export class CommentsInterface {
   username: string;
   text: string;
   commentId: number;

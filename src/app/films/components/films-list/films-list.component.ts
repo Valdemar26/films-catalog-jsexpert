@@ -8,7 +8,7 @@ import { FavoriteFilmsService } from '../../services/favorite-films.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { GenresListInterface } from '../../interfaces/genres-list.interface';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
-import { FilmInterface} from '../../interfaces/film.interface';
+import { FilmInterface } from '../../interfaces/film.interface';
 
 
 @Component({

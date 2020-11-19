@@ -41,14 +41,18 @@ export class FilmService {
 
   public initFilmList(): Observable<any> {
 
-    if (JSON.parse(localStorage.getItem('filmListArray')) && JSON.parse(localStorage.getItem('filmListArray')).length) {
-      this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
+    const filmsFromStorage = JSON.parse(localStorage.getItem('filmListArray'));
+
+    if (filmsFromStorage && filmsFromStorage.length) {
+      this.filmListArray = filmsFromStorage;
+
       this.updateFilmList(this.filmListArray);
       return of(false);
     } else {
       return this.http.get(this.popularFilmUrl).pipe(
         tap((filmList: FilmInterface) => {
           this.filmListArray = filmList.results.map((e => ({...e, isFavorite: false})));
+
           this.updateFilmList(this.filmListArray);
           localStorage.setItem('filmListArray', JSON.stringify(this.filmListArray));
         }),
@@ -63,10 +67,6 @@ export class FilmService {
   }
 
   public updateFilmList(list: FilmListInterface[]): void {
-
-    if (localStorage.getItem('filmListArray')) {
-      this.filmListArray = JSON.parse(localStorage.getItem('filmListArray'));
-    }
 
     if (list && list.length) {
       const result = [...this.filmListArray, ...list];
@@ -133,7 +133,7 @@ export class FilmService {
       catchError( (error) => {
         console.log('ERROR GET FILM');
         this.router.navigate(['/', 'main']);
-        // TODO show notification modal for few seconds and redirect to main page
+        // TODO show error tooltip for few seconds and redirect to main page
         return error;
       })
     );
