@@ -27,6 +27,7 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.filmDetailService.initCommentsList(this.subjectId);
   }
 
   public confirm(): void {
@@ -47,9 +48,9 @@ export class CommentsComponent implements OnInit {
 
     const singleComment = this.commentsForm.value;
 
-    this.filmDetailService.updateCommentsList(singleComment, this.subjectId);
+    this.filmDetailService.updateCommentsList(this.subjectId, singleComment);
 
-    // TODO show loader and after clear form
+    // TODO show success tooltip and after that clear form
     this.cancel();
   }
 
@@ -82,7 +83,7 @@ export class CommentsComponent implements OnInit {
   }
 
 
-  private generateGravatarPath(): void {
+  private generateGravatarPath(): void {  // todo create GravatarService and add unique gravatar for every user
     const random = Math.floor(1000 + Math.random() * 9000);
     this.avatarPath = `https://www.gravatar.com/avatar/94d093eda664addd6e450d7e${random}bcad?s=80&d=identicon&r=PG`;
   }

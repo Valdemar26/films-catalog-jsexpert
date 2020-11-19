@@ -36,20 +36,22 @@ export class FilmDetailService {
     return this.http.get(`${this.themoviedbUrl}${id}/reviews?api_key=${this.apiKey}`);
   }
 
-  public updateCommentsList(comment: CommentsInterface[], id: number): void {
-    console.log(comment);
+  public getCommentsFromStorage(id: number): CommentsInterface[] {
+    const commentsFromStorage = localStorage.getItem(`comments-${id}`);
+    return commentsFromStorage ? JSON.parse(commentsFromStorage) : [];
+  }
 
-    if (localStorage.getItem(`comments-${id}`)) {
-      this.commentsListArray = JSON.parse(localStorage.getItem(`comments-${id}`));
-    }
+  public initCommentsList(id: number): void {
+    this.commentsList$.next(this.getCommentsFromStorage(id));
+  }
+
+  public updateCommentsList(id: number, comment?: CommentsInterface): void {
 
     if (comment && Object.keys(comment).length) {
-
-      const result = [...this.commentsListArray, {...comment}];
-
-      localStorage.setItem(`comments-${id}`, JSON.stringify([...result]));
-      this.commentsList$.next(result);
-
+      this.commentsListArray = this.getCommentsFromStorage(id);
+      this.commentsListArray.push(comment);
+      localStorage.setItem(`comments-${id}`, JSON.stringify(this.commentsListArray));
+      this.commentsList$.next(this.commentsListArray);
     }
   }
 
