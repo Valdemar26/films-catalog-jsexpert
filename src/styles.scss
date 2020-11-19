@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import './assets/scss/themes/material-theme';
+@import './assets/scss/mixins/mixin-card';
+@import './assets/scss/mixins/mixin-buttons';
 
 html, body { height: 100%; }
 body {
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
-  height: calc(100% - 2*65px);
 }
 
 .mat-typography {
@@ -23,111 +24,10 @@ body {
   font-weight: bold;
 }
 
-// 'card' styles
-// TODO create 'mixin' for 'card' style
 .example-card {
-  max-width: 400px;
-  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
-  border: 1px solid #ebebeb;
-  margin: 10px;
-  transition: 0.3s ease-in;
-
-  &:hover {
-    cursor: pointer;
-    box-shadow: 0 2px 20px 2px rgba(0, 0, 0, 0.3), 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-  }
-
-  mat-card-header {
-    justify-content: center;
-    position: relative;
-
-    .favorite {
-      position: absolute;
-      right: -10px;
-      top: -10px;
-
-      &.active {
-        color: #f50;
-      }
-    }
-  }
-
-  .release {
-    color: #333;
-    font-size: 12px;
-    line-height: 14px;
-    text-align: center;
-  }
-
-  .genres {
-    display: flex;
-    flex-wrap: wrap;
-
-    span {
-      font-size: 12px;
-      line-height: 12px;
-      padding: 4px 6px;
-      background-color: #ebebeb;
-      color: #333;
-      margin-right: 5px;
-      transition: 0.3s ease-in;
-
-      &:hover {
-        background-color: darken(#ebebeb, 10%);
-        color: #000;
-      }
-
-      &.active {
-        background-color: #ffff00;
-      }
-    }
-  }
-
-  img {
-    max-width: 200px;
-    width: auto;
-    height: auto;
-    margin: 0 auto 10px;
-    display: flex;
-    position: relative;
-  }
-
-  exp-details-inner {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 6;
-    -webkit-box-orient: vertical;
-  }
-
-  mat-card-actions {
-    display: flex;
-    justify-content: space-between;
-    padding-left: 10px;
-  }
+  @include card();
 }
 
-// buttons
-.button-success {  // TODO create mixin for all buttons
-  color: #fff;
-  background-color: #28a745;
-  border: none;
-  font-size: 13px;
-  padding: 4px 10px;
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-  &:hover {
-    background-color: #218838;
-    cursor: pointer;
-  }
+.button-success {
+  @include button-success();
 }
