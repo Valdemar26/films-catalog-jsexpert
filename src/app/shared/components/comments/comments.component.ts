@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
 import { CommentsInterface } from '../../interfaces/comments.interface';
 import { FilmDetailService } from '../../../films/services/film-detail.service';
+import { AvatarService } from '../../services/avatar.service';
+import { ReplyComponent } from '../reply/reply.component';
 
 
 @Component({
@@ -16,6 +18,9 @@ export class CommentsComponent implements OnInit {
 
   @Input() subjectId: number;
 
+  @ViewChild('replyContainer', { read: ViewContainerRef }) replyContainer;
+  componentRef: ComponentRef<any>;
+
   public commentsForm: FormGroup;
   public comments: CommentsInterface[] = [];
   public currentDate: any;
@@ -23,11 +28,16 @@ export class CommentsComponent implements OnInit {
   public avatarPath: string;
   public commentsLength: number;
 
-  constructor(private formBuilder: FormBuilder, private filmDetailService: FilmDetailService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private resolver: ComponentFactoryResolver,
+    private filmDetailService: FilmDetailService,
+    private avatarService: AvatarService
+    ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initForm();
-    this.filmDetailService.initCommentsList(this.subjectId);
+    this.initComments();
   }
 
   public confirm(): void {
@@ -39,16 +49,14 @@ export class CommentsComponent implements OnInit {
     }
 
     this.getDateNow();
-
+    this.generateAvatarPath();
     this.updateForm();
-
-    this.generateGravatarPath();
-
-    this.getCommentsLength(this.subjectId);
 
     const singleComment = this.commentsForm.value;
 
     this.filmDetailService.updateCommentsList(this.subjectId, singleComment);
+
+    this.getCommentsLength(this.subjectId);
 
     // TODO show success tooltip and after that clear form
     this.cancel();
@@ -62,12 +70,24 @@ export class CommentsComponent implements OnInit {
     this.commentsForm.reset();
   }
 
+  // todo generate dynamic 'reply' component with form markup
+  public replyToComment(id: number): void {
+    console.log(id);
+
+    this.replyContainer.clear();
+    const factory = this.resolver.resolveComponentFactory(ReplyComponent);
+    this.componentRef = this.replyContainer.createComponent(factory);
+
+    this.componentRef.instance.parentRef = this.componentRef;
+  }
+
   private initForm(): void {
     this.commentsForm = this.formBuilder.group({
       comment: ['', Validators.required],
       username: ['', Validators.required],
       commentId: [Date.now()],
-      subjectId: [this.subjectId]
+      subjectId: [this.subjectId],
+      avatar: this.avatarPath
     });
   }
 
@@ -78,22 +98,28 @@ export class CommentsComponent implements OnInit {
   private updateForm(): void {
     this.commentsForm.patchValue({
       commentId: Date.now(),
-      subjectId: [this.subjectId]
+      subjectId: [this.subjectId],
+      avatar: this.avatarPath
     });
   }
 
 
-  private generateGravatarPath(): void {  // todo create GravatarService and add unique gravatar for every user
-    const random = Math.floor(1000 + Math.random() * 9000);
-    this.avatarPath = `https://www.gravatar.com/avatar/94d093eda664addd6e450d7e${random}bcad?s=80&d=identicon&r=PG`;
+  private generateAvatarPath(): void {
+    this.avatarPath = this.avatarService.generateGravatar();
   }
 
 
-  public getCommentsLength(id): void {
+  private getCommentsLength(id): void {
     const currentComments = JSON.parse(localStorage.getItem(`comments-${id}`));
 
     if (currentComments) {
       this.commentsLength = currentComments.length;
     }
   }
+
+  private initComments(): void {
+    this.filmDetailService.initCommentsList(this.subjectId);
+    this.getCommentsLength(this.subjectId);
+  }
+
 }

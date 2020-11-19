@@ -15,7 +15,7 @@ export class FilmDetailService {
   private themoviedbUrl = `https://api.themoviedb.org/3/movie/`;
   private trailerUrl = `http://api.themoviedb.org/3/movie/`;
 
-  public commentsList$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public commentsList$: BehaviorSubject<CommentsInterface[]> = new BehaviorSubject<CommentsInterface[]>([]);
   private commentsListArray: CommentsInterface[] = [];
 
   constructor(private http: HttpClient) { }

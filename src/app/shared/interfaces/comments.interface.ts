@@ -3,4 +3,6 @@ export class CommentsInterface {
   text: string;
   commentId: number;
   subjectId: number;
+  avatar: string;
+  reply?: string;
 }
