@@ -1,0 +1,24 @@
+@mixin button-success {
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  font-size: 13px;
+  padding: 4px 10px;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+  &:hover {
+    background-color: #218838;
+    cursor: pointer;
+  }
+}
