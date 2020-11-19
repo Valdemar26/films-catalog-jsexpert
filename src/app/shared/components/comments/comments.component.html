@@ -22,18 +22,17 @@
   </form>
 
 
-  <!-- TODO create getter to get all comments on page init -->
   <div *ngIf="getCommentsList | async as commentsList">
     <div *ngFor="let comment of commentsList | commentsPipe:subjectId" class="exp-comment">
 
-      <div class="exp-comment-avatar">
-        <img [src]="avatarPath" alt="avatar">
+      <div class="exp-comment-avatar" *ngIf="comment.avatar">
+        <img [src]="comment.avatar" alt="avatar">
       </div>
 
       <div class="exp-comment-name">{{ comment.username }}</div>
 
       <div class="exp-comment-reply">
-        <button class="button-success">Reply</button>
+        <button class="button-success" (click)="replyToComment(comment.commentId)">Reply</button>
       </div>
 
       <div class="exp-comment-date">{{ comment.commentId | date:'MMM d, y, h:mm:ss' }}</div>
@@ -53,3 +52,5 @@
 
 </div>
 
+
+<ng-container #replyContainer></ng-container>

@@ -19,6 +19,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentsPipe } from './pipe/comments.pipe';
+import { ReplyComponent } from './components/reply/reply.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { CommentsPipe } from './pipe/comments.pipe';
     LoginComponent,
     RegistrationComponent,
     CommentsComponent,
-    CommentsPipe
+    CommentsPipe,
+    ReplyComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ import { CommentsPipe } from './pipe/comments.pipe';
     RatingComponent,
     ModalComponent,
     CommentsComponent,
+    ReplyComponent,
     CommentsPipe
   ],
   entryComponents: [ModalComponent]

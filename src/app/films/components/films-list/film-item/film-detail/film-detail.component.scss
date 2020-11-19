@@ -192,7 +192,6 @@
             opacity: 0;
             transition: .5s ease;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 2;
 
             span {
               width: 90%;
@@ -201,7 +200,7 @@
               overflow:hidden;
               max-height:200px;
               display: -webkit-box;
-              -webkit-line-clamp: 10;
+              -webkit-line-clamp: 9;
               -webkit-box-orient: vertical;
               color: white;
               font-size: 13px;
