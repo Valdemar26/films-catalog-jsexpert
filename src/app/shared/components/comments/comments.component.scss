@@ -52,6 +52,7 @@
     display: grid;
     grid-template-columns: 100px repeat(3, calc((100% - 180px) / 3)) 80px; // repeat(5, 20%)
     grid-template-rows: repeat(4, 25%);
+    position: relative;
 
     .exp-comment-avatar {
       grid-column: 1/2;

@@ -1,6 +1,8 @@
 <div class="exp-comments-wrapper">
 
   <h3 *ngIf="commentsLength">Comments: ({{ commentsLength }})</h3>
+
+  <!-- TODO move in different component -->
   <form class="exp-comments-form"
         [formGroup]="commentsForm">
 
