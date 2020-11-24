@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
@@ -27,6 +27,8 @@ export class CommentsComponent implements OnInit {
 
   public avatarPath: string;
   public commentsLength: number;
+
+  public reply: CommentsInterface[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,13 +74,12 @@ export class CommentsComponent implements OnInit {
 
   // todo generate dynamic 'reply' component with form markup
   public replyToComment(id: number): void {
-    console.log(id);
-
     this.replyContainer.clear();
     const factory = this.resolver.resolveComponentFactory(ReplyComponent);
     this.componentRef = this.replyContainer.createComponent(factory);
 
     this.componentRef.instance.parentRef = this.componentRef;
+    this.componentRef.instance.replyId = id;
   }
 
   private initForm(): void {
@@ -87,7 +88,8 @@ export class CommentsComponent implements OnInit {
       username: ['', Validators.required],
       commentId: [Date.now()],
       subjectId: [this.subjectId],
-      avatar: this.avatarPath
+      avatar: this.avatarPath,
+      reply: ['', Validators.required]
     });
   }
 
@@ -99,7 +101,8 @@ export class CommentsComponent implements OnInit {
     this.commentsForm.patchValue({
       commentId: Date.now(),
       subjectId: [this.subjectId],
-      avatar: this.avatarPath
+      avatar: this.avatarPath,
+      reply: this.reply
     });
   }
 
@@ -109,7 +112,7 @@ export class CommentsComponent implements OnInit {
   }
 
 
-  private getCommentsLength(id): void {
+  private getCommentsLength(id: number): void {
     const currentComments = JSON.parse(localStorage.getItem(`comments-${id}`));
 
     if (currentComments) {
@@ -117,9 +120,19 @@ export class CommentsComponent implements OnInit {
     }
   }
 
+  private getReply(id: number): void {
+    const reply = JSON.parse(localStorage.getItem(`comments-${id}`));
+    console.log(reply);
+
+    if (reply) {
+      this.reply = reply.reply;
+    }
+  }
+
   private initComments(): void {
     this.filmDetailService.initCommentsList(this.subjectId);
     this.getCommentsLength(this.subjectId);
+    this.getReply(this.subjectId);
   }
 
 }
