@@ -12,6 +12,7 @@ export class ReplyComponent implements OnInit {
 
   @Input() parentRef;
   @Input() replyId: number;
+  @Input() commentId: number;
 
   public replyForm: FormGroup;
 
@@ -23,8 +24,6 @@ export class ReplyComponent implements OnInit {
     private filmDetailService: FilmDetailService) { }
 
   public ngOnInit(): void {
-    console.log('reply parentRef: ', this.parentRef, this.replyId);
-
     this.initReplyForm();
   }
 
@@ -33,12 +32,9 @@ export class ReplyComponent implements OnInit {
 
     this.updateForm();
 
-    const form = this.replyForm.getRawValue();
-    console.log(form);
-
     const singleReply = this.replyForm.value;
 
-    this.filmDetailService.updateReplyList(this.replyId, singleReply);
+    this.filmDetailService.updateReplyList(this.commentId, this.replyId, singleReply);
 
     // TODO show success tooltip and after that clear form
     this.cancel();

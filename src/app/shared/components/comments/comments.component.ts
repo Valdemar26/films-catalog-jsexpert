@@ -1,5 +1,6 @@
 import { Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -34,7 +35,8 @@ export class CommentsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private resolver: ComponentFactoryResolver,
     private filmDetailService: FilmDetailService,
-    private avatarService: AvatarService
+    private avatarService: AvatarService,
+    private route: ActivatedRoute
     ) { }
 
   public ngOnInit(): void {
@@ -80,6 +82,7 @@ export class CommentsComponent implements OnInit {
 
     this.componentRef.instance.parentRef = this.componentRef;
     this.componentRef.instance.replyId = id;
+    this.componentRef.instance.commentId = this.route.snapshot.params['id'];
   }
 
   private initForm(): void {
@@ -89,7 +92,7 @@ export class CommentsComponent implements OnInit {
       commentId: [Date.now()],
       subjectId: [this.subjectId],
       avatar: this.avatarPath,
-      reply: ['', Validators.required]
+      reply: ['']
     });
   }
 
