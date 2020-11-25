@@ -4,5 +4,5 @@ export class CommentsInterface {
   commentId: number;
   subjectId: number;
   avatar: string;
-  reply?: string;
+  reply?: any;  // TODO fix this
 }
