@@ -18,6 +18,9 @@ export class FilmDetailService {
   public commentsList$: BehaviorSubject<CommentsInterface[]> = new BehaviorSubject<CommentsInterface[]>([]);
   private commentsListArray: CommentsInterface[] = [];
 
+  public replyList$: BehaviorSubject<CommentsInterface[]> = new BehaviorSubject<CommentsInterface[]>([]);
+  private replyListArray: any[] = [];
+
   constructor(private http: HttpClient) { }
 
   public getFilmHeroes(id: number): any {
@@ -52,6 +55,7 @@ export class FilmDetailService {
       this.commentsListArray.push(comment);
       localStorage.setItem(`comments-${id}`, JSON.stringify(this.commentsListArray));
       this.commentsList$.next(this.commentsListArray);
+      this.replyList$.next(this.commentsListArray);
     }
   }
 
@@ -73,5 +77,9 @@ export class FilmDetailService {
 
   public get getComments(): Observable<any> {
     return this.commentsList$.asObservable();
+  }
+
+  public get getReplyToComments(): Observable<any> {
+    return this.replyList$.asObservable();
   }
 }
