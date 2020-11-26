@@ -27,7 +27,7 @@ export class ReplyComponent implements OnInit {
     this.initReplyForm();
   }
 
-  public confirm(): void {
+  public confirmReply(): void {
     this.generateAvatarPath();
 
     this.updateForm();

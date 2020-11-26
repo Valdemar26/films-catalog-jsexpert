@@ -30,6 +30,7 @@ export class CommentsComponent implements OnInit {
   public commentsLength: number;
 
   public reply: CommentsInterface[] = [];
+  public replyToCommentMessage;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,6 +70,10 @@ export class CommentsComponent implements OnInit {
   public get getCommentsList(): Observable<any[]> {
     return this.filmDetailService.getComments;
   }
+
+  // public get getReplyList(): Observable<any[]> {
+  //   return this.filmDetailService.getReplyToComments;
+  // }
 
   public cancel(): void {
     this.commentsForm.reset();
