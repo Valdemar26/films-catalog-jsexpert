@@ -127,6 +127,27 @@
         }
       }
     }
+
+    .exp-reply-to-comment {
+      grid-column: 3/6;
+      grid-row: 2/5;
+      border: 1px solid green;
+      width: calc(100% - 140px);
+      height: auto;
+      overflow-x: auto;
+      margin: 5px auto 5px;
+
+      .exp-single-reply {
+        display: flex;
+        margin-bottom: 20px;
+
+        .exp-reply-content {
+          display: flex;
+          flex-direction: column;
+          margin-left: 5px;
+        }
+      }
+    }
   }
 }
 

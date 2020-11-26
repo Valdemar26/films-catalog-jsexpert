@@ -49,6 +49,26 @@
 
       </div>
 
+      <div class="exp-reply-to-comment" *ngIf="comment.reply && comment.reply.length">
+
+        <div *ngFor="let reply of comment.reply; let i = index" class="exp-single-reply">
+          <div *ngIf="reply.avatar" class="exp-reply-avatar">
+            <img [src]="reply.avatar" alt="avatar">
+          </div>
+
+          <div class="exp-reply-content">
+            <div class="exp-reply-name">{{ reply.username }}</div>
+
+            <div class="exp-reply-date">{{ reply.commentId | date:'MMM d, y, h:mm:ss' }}</div>
+
+            <div class="exp-reply-comment">
+              <p>{{ reply.comment }}</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
   </div>
 
