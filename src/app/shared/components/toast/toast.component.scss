@@ -1,0 +1,118 @@
+.exp-notification-toast {
+  z-index: 999;
+  padding: 10px 10px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: sans-serif;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 12px 0 rgba(17, 89, 98, 0.36);
+  margin-bottom: 10px;
+  background-color: dimgray;
+  position: relative;
+}
+
+.exp-notification-toast-icon,
+.exp-notification-toast-close-button {
+  width: 15px;
+  object-fit: contain;
+  margin: 0 5px;
+}
+
+.exp-notification-toast-icon {
+  width: 25px;
+}
+
+.exp-notification-toast-close-button {
+  cursor: pointer;
+}
+
+.exp-notification-toast-close-button:hover {
+  transition: 0.3s ease;
+  opacity: 0.6;
+}
+
+.exp-notification-toast-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  margin: 0 10px;
+}
+
+.exp-notification-toast-title {
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.exp-notification-toast-text {
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.exp-notification-toast-action-button {
+  border: none;
+  padding: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 6px;
+  font-family: sans-serif;
+  outline: none;
+  margin: 10px 0;
+}
+
+.ecc-toast {
+  animation: 0.5s notification-appear;
+}
+
+.ecc-toast.exp-notification-toast-destroy {
+  opacity: 0;
+  animation: exp-notification-toast-destroy 0.5s ease;
+}
+
+// Position classes
+.ecc-notification-success {
+  background-color: #95C124;
+}
+
+.ecc-notification-warning {
+  background-color: darkorange;
+}
+
+.ecc-notification-error {
+  background-color: firebrick;
+}
+
+.ecc-notification-info {
+  background-color: silver;
+}
+
+// Toast appear / disappear animation
+@keyframes notification-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+    z-index: 1001;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes exp-notification-toast-destroy {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
