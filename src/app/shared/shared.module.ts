@@ -14,12 +14,13 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
-import { NotificationModalComponent } from './components/notification-modal/notification-modal.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentsPipe } from './pipe/comments.pipe';
 import { ReplyComponent } from './components/reply/reply.component';
+import { ToastComponent } from './components/toast/toast.component';
+import { ToastOverlayComponent } from './components/toast/toast-overlay/toast-overlay.component';
 
 
 @NgModule({
@@ -30,12 +31,13 @@ import { ReplyComponent } from './components/reply/reply.component';
     RatingComponent,
     ModalComponent,
     SafeUrlPipe,
-    NotificationModalComponent,
     LoginComponent,
     RegistrationComponent,
     CommentsComponent,
     CommentsPipe,
-    ReplyComponent
+    ReplyComponent,
+    ToastComponent,
+    ToastOverlayComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,8 @@ import { ReplyComponent } from './components/reply/reply.component';
     ModalComponent,
     CommentsComponent,
     ReplyComponent,
-    CommentsPipe
+    CommentsPipe,
+    ToastComponent
   ],
   entryComponents: [ModalComponent]
 })

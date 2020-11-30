@@ -20,8 +20,6 @@ import { FilmDetailService } from '../../../../services/film-detail.service';
 
 import { ModalComponent } from '../../../../../shared/components/modal/modal.component';
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
-import { NotificationService } from '../../../../../shared/services/notification.service';
-import { NotificationModalComponent } from '../../../../../shared/components/notification-modal/notification-modal.component';
 import { LoaderService } from '../../../../../shared/services/loader.service';
 import { FilmReviewInterface } from '../../../../interfaces/film-review.interface';
 
@@ -56,7 +54,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   constructor(
     private filmService: FilmService,
     private filmDetailService: FilmDetailService,
-    private notificationService: NotificationService,
     private loaderService: LoaderService,
     private route: ActivatedRoute,
     private router: Router,
@@ -126,16 +123,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private checkAdultFilm(): void {
     if (this.adultFilm) {
       console.log('adultFilm: ', this.adultFilm);
-      this.createNotification();
+      // this.createNotification();  // TODO create notification
     }
-  }
-
-  private createNotification(): void {
-    this.notification.clear();
-    const factory = this.resolver.resolveComponentFactory(NotificationModalComponent);
-    this.componentRef = this.notification.createComponent(factory);
-
-    this.componentRef.instance.modalNotification = this.notificationService.modalNotification;
   }
 
   private initFilmHeroes(): void {
@@ -185,7 +174,5 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public openFilm(film: FilmListInterface): any {
     console.log(film.id);
     this.router.navigate(['/films/' + film.id]);
-    // TODO check why this doesn't work!
-    // router.navigate changes url but the view won't change
   }
 }

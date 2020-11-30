@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AvatarService } from '../../services/avatar.service';
 import { FilmDetailService } from '../../../films/services/film-detail.service';
+import {NotificationsService} from "../toast/notification/notifications.service";
 
 @Component({
   selector: 'exp-reply',
@@ -21,7 +22,8 @@ export class ReplyComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private avatarService: AvatarService,
-    private filmDetailService: FilmDetailService) { }
+    private filmDetailService: FilmDetailService,
+    private notificationService: NotificationsService) { }
 
   public ngOnInit(): void {
     this.initReplyForm();
@@ -36,7 +38,9 @@ export class ReplyComponent implements OnInit {
 
     this.filmDetailService.updateReplyList(this.commentId, this.replyId, singleReply);
 
-    // TODO show success tooltip and after that clear form
+    // TODO show success toast and after that clear form
+    this.notificationService.showToast();
+
     this.cancel();
   }
 
