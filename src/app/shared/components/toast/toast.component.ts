@@ -2,9 +2,9 @@ import {Component, HostListener, Input, ElementRef, OnDestroy, OnInit, Renderer2
 
 import {of, Subscription} from 'rxjs';
 import {delay} from 'rxjs/operators';
+import {NotificationInterface} from './interfaces/notification.interface';
+import {NotificationsService} from './notification/notifications.service';
 
-import {NotificationsDataService} from '../../services/notifications-data.service';
-import {NotificationInterface} from '../../interfaces/notification.interface';
 
 @Component({
   selector: 'exp-toast',
@@ -16,13 +16,13 @@ export class ToastComponent implements OnInit, OnDestroy {
 
   @Input() public notification: NotificationInterface;
 
-  private _timerSubscription = new Subscription();
-  private _animateSubscription = new Subscription();
+  private timerSubscription = new Subscription();
+  private animateSubscription = new Subscription();
 
   constructor(
-    private _dataService: NotificationsDataService,
-    private _renderer: Renderer2,
-    private _el: ElementRef
+    private notificationsService: NotificationsService,
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {
   }
 
@@ -33,7 +33,7 @@ export class ToastComponent implements OnInit, OnDestroy {
   @HostListener('mouseenter')
   public mouseEnter(): void {
     if (this.notification.config.keepOnHover) {
-      this._timerSubscription.unsubscribe();
+      this.timerSubscription.unsubscribe();
     }
   }
 
@@ -53,23 +53,17 @@ export class ToastComponent implements OnInit, OnDestroy {
 
   public close(): void {
 
-    this._renderer.addClass(this._el.nativeElement, 'ecc-notification-toast-destroy');
+    this.renderer.addClass(this.el.nativeElement, 'exp-notification-toast-destroy');
 
-    this._animateSubscription = of(true).pipe(
+    this.animateSubscription = of(true).pipe(
       delay(500)
-    ).subscribe(() => this._dataService.remove(this.notification));
-  }
-
-  public toastActionButton(notification: NotificationInterface) {
-    if (notification.config.actionButton.action) {
-      notification.config.actionButton.action();
-    }
+    ).subscribe(() => this.notificationsService.removeToast(this.notification));
   }
 
   public ngOnDestroy(): void {
     this.notification.destroy$.next(true);
-    this._timerSubscription.unsubscribe();
-    this._animateSubscription.unsubscribe();
+    this.timerSubscription.unsubscribe();
+    this.animateSubscription.unsubscribe();
   }
 
   private startTimer(): void {
@@ -78,7 +72,7 @@ export class ToastComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this._timerSubscription = of(true).pipe(
+    this.timerSubscription = of(true).pipe(
       delay(this.notification.config.duration)
     ).subscribe(() => this.close());
   }
