@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AvatarService } from '../../services/avatar.service';
 import { FilmDetailService } from '../../../films/services/film-detail.service';
-import {NotificationsService} from "../toast/notification/notifications.service";
+import { NotificationsService } from '../toast/notification/notifications.service';
 
 @Component({
   selector: 'exp-reply',

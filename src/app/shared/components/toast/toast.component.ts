@@ -1,9 +1,9 @@
-import {Component, HostListener, Input, ElementRef, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
+import { Component, HostListener, Input, ElementRef, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 
-import {of, Subscription} from 'rxjs';
-import {delay} from 'rxjs/operators';
-import {NotificationInterface} from './interfaces/notification.interface';
-import {NotificationsService} from './notification/notifications.service';
+import { of, Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { NotificationInterface } from './interfaces/notification.interface';
+import { NotificationsService } from './notification/notifications.service';
 
 
 @Component({
@@ -27,6 +27,7 @@ export class ToastComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    console.log(this.notification);
     this.startTimer();
   }
 

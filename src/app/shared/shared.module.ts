@@ -20,7 +20,6 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentsPipe } from './pipe/comments.pipe';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ToastComponent } from './components/toast/toast.component';
-import { ToastOverlayComponent } from './components/toast/toast-overlay/toast-overlay.component';
 
 
 @NgModule({
@@ -36,8 +35,7 @@ import { ToastOverlayComponent } from './components/toast/toast-overlay/toast-ov
     CommentsComponent,
     CommentsPipe,
     ReplyComponent,
-    ToastComponent,
-    ToastOverlayComponent
+    ToastComponent
   ],
   imports: [
     CommonModule,
