@@ -73,6 +73,7 @@ export class FilmDetailService {
     }
 
     localStorage.setItem(`comments-${id}`, JSON.stringify([...commentsFromStorage]));
+    this.commentsList$.next(commentsFromStorage);
   }
 
   public get getComments(): Observable<any> {
