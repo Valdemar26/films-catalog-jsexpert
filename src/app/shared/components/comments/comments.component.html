@@ -27,26 +27,33 @@
   <div *ngIf="getCommentsList | async as commentsList">
     <div *ngFor="let comment of commentsList | commentsPipe:subjectId" class="exp-comment">
 
-      <div class="exp-comment-avatar" *ngIf="comment.avatar">
-        <img [src]="comment.avatar" alt="avatar">
-      </div>
+      <div class="exp-comments">
+        <div class="exp-comment-avatar" *ngIf="comment.avatar">
+          <img [src]="comment.avatar" alt="avatar">
+        </div>
 
-      <div class="exp-comment-name">{{ comment.username }}</div>
+        <div class="exp-comment-container">
+          <div class="exp-comment-user-wrapper">
+            <div class="exp-comment-name">{{ comment.username }}</div>
 
-      <div class="exp-comment-reply">
-        <button class="button-success" (click)="replyToComment(comment.commentId)">Reply</button>
-      </div>
+            <div class="exp-comment-reply">
+              <button class="button-success" (click)="replyToComment(comment.commentId)">Reply</button>
+            </div>
+          </div>
 
-      <div class="exp-comment-date">{{ comment.commentId | date:'MMM d, y, h:mm:ss' }}</div>
 
-      <div class="exp-comment-content">
-        <p>{{ comment.comment }}</p>
-      </div>
+          <div class="exp-comment-date">{{ comment.commentId | date:'MMM d, y, h:mm:ss' }}</div>
 
-      <div class="exp-comment-vote">
-        <span class="material-icons icon-up" title="+1">thumb_up</span>
-        <span class="material-icons icon-down" title="-1">thumb_down</span>
+          <div class="exp-comment-content">
+            <p>{{ comment.comment }}</p>
+          </div>
 
+          <div class="exp-comment-vote">
+            <span class="material-icons icon-up" title="+1">thumb_up</span>
+            <span class="material-icons icon-down" title="-1">thumb_down</span>
+
+          </div>
+        </div>
       </div>
 
       <div class="exp-reply-to-comment" *ngIf="comment.reply && comment.reply.length">
@@ -66,7 +73,6 @@
             </div>
           </div>
         </div>
-
 
       </div>
     </div>
