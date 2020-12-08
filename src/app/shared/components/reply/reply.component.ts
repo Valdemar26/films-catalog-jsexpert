@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AvatarService } from '../../services/avatar.service';
 import { FilmDetailService } from '../../../films/services/film-detail.service';
 import { NotificationsService } from '../toast/notification/notifications.service';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'exp-reply',
@@ -10,6 +11,9 @@ import { NotificationsService } from '../toast/notification/notifications.servic
   styleUrls: ['./reply.component.scss']
 })
 export class ReplyComponent implements OnInit {
+
+  @ViewChild('toastContainer', { read: ViewContainerRef }) toastContainer;
+  componentRef: ComponentRef<any>;
 
   @Input() parentRef;
   @Input() replyId: number;
@@ -21,6 +25,7 @@ export class ReplyComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private resolver: ComponentFactoryResolver,
     private avatarService: AvatarService,
     private filmDetailService: FilmDetailService,
     private notificationService: NotificationsService) { }
@@ -40,12 +45,21 @@ export class ReplyComponent implements OnInit {
 
     // TODO show success toast and after that clear form
     this.notificationService.showToast();
+    this.showReplyToast();
 
     this.cancel();
   }
 
   public cancel(): void {
     this.replyForm.reset();
+  }
+
+  private showReplyToast(): void {
+    this.toastContainer.clear();
+    const factory = this.resolver.resolveComponentFactory(ToastComponent);
+    this.componentRef = this.toastContainer.createComponent(factory);
+
+    this.componentRef.instance.notification = this.componentRef;
   }
 
   private initReplyForm(): void {
