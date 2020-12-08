@@ -29,6 +29,6 @@ export class NotificationsService {  // is service create methods to 'show' and 
   }
 
   public removeToast(notification: NotificationInterface): void {
-
+    console.log('removeToast');
   }
 }

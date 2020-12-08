@@ -58,7 +58,7 @@
 
       <div class="exp-reply-to-comment" *ngIf="comment.reply && comment.reply.length">
 
-        <div *ngFor="let reply of comment.reply; let i = index" class="exp-single-reply">
+        <div *ngFor="let reply of comment.reply" class="exp-single-reply">
           <div *ngIf="reply.avatar" class="exp-reply-avatar">
             <img [src]="reply.avatar" alt="avatar">
           </div>
