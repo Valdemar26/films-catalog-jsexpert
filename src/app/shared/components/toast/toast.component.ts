@@ -1,7 +1,6 @@
 import { Component, Input, ElementRef, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 
 import { NotificationInterface } from './interfaces/notification.interface';
-import { NotificationsService } from './notification/notifications.service';
 
 
 @Component({
@@ -15,7 +14,6 @@ export class ToastComponent implements OnInit, OnDestroy {
   @Input() public notification: NotificationInterface;
 
   constructor(
-    private notificationsService: NotificationsService,
     private renderer: Renderer2,
     private el: ElementRef
   ) {
