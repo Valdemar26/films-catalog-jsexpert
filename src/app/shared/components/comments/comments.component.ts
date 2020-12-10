@@ -107,8 +107,6 @@ export class CommentsComponent implements OnInit {
       avatar: this.avatarPath,
       reply: this.reply
     });
-
-    this.commentsForm.valueChanges.subscribe((data) => console.log('commentsForm: ', data));
   }
 
 
@@ -127,7 +125,6 @@ export class CommentsComponent implements OnInit {
 
   private getReply(id: number): void {
     const reply = JSON.parse(localStorage.getItem(`comments-${id}`));
-    console.log(reply);
 
     if (reply) {
       this.reply = reply.reply;

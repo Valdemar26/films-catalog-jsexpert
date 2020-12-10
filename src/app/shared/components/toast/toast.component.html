@@ -1,39 +1,22 @@
-<div class="exp-notification-toast" [class.ecc-notification-success]="true">
-  Notification <!-- {{ notification.message }}-->
+<div class="exp-notification-toast {{ notification.notificationType }}">
+
+  <img class="exp-notification-toast-icon" *ngIf="notification.icon"
+    [src]="notification.icon.src"
+    [alt]="notification.icon.alt"/>
+
+
+  <div class="exp-notification-toast-container">
+
+    <div class="exp-notification-toast-title" *ngIf="notification.title">
+      {{ notification.title }}
+    </div>
+
+    <div class="exp-notification-toast-text" *ngIf="notification.text">
+      {{ notification.text }}
+    </div>
+
+  </div>
+
   <img class="exp-notification-toast-close-button" src="./../../../../assets/images/close.svg"
        alt="close" (click)="close()">
 </div>
-
-<!--<div *ngIf="notification" class="exp-notification-toast {{ notification.config.notificationType }}">-->
-
-    <!--<img class="exp-notification-toast-icon"-->
-         <!--*ngIf="notification.config.icon"-->
-         <!--[src]="notification.config.icon.src"-->
-         <!--[alt]="notification.config.icon.alt"/>-->
-
-    <!--<div class="exp-notification-toast-container">-->
-
-        <!--<div class="exp-notification-toast-title" *ngIf="notification.message.title">-->
-            <!--{{ notification.message.title }}-->
-        <!--</div>-->
-
-        <!--<div class="exp-notification-toast-text" *ngIf="notification.message.text">-->
-            <!--{{ notification.message.text }}-->
-        <!--</div>-->
-
-        <!--<button class="exp-notification-toast-action-button"-->
-                <!--*ngIf="notification.config.actionButton"-->
-                <!--(click)="toastActionButton(notification)">-->
-            <!--{{ notification.config.actionButton.label }}-->
-        <!--</button>-->
-
-    <!--</div>-->
-
-    <!--<img class="exp-notification-toast-close-button"-->
-         <!--*ngIf="notification.config.closeButton"-->
-         <!--[src]="notification.config.closeButton.image.src"-->
-         <!--[alt]="notification.config.closeButton.image.alt"-->
-         <!--(click)="close()"/>-->
-
-<!--</div>-->
-
