@@ -28,14 +28,4 @@ export class FavoriteFilmsService {
     this.filmService.filmList$.next(allFilms);
     localStorage.setItem('filmListArray', JSON.stringify(allFilms));
   }
-
-  // public checkFavoriteFilms(): FilmListInterface[] {
-  //   let favFilms = [];
-  //   this.filmService.getFilmList.subscribe((films: FilmListInterface[]) => {
-  //     console.log(films);
-  //     favFilms = films;
-  //   });
-  //
-  //   return favFilms;
-  // }
 }

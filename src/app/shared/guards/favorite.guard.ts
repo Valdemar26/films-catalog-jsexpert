@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { FilmService } from '../../films/services/film.service';
 import { FilmListInterface } from '../../films/interfaces/film-list.interface';
 
 @Injectable({
