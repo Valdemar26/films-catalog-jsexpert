@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
@@ -45,7 +47,8 @@ import { ToastComponent } from './components/toast/toast.component';
     MatSlideToggleModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   exports: [
     FooterComponent,
@@ -56,7 +59,8 @@ import { ToastComponent } from './components/toast/toast.component';
     CommentsComponent,
     ReplyComponent,
     CommentsPipe,
-    ToastComponent
+    ToastComponent,
+    TranslateModule
   ],
   entryComponents: [ModalComponent]
 })

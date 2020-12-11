@@ -8,6 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 
@@ -21,7 +23,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     MatTabsModule,
     MatToolbarModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    TranslateModule
   ]
 })
 export class WelcomeModule { }
