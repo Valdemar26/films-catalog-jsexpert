@@ -1,11 +1,11 @@
 <div class="wrapper">
 
-    <h2>Welcome to the movie app</h2><br>
+    <h2>{{ 'Welcome' | translate }}</h2><br>
 
   <mat-tab-group mat-align-tabs="center">
 
     <!-- TODO make *ngFor for film and actors at one time (not two *ngFor's as now) -->
-    <mat-tab label="Кращі фільми">
+    <mat-tab [label]="'Best films' | translate">
 
       <div class="films-wrapper">
 
@@ -24,7 +24,7 @@
 
     </mat-tab>
 
-    <mat-tab label="Кращі актори">
+    <mat-tab [label]="'Best actors' | translate">
       <div class="actors-wrapper">
 
         <div *ngFor="let actor of welcomeActors | slice:0:18; let i = index"

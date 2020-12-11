@@ -2,7 +2,16 @@
   <mat-toolbar-row>
 
     <div class="exp-header-wrapper">
-      <span class="logo" routerLink="">Film Catalog</span>
+      <span class="logo" routerLink="">{{ 'Film Catalog' | translate }}</span>
+
+      <select class="form-control" #selectedLanguage (change)="switchLanguage(selectedLanguage.value)">
+        <option *ngFor="let language of translate.getLangs()"
+                [value]="language"
+                [selected]="language === translate.currentLang">
+          {{ language }}
+          <img alt="flag" [src]="language.imgUrl">
+        </option>
+      </select>
 
       <div class="exp-menu-wrapper">
         <a mat-button
@@ -11,7 +20,7 @@
            [routerLinkActive]="link.active"
            [class.active]="link.id === linkId"
            (click)="chooseLink(link.id)">
-          <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
+          <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label | translate }}
         </a>
       </div>
 

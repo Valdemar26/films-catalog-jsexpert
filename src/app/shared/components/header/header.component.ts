@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+
 import { MenuItemInterface } from '../../interfaces/menu-item.interface';
 import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'exp-header',
@@ -28,11 +31,19 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private authService: AuthService) {
+    private authService: AuthService,
+    public translate: TranslateService
+  ) {
+    translate.addLangs(['ukr', 'eng', 'ger']);
+    translate.setDefaultLang('ukr');
   }
 
   public ngOnInit(): void {
     this.isLogged = this.authService.isLoggedIn();
+  }
+
+  public switchLanguage(lang: string): void {
+    this.translate.use(lang);
   }
 
   public chooseLink(id: number): void {
