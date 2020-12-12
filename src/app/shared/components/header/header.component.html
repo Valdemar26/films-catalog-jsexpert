@@ -8,8 +8,8 @@
         <option *ngFor="let language of translate.getLangs()"
                 [value]="language"
                 [selected]="language === translate.currentLang">
-          {{ language }}
-          <img alt="flag" [src]="language.imgUrl">
+          {{ countries[language] }}
+          <img alt="flag" [src]="countries[language]"> <!-- TODO why images doesn't shown in option -->
         </option>
       </select>
 
@@ -42,7 +42,7 @@
              [routerLinkActive]="link.active"
              [class.active]="link.id === linkId"
              (click)="chooseLink(link.id)">
-            <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label }}
+            <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label | translate }}
           </a>
         </ul>
       </div>
