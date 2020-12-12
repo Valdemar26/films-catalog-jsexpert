@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
   public isLogged: boolean;
   public isMenuOpened: boolean;
 
+  public countries!: any;  // '!' mean that variable will be initialized in another function (scope)
+
   links: MenuItemInterface[] = [
     { path: '/welcome', label: 'Main Page', active: 'button-active', icon: 'home', id: 0 },
     { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt', id: 1 },
@@ -34,6 +36,13 @@ export class HeaderComponent implements OnInit {
     private authService: AuthService,
     public translate: TranslateService
   ) {
+
+    this.countries = {
+        ukr: './../../../../assets/images/ukr.svg',
+        eng: './../../../../assets/images/eng.svg',
+        ger: './../../../../assets/images/ger.svg'
+    };
+
     translate.addLangs(['ukr', 'eng', 'ger']);
     translate.setDefaultLang('ukr');
   }

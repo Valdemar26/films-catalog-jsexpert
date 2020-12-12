@@ -22,6 +22,8 @@ import { ModalComponent } from '../../../../../shared/components/modal/modal.com
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 import { LoaderService } from '../../../../../shared/services/loader.service';
 import { FilmReviewInterface } from '../../../../interfaces/film-review.interface';
+import {NotificationsService} from '../../../../../shared/components/toast/notification/notifications.service';
+import {NotificationTypeEnum} from '../../../../../shared/components/toast/enum/notification-type.enum';
 
 
 @Component({
@@ -33,6 +35,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalContainer', { read: ViewContainerRef }) container;
   @ViewChild('notificationContainer', { read: ViewContainerRef }) notification;
+  @ViewChild('foreverModalContainer', { read: ViewContainerRef }) foreverModalContainer;
   componentRef: ComponentRef<any>;
 
   public filmDetail: FilmListInterface;
@@ -60,6 +63,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver,
+    private notificationService: NotificationsService
     ) { }
 
   public ngOnInit(): void {
@@ -127,6 +131,21 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  private showDeleteForeverModal(): void {
+
+    const config = {
+      title: 'Some Title',
+      text: 'Bitte überprüfen sie Benutzername und Passwort',
+      notificationType: NotificationTypeEnum.Error,
+      icon: {
+        src: 'https://cdn4.iconfinder.com/data/icons/rounded-white-basic-ui/139/Warning01-RoundedWhite-512.png',
+        alt: 'error-icon'
+      }
+    };
+
+    this.notificationService.showToast(this.foreverModalContainer, config);
+  }
+
   private initFilmHeroes(): void {
     const heroesSubscription = this.filmDetailService.getFilmHeroes(this.filmId)
       .subscribe((heroes) => this.heroesList = heroes.cast);
@@ -174,5 +193,10 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public openFilm(film: FilmListInterface): any {
     console.log(film.id);
     this.router.navigate(['/films/' + film.id]);
+  }
+
+  public closeForever(id: number): void {
+    console.log('CLOSE: ', id);
+    this.showDeleteForeverModal();
   }
 }

@@ -28,7 +28,8 @@ export class ReplyComponent implements OnInit {
     private formBuilder: FormBuilder,
     private avatarService: AvatarService,
     private filmDetailService: FilmDetailService,
-    private notificationService: NotificationsService) { }
+    private notificationService: NotificationsService
+  ) { }
 
   public ngOnInit(): void {
     this.initReplyForm();

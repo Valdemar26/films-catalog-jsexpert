@@ -11,10 +11,18 @@
 
     <div class="film-info" [ngStyle]="{'background-image': 'url(' + backdropPath + filmDetail.backdrop_path + ')'}">
       <div class="film-info-content">
-        <h2>
-          {{ filmDetail.title }}
-          <span>({{ filmDetail.release_date.slice(0,4) }})</span>
-        </h2>
+        <div class="film-info-content-wrapper">
+          <h2>
+            {{ filmDetail.title }}
+            <span>({{ filmDetail.release_date.slice(0,4) }})</span>
+          </h2>
+          <img
+            (click)="closeForever(filmDetail.id)"
+            class="exp-delete-forever"
+            src="./../../../../../../assets/images/delete-forever.png"
+            alt="close-forever">
+        </div>
+
 
         <div class="original-title">
           <h3>{{ filmDetail.original_title }}</h3>
@@ -107,6 +115,8 @@
   <ng-container #modalContainer></ng-container>
 
   <ng-container #notificationContainer></ng-container>
+
+  <ng-container #foreverModalContainer></ng-container>
 </div>
 
 

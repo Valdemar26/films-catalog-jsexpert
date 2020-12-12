@@ -58,14 +58,10 @@ export class FilmItemComponent implements OnInit, OnDestroy {
 
     this.filmService.getFilmList.pipe(
       switchMap((items: FilmListInterface[]) => {
-        return from(items);
-      }),
-      filter((film) => {
-        console.log(film.genre_ids.indexOf(id) > 0);
-        return film.genre_ids.indexOf(id) > 0;
+        return items.filter((film) => film.genre_ids.indexOf(id) > 0);
       })
     ).subscribe((data) => {
-      console.log(data);  // DOESN'T GET DATA
+      // console.log('data: ', data);  // DOESN'T GET DATA
       genresArray.push(data);
     });
 
