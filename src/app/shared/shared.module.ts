@@ -22,6 +22,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentsPipe } from './pipe/comments.pipe';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ToastComponent } from './components/toast/toast.component';
+import {CloseModalComponent} from './components/toast/close-modal/close-modal.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ToastComponent } from './components/toast/toast.component';
     CommentsComponent,
     CommentsPipe,
     ReplyComponent,
-    ToastComponent
+    ToastComponent,
+    CloseModalComponent
   ],
   imports: [
     CommonModule,
@@ -60,8 +62,9 @@ import { ToastComponent } from './components/toast/toast.component';
     ReplyComponent,
     CommentsPipe,
     ToastComponent,
+    CloseModalComponent,
     TranslateModule
   ],
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent, CloseModalComponent]
 })
 export class SharedModule { }
