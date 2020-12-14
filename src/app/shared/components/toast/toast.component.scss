@@ -11,9 +11,9 @@
   border-radius: 10px;
   box-shadow: 0 0 12px 0 rgba(17, 89, 98, 0.36);
   width: auto;
-  position: relative;
-  top: -300px;
-  left: 100px;
+  position: absolute;
+  top: 200px;
+  left: 50%;
   animation-duration: 0.8s;
   animation-name: exp-notification-appear;
 
@@ -24,19 +24,19 @@
   }
 
   // Position classes
-  &.ecc-notification-success {
+  &.exp-notification-success {
     background-color: #95C124;
   }
 
-  &.ecc-notification-warning {
+  &.exp-notification-warning {
     background-color: darkorange;
   }
 
-  &.ecc-notification-error {
+  &.exp-notification-error {
     background-color: firebrick;
   }
 
-  &.ecc-notification-info {
+  &.exp-notification-info {
     background-color: silver;
   }
 
