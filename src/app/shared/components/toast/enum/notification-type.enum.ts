@@ -1,6 +1,6 @@
 export enum NotificationTypeEnum {
-  Warning = 'ecc-notification-warning',
-  Info = 'ecc-notification-info',
-  Success = 'ecc-notification-success',
-  Error = 'ecc-notification-error'
+  Warning = 'exp-notification-warning',
+  Info = 'exp-notification-info',
+  Success = 'exp-notification-success',
+  Error = 'exp-notification-error'
 }

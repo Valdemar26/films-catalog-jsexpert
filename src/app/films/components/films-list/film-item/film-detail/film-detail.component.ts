@@ -134,8 +134,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private showDeleteForeverModal(): void {
 
     const config = {
-      title: 'Some Title',
-      text: 'Bitte überprüfen sie Benutzername und Passwort',
+      title: 'Приховати цей фільм назавжди?',
+      text: 'Цю дію не можна скасувати. Даний фільм буде приховано назавжди.',
       notificationType: NotificationTypeEnum.Error,
       icon: {
         src: 'https://cdn4.iconfinder.com/data/icons/rounded-white-basic-ui/139/Warning01-RoundedWhite-512.png',
