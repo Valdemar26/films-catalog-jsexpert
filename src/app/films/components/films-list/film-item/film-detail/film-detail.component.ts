@@ -22,8 +22,9 @@ import { ModalComponent } from '../../../../../shared/components/modal/modal.com
 import { FilmListInterface } from '../../../../interfaces/film-list.interface';
 import { LoaderService } from '../../../../../shared/services/loader.service';
 import { FilmReviewInterface } from '../../../../interfaces/film-review.interface';
-import {NotificationsService} from '../../../../../shared/components/toast/notification/notifications.service';
-import {NotificationTypeEnum} from '../../../../../shared/components/toast/enum/notification-type.enum';
+import { NotificationsService } from '../../../../../shared/components/toast/notification/notifications.service';
+import { ModalTypeEnum } from '../../../../../shared/components/toast/enum/notification-type.enum';
+import { NotificationInterface } from '../../../../../shared/components/toast/interfaces/notification.interface';
 
 
 @Component({
@@ -116,7 +117,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
         if (film) {
           this.filmDetail = film;
           this.loaderService.hide();
-          this.adultFilm = film.adult;  // TODO check if film is 'adult' - create notification service and modal
+          this.adultFilm = film.adult;  // TODO check if film is 'adult' - create notification service and close-modal
           this.checkAdultFilm();
         }
     });
@@ -127,23 +128,27 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private checkAdultFilm(): void {
     if (this.adultFilm) {
       console.log('adultFilm: ', this.adultFilm);
-      // this.createNotification();  // TODO create notification
+      this.showAdultModal();  // TODO create notification
     }
   }
 
-  private showDeleteForeverModal(): void {
+  private showDeleteForeverModal(id): void {
 
-    const config = {
+    const config: NotificationInterface = {
       title: 'Приховати цей фільм назавжди?',
       text: 'Цю дію не можна скасувати. Даний фільм буде приховано назавжди.',
-      notificationType: NotificationTypeEnum.Error,
+      modalType: ModalTypeEnum.Error,
       icon: {
         src: 'https://cdn4.iconfinder.com/data/icons/rounded-white-basic-ui/139/Warning01-RoundedWhite-512.png',
         alt: 'error-icon'
       }
     };
 
-    this.notificationService.showToast(this.foreverModalContainer, config);
+    this.notificationService.showModal(this.foreverModalContainer, config, id);
+  }
+
+  private showAdultModal(): void {
+    console.log('showAdultModal');
   }
 
   private initFilmHeroes(): void {
@@ -196,7 +201,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public closeForever(id: number): void {
-    console.log('CLOSE: ', id);
-    this.showDeleteForeverModal();
+    this.showDeleteForeverModal(id);
   }
 }

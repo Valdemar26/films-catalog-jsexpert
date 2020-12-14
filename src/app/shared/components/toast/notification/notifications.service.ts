@@ -3,14 +3,14 @@ import { Injectable, ApplicationRef, ComponentFactoryResolver,
 } from '@angular/core';
 
 import { NotificationInterface } from '../interfaces/notification.interface';
-import { NotificationTypeEnum } from '../enum/notification-type.enum';
 import { ToastComponent } from '../toast.component';
+import { CloseModalComponent } from '../close-modal/close-modal.component';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotificationsService {  // is service create methods to 'show' and 'hide' toast, with config
+export class NotificationsService {
 
   private renderer: Renderer2;
   componentRef: ComponentRef<any>;
@@ -26,13 +26,20 @@ export class NotificationsService {  // is service create methods to 'show' and 
   }
 
   public showToast(toastContainer, config): void {
-    console.log('showToast');
-
     toastContainer.clear();
     const factory = this.resolver.resolveComponentFactory(ToastComponent);
     this.componentRef = toastContainer.createComponent(factory);
 
     this.componentRef.instance.notification = config;
+  }
+
+  public showModal(modalContainer, config, id): void {
+
+    modalContainer.clear();
+    const factory = this.resolver.resolveComponentFactory(CloseModalComponent);
+    this.componentRef = modalContainer.createComponent(factory);
+
+    this.componentRef.instance.modalConfig = config;
   }
 
   public removeToast(notification: NotificationInterface): void {
