@@ -16,14 +16,10 @@ export class HideFilmPipe implements PipeTransform {
       const arrayOfFilteredFilms = JSON.parse(localStorage.getItem('filteredFilmsId'));
 
       const filteredFilms = films.filter((film) => {
-        console.log(film);
-        // TODO problem below
-        return arrayOfFilteredFilms.indexOf(film.id !== -1);
+        return arrayOfFilteredFilms.indexOf(film.id) === -1;
       });
 
-      console.log('filteredFilms: ', filteredFilms);
-
-      localStorage.setItem('filmListArray', JSON.stringify(filteredFilms));
+      localStorage.setItem('filmListArray', JSON.stringify(filteredFilms));  // TODO need to be saved arrays of ids
 
       return filteredFilms;
     } else {
