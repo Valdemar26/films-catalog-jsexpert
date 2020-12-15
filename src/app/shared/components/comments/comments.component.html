@@ -27,7 +27,7 @@
 
 
   <div *ngIf="getCommentsList | async as commentsList">
-    <div *ngFor="let comment of commentsList | commentsPipe:subjectId" class="exp-comment">
+    <div *ngFor="let comment of commentsList | commentsPipe:subjectId | reverse" class="exp-comment">
 
       <div class="exp-comments">
         <div class="exp-comment-avatar" *ngIf="comment.avatar">
@@ -60,7 +60,7 @@
 
       <div class="exp-reply-to-comment" *ngIf="comment.reply && comment.reply.length">
 
-        <div *ngFor="let reply of comment.reply" class="exp-single-reply">
+        <div *ngFor="let reply of comment.reply | reverse" class="exp-single-reply">
           <div *ngIf="reply.avatar" class="exp-reply-avatar">
             <img [src]="reply.avatar" alt="avatar">
           </div>
