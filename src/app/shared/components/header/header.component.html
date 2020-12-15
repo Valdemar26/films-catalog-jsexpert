@@ -5,11 +5,11 @@
       <span class="logo" routerLink="">{{ 'Film Catalog' | translate }}</span>
 
       <select class="form-control" #selectedLanguage (change)="switchLanguage(selectedLanguage.value)">
-        <option *ngFor="let language of translate.getLangs()"
+        <option *ngFor="let language of translate.getLangs(); let i = index"
                 [value]="language"
-                [selected]="language === translate.currentLang">
-          {{ countries[language] }}
-          <img alt="flag" [src]="countries[language]"> <!-- TODO why images doesn't shown in option -->
+                [selected]="language === translate.currentLang"
+                class="exp-country exp-country-index-{{ i }}">
+          {{ countriesName[language] }}
         </option>
       </select>
 
