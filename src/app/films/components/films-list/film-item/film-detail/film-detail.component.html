@@ -43,18 +43,18 @@
           <span class="chips">No Trailer for this Movie yet!</span>
         </ng-template>
 
-        <h4>Опис</h4>
+        <h4>{{ 'Description' | translate }}</h4>
         <p>{{ filmDetail.overview.length ? filmDetail.overview : 'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}</p>
 
       </div>
 
-      <button mat-raised-button color="primary" mat-button (click)="back()">Back</button>
+      <button mat-raised-button color="primary" mat-button (click)="back()">{{ 'Back' | translate }}</button>
     </div>
 
   </div>
 
   <div class="film-heroes" *ngIf="heroesList && heroesList.length; else noHeroesTemplate">
-    <h3>Series Cast:</h3>
+    <h3>{{ 'Series Cast' | translate }}</h3>
 
     <div class="hero-wrapper">
       <div class="hero" *ngFor="let hero of heroesList">
@@ -75,7 +75,7 @@
   </ng-template>
 
   <div class="film-similar" *ngIf="similarList && similarList.length; else noSimilarTemplate">
-    <h3>Similar Movies</h3>
+    <h3>{{ 'Similar Movies' | translate }}</h3>
 
     <div class="film-similar-wrapper">
 
@@ -102,14 +102,14 @@
   </div>
 
   <div class="exp-film-review" *ngIf="movieReview && movieReview.length">
-    <h3>Movie Review</h3>
+    <h3>{{ 'Movie Review' | translate }}</h3>
     <p *ngFor="let review of movieReview"><span>{{ review.author }}:</span> {{ review.content }}</p>
   </div>
 
   <exp-comments [subjectId]="+filmId"></exp-comments>
 
   <ng-template #noSimilarTemplate>
-    <span class="chips">No similar movies for this Movie yet!</span>
+    <span class="chips">{{ 'No similar movies' | translate }}</span>
   </ng-template>
 
   <ng-container #modalContainer></ng-container>

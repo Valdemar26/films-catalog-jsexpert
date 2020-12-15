@@ -21,6 +21,6 @@
   <button *ngIf="getFilmList | async as filmsList"
           mat-raised-button color="accent" mat-button class="more"
           [disabled]="isButtonDisabled"
-          (click)="loadMoreFilms()">More films</button>
+          (click)="loadMoreFilms()">{{ 'More films' | translate }}</button>
 
 </div>

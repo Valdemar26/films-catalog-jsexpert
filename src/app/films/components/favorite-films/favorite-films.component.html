@@ -28,7 +28,7 @@
               <mat-card-actions>
                 <button mat-raised-button color="primary" mat-button
                         (click)="removeFromFavoriteFilms(film)">
-                  Remove from favorite
+                  {{ 'Remove from favorite' | translate }}
                 </button>
 
               </mat-card-actions>
@@ -41,5 +41,5 @@
 
 
 <ng-template #emptyTemplate>
-  No Favorite Films yet!
+  {{ 'No Favorite Films yet!' | translate }}
 </ng-template>
