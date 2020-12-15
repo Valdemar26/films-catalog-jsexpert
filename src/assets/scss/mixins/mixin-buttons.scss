@@ -25,3 +25,12 @@
     cursor: pointer;
   }
 }
+
+@mixin button-cancel {
+  @include button-success();
+  background-color: #ccc;
+
+  &:hover {
+    background-color: darken(#ccc, 10%);
+  }
+}

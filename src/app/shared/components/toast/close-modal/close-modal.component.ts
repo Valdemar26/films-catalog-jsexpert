@@ -17,7 +17,6 @@ export class CloseModalComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    console.log('modalConfig: ', this.modalConfig);
   }
 
   public close(): void {
