@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
 import { FilmService } from '../../../../services/film.service';
@@ -141,7 +141,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
       icon: {
         src: './../../../../../assets/images/warning.svg',
         alt: 'warning-icon'
-      }
+      },
+      confirm$: new Subject<true>()
     };
 
     this.notificationService.showModal(this.foreverModalContainer, config, id);

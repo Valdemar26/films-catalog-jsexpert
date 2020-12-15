@@ -24,6 +24,15 @@ export class CloseModalComponent implements OnInit {
   }
 
   public acceptHide(): void {
-    console.log('accept');
+    console.log(this.modalConfig, this.modalConfig.confirm$.subscribe);
+
+    this.modalConfig.confirm$.subscribe((confirmed: boolean) => {
+      console.log('confirmed: ', confirmed);
+
+      if (confirmed) {
+        // hide film forever
+        console.log('HIDE');
+      }
+    });
   }
 }
