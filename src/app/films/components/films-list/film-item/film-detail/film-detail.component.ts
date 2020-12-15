@@ -139,8 +139,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
       text: 'Цю дію не можна скасувати. Даний фільм буде приховано назавжди.',
       modalType: ModalTypeEnum.Error,
       icon: {
-        src: 'https://cdn4.iconfinder.com/data/icons/rounded-white-basic-ui/139/Warning01-RoundedWhite-512.png',
-        alt: 'error-icon'
+        src: './../../../../../assets/images/warning.svg',
+        alt: 'warning-icon'
       }
     };
 

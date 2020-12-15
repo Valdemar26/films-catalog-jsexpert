@@ -1,5 +1,3 @@
-{{ modalConfig }}
-
 <div class="exp-modal-wrapper {{ modalConfig.modalType }}" *ngIf="modalConfig">
   <img class="exp-modal-icon" *ngIf="modalConfig.icon"
        [src]="modalConfig.icon.src"
@@ -22,7 +20,7 @@
        alt="close" (click)="close()">
 
   <div class="exp-modal-buttons-wrapper">
-    <button (click)="close()">Cancel</button>
-    <button (click)="acceptHide()">Ok</button>
+    <button class="exp-cancel-button" (click)="close()">Cancel</button>
+    <button class="exp-success-button" (click)="acceptHide()">Ok</button>
   </div>
 </div>
