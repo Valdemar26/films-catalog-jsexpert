@@ -1,3 +1,5 @@
+$size: 50px;
+
 .mat-toolbar {
   font-size: 14px;
 
@@ -5,29 +7,69 @@
     display: flex;
     justify-content: space-between;
 
-    .search {
+    .exp-search {
+      display: flex;
+      background: linear-gradient(45deg, #e8e8e8, #e4e4e4);
+      height: $size;
+      border-radius: $size;
+      padding: 5px;
+      position: relative;
 
-      .mat-form-field {
+      &.no-results {
+        border-radius: 25px 25px 0 0;
 
-        .search-icon {
-          cursor: pointer;
-        }
-
-        .search-input {
-          font-size: 14px;
-          height: 20px;
+        input {
+          width: 250px;
+          padding: 0 10px;
         }
       }
 
-      .example-full-width {
-        position: relative;
-        width: 180px;
+      &:hover {
+        input {
+          width: 250px;
+          padding: 0 10px;
+        }
+        button {
+          background-color: #e6e6e6;
+        }
+      }
+
+      input {
+        border: none;
+        background: none;
+        outline: none;
+        padding: 0;
+        font-size: 18px;
+        color: #fff;
+        width: 0;
+        transition: 0.4s;
+      }
+
+      input[type="search"]::-webkit-search-cancel-button {
+        display: none;
+      }
+
+      input[type="search"]:focus::-webkit-search-cancel-button {
+        display: none;
+      }
+
+      button {
+        color: #fff;
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+        border: none;
+        background-color: #e0e0e0;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.4s;
       }
 
       .no-results {
         position: absolute;
-        width: 180px;
-        top: 70px;
+        width: 310px;
+        top: 60px;
+        left: 0;
         height: 50px;
         text-align: left;
         z-index: 3;
