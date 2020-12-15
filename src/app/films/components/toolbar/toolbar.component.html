@@ -2,24 +2,24 @@
   <mat-toolbar-row>
 
     <span *ngIf="getFavoriteFilmsCount | async as favoriteFilmsCounter; else defaultTemplate">
-      В обране додано {{ favoriteFilmsCounter }} елементів
+      {{ 'Added' | translate }} {{ favoriteFilmsCounter }} {{ 'Elements' | translate }}
     </span>
 
     <ng-template #defaultTemplate>
-      <span>В обране додано 0 елементів</span>
+      <span>{{ 'Zero favorite' | translate }}</span>
     </ng-template>
 
     <span class="menu-spacing"></span>
 
     <div class="exp-search" [class.no-results]="filmsList && !filmsList.length">
-      <input #searchRef type="search" placeholder="Search..." (input)="searchFilmByTitle()">
+      <input #searchRef type="search" [placeholder]="'Search' | translate" (input)="searchFilmByTitle()">
 
       <button>
         <mat-icon class="search-icon">search</mat-icon>
       </button>
 
       <div class="no-results" *ngIf="filmsList && !filmsList.length">
-        <span>No results...</span>
+        <span>{{ 'No results' | translate }}</span>
       </div>
     </div>
 
@@ -28,11 +28,11 @@
     <div>
       <mat-form-field>
         <mat-select #templateSelect
-                    placeholder="Сортувати за"
+                    [placeholder]="'Sorting' | translate"
                     [(value)]="sortingMethod"
                     (selectionChange)="transform(templateSelect.value)">
-          <mat-option value="0">назвою: A-Я</mat-option>
-          <mat-option value="1">назвою: Я-A</mat-option>
+          <mat-option value="0">{{ 'Sorting method asc' | translate }}</mat-option>
+          <mat-option value="1">{{ 'Sorting method desc' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

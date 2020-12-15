@@ -23,6 +23,7 @@ import { CommentsPipe } from './pipe/comments.pipe';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ToastComponent } from './components/toast/toast.component';
 import {CloseModalComponent} from './components/toast/close-modal/close-modal.component';
+import { ReversePipe } from './pipe/reverse.pipe';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {CloseModalComponent} from './components/toast/close-modal/close-modal.co
     CommentsPipe,
     ReplyComponent,
     ToastComponent,
-    CloseModalComponent
+    CloseModalComponent,
+    ReversePipe
   ],
   imports: [
     CommonModule,
