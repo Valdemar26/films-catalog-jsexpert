@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NotificationInterface } from '../interfaces/notification.interface';
 
@@ -10,10 +11,12 @@ import { NotificationInterface } from '../interfaces/notification.interface';
 export class CloseModalComponent implements OnInit {
 
   @Input() public modalConfig: NotificationInterface;
+  @Input() public filteredFilmId: number;
 
   constructor(
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
@@ -24,15 +27,24 @@ export class CloseModalComponent implements OnInit {
   }
 
   public acceptHide(): void {
-    console.log(this.modalConfig, this.modalConfig.confirm$.subscribe);
+    console.log(this.modalConfig);
 
-    this.modalConfig.confirm$.subscribe((confirmed: boolean) => {
-      console.log('confirmed: ', confirmed);
+    const hiddenFilms = [];
+    hiddenFilms.push(this.filteredFilmId);
 
-      if (confirmed) {
-        // hide film forever
-        console.log('HIDE');
-      }
-    });
+    localStorage.setItem('filteredFilmsId', JSON.stringify(hiddenFilms));
+
+    this.close();
+    this.router.navigate(['/main']);
+
+    // this.modalConfig.confirm$.subscribe((confirmed: boolean) => {
+    //   console.log('confirmed: ', confirmed);
+    //
+    //   if (confirmed) {
+    //     // hide film forever
+    //     console.log('HIDE');
+    //     localStorage.setItem('filteredFilmsId', JSON.stringify(this.filteredFilmId));
+    //   }
+    // });
   }
 }

@@ -8,7 +8,7 @@
 
   <div class="film-list-wrapper" *ngIf="getFilmList | async as filmsList">
 
-    <ng-container *ngFor="let film of filmsList; trackBy: identify">
+    <ng-container *ngFor="let film of filmsList | hideFilm; trackBy: identify">
 
       <exp-film-item [filmList]="film"
                      [genresList]="getGenresList | async"

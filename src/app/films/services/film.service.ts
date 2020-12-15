@@ -84,7 +84,6 @@ export class FilmService {
     if (result && result.length) {
       this.filmList$.next(result);
     } else {
-      console.log('no results');
       this.filmList$.next([]);
     }
   }
