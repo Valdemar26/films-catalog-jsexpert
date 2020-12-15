@@ -40,6 +40,7 @@ export class NotificationsService {
     this.componentRef = modalContainer.createComponent(factory);
 
     this.componentRef.instance.modalConfig = config;
+    this.componentRef.instance.filteredFilmId = id;
   }
 
   public removeToast(notification: NotificationInterface): void {

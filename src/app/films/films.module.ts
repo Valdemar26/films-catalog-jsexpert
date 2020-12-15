@@ -21,6 +21,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { FilmDetailComponent } from './components/films-list/film-item/film-detail/film-detail.component';
 import { FavoriteFilmsComponent } from './components/favorite-films/favorite-films.component';
 import { FavoriteFilmsPipe } from './pipes/favorite-films.pipe';
+import { HideFilmPipe } from './pipes/hide-film.pipe';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FavoriteFilmsPipe } from './pipes/favorite-films.pipe';
     DetailsComponent,
     FilmDetailComponent,
     FavoriteFilmsComponent,
-    FavoriteFilmsPipe
+    FavoriteFilmsPipe,
+    HideFilmPipe
   ],
   imports: [
     CommonModule,
