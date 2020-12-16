@@ -5,7 +5,6 @@ import { debounceTime, distinctUntilChanged, map, skipWhile } from 'rxjs/operato
 
 import { FilmService } from '../../services/film.service';
 import { FilmListInterface } from '../../interfaces/film-list.interface';
-import { FavoriteFilmsService } from '../../services/favorite-films.service';
 
 
 @Component({
@@ -19,7 +18,6 @@ export class ToolbarComponent implements OnInit {
 
   public filmsList: FilmListInterface[];
   public sortingMethod: number;
-  public favoriteFilmsCount = 0;
 
   constructor(
     private filmService: FilmService
