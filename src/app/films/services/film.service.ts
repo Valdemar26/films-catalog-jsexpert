@@ -100,9 +100,16 @@ export class FilmService {
     const direction = !!parseInt(value, 10) ? -1 : 1;
 
     return this.getFilmList.subscribe((films: FilmListInterface[]) => {
-      return films.sort(
-        (a: FilmListInterface, b: FilmListInterface) => direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
+
+      const sortedFilms = films.sort(
+        (a: FilmListInterface, b: FilmListInterface) => {
+          return direction * (a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1);
+        }
       );
+
+      localStorage.setItem('filmListArray', JSON.stringify(sortedFilms));
+
+      return sortedFilms;
     });
   }
 
