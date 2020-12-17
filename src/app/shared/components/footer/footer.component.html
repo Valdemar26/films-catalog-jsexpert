@@ -1,13 +1,9 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span>© Copyright 2020</span>
+<div class="exp-footer">
+  <span>© Copyright 2020</span>
 
-    <span class="menu-spacing"></span>
-
-    <mat-slide-toggle
-      [checked]="isDarkTheme | async"
-      (change)="toggleDarkTheme($event.checked)">
-      {{ 'Theme' | translate }}
-    </mat-slide-toggle>
-  </mat-toolbar-row>
-</mat-toolbar>
+  <mat-slide-toggle
+    [checked]="isDarkTheme | async"
+    (change)="toggleDarkTheme($event.checked)">
+    {{ 'Theme' | translate }}
+  </mat-slide-toggle>
+</div>
