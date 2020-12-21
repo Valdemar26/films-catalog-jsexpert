@@ -22,7 +22,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { CommentsPipe } from './pipe/comments.pipe';
 import { ReplyComponent } from './components/reply/reply.component';
 import { ToastComponent } from './components/toast/toast.component';
-import {CloseModalComponent} from './components/toast/close-modal/close-modal.component';
+import { CloseModalComponent } from './components/toast/close-modal/close-modal.component';
 import { ReversePipe } from './pipe/reverse.pipe';
 
 

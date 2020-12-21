@@ -27,7 +27,6 @@ export class CloseModalComponent implements OnInit {
   }
 
   public acceptHide(): void {
-    console.log(this.modalConfig);
 
     const hiddenFilms = [];
     hiddenFilms.push(this.filteredFilmId);

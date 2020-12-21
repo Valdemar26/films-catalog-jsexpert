@@ -6,21 +6,24 @@
 
   </mat-card>
 
+
   <div class="film-list-wrapper" *ngIf="getFilmList | async as filmsList">
 
     <ng-container *ngFor="let film of filmsList | hideFilm; trackBy: identify">
 
-        <exp-film-item [filmList]="film"
-                       [genresList]="getGenresList | async"
-                       (favoriteFilm)="setFavoriteFilm($event)"></exp-film-item>
+      <exp-film-item [filmList]="film"
+                     [genresList]="getGenresList | async"
+                     (favoriteFilm)="setFavoriteFilm($event)">
+      </exp-film-item>
 
     </ng-container>
 
   </div>
 
-  <button *ngIf="getFilmList | async as filmsList"
-          mat-raised-button color="accent" mat-button class="more"
-          [disabled]="isButtonDisabled"
-          (click)="loadMoreFilms()">{{ 'More films' | translate }}</button>
+    <button *ngIf="getFilmList | async as filmsList"
+            mat-raised-button color="accent" mat-button class="more"
+            [disabled]="isButtonDisabled"
+            (click)="loadMoreFilms()">{{ 'More films' | translate }}
+    </button>
 
 </div>
