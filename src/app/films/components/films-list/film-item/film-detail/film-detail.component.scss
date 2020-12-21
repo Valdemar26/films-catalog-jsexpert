@@ -1,4 +1,5 @@
 @import "../../../../../../assets/scss/mixins/mixin-scroll";
+@import "../../../../../../assets/scss/mixins/mixin-buttons";
 
 .exp-film-detail {
   padding-bottom: 100px;
@@ -22,6 +23,10 @@
       background-size: cover;
       background: 50% 50% no-repeat;
       position: relative;
+
+      .exp-button-back {
+        @include button-back();
+      }
 
       .film-info-content {
         width: calc(100% - 20px);
