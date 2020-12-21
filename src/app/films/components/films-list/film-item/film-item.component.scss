@@ -1,3 +1,4 @@
+@import "../../../../../assets/scss/mixins/mixin-buttons";
 
 .card {
   border: 1px solid #ebebeb;
@@ -22,10 +23,6 @@
   }
 
   .card-info {
-
-    .card-info-title {
-
-    }
 
     .card-info-film-detail {
       display: flex;
@@ -89,4 +86,11 @@
     }
 
   }
+
+
+}
+
+
+.exp-button-open {
+  @include button-success();
 }

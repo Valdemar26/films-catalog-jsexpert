@@ -44,11 +44,13 @@
         </ng-template>
 
         <h4>{{ 'Description' | translate }}</h4>
-        <p>{{ filmDetail.overview.length ? filmDetail.overview : 'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}</p>
+        <p>{{ filmDetail.overview.length ?
+          filmDetail.overview :
+          'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}</p>
 
       </div>
 
-      <button mat-raised-button color="primary" mat-button (click)="back()">{{ 'Back' | translate }}</button>
+      <button class="exp-button-back" (click)="back()">{{ 'Back' | translate }}</button>
     </div>
 
   </div>

@@ -1,4 +1,5 @@
 @import './../../../../assets/scss/variables/variables';
+@import './../../../../assets/scss/mixins/mixin-buttons';
 
 .exp-comments-wrapper {
   display: flex;
@@ -36,6 +37,10 @@
     .exp-comments-buttons-wrapper {
       display: flex;
       margin-bottom: 20px;
+
+      .btn-comment {
+        @include button-success();
+      }
 
       .button-cancel {
         margin-right: 20px;
