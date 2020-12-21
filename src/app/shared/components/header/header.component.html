@@ -36,6 +36,7 @@
         <span></span>
 
         <ul class="menu">
+
           <a mat-button
              *ngFor="let link of links"
              [routerLink]="link.path"
@@ -44,6 +45,16 @@
              (click)="chooseLink(link.id)">
             <mat-icon class="example-icon">{{ link.icon }}</mat-icon>{{ link.label | translate }}
           </a>
+
+          <select class="form-control" #selectedLanguageModal (change)="switchLanguage(selectedLanguageModal.value)">
+            <option *ngFor="let language of translate.getLangs(); let i = index"
+                    [value]="language"
+                    [selected]="language === translate.currentLang"
+                    class="exp-country exp-country-index-{{ i }}">
+              {{ countriesName[language] }}
+            </option>
+          </select>
+
         </ul>
       </div>
     </nav>
