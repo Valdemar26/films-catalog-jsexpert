@@ -33,7 +33,7 @@ export class NotificationsService {
     this.componentRef.instance.notification = config;
   }
 
-  public showModal(modalContainer, config, id): void {
+  public showModal(modalContainer, config, id?): void {
 
     modalContainer.clear();
     const factory = this.resolver.resolveComponentFactory(CloseModalComponent);

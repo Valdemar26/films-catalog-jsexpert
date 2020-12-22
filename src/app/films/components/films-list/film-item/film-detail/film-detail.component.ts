@@ -128,7 +128,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private checkAdultFilm(): void {
     if (this.adultFilm) {
       console.log('adultFilm: ', this.adultFilm);
-      this.showAdultModal();  // TODO create notification
+      this.showAdultModal();
     }
   }
 
@@ -150,6 +150,20 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   private showAdultModal(): void {
     console.log('showAdultModal');
+
+    const config: NotificationInterface = {
+      title: 'Вам виповнилось 18 років?',
+      text: 'Даний фільм може містити сцени, не призначені для перегляду особами, молодше за 18 років',
+      modalType: ModalTypeEnum.Error,
+      icon: {
+        src: './../../../../../assets/images/warning.svg',
+        alt: 'warning-icon'
+      },
+      confirm$: new Subject<true>()
+    };
+
+
+    this.notificationService.showModal(this.foreverModalContainer, config);
   }
 
   private initFilmHeroes(): void {
