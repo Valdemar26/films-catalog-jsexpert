@@ -18,7 +18,7 @@
 
   <img *ngIf="!film.poster_path" src="../../../../../assets/images/not-available.jpg" alt="not-available">
 
-  <span class="release">{{ film.release_date }}</span>
+  <span class="release">{{ film.release_date | reverse }}</span>
 
   <div class="genres">
     <span *ngFor="let genre of genres"
