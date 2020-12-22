@@ -65,7 +65,8 @@ import { ReversePipe } from './pipe/reverse.pipe';
     CommentsPipe,
     ToastComponent,
     CloseModalComponent,
-    TranslateModule
+    TranslateModule,
+    ReversePipe
   ],
   entryComponents: [ModalComponent, CloseModalComponent]
 })
