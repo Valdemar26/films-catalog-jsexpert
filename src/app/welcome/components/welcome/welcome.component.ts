@@ -37,7 +37,6 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   public openActor(actor): void {
-    console.log(actor);
     this.router.navigate(['/actor/' + actor.id]);
   }
 
