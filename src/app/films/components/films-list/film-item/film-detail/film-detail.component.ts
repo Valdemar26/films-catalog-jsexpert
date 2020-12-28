@@ -25,6 +25,7 @@ import { FilmReviewInterface } from '../../../../interfaces/film-review.interfac
 import { NotificationsService } from '../../../../../shared/components/toast/notification/notifications.service';
 import { ModalTypeEnum } from '../../../../../shared/components/toast/enum/notification-type.enum';
 import { NotificationInterface } from '../../../../../shared/components/toast/interfaces/notification.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -64,7 +65,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private location: Location,
     private sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private translationService: TranslateService
     ) { }
 
   public ngOnInit(): void {
@@ -133,10 +135,15 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   private showDeleteForeverModal(id): void {
+    let modalTitle, modalText;
+
+    this.translationService.get('Hide film').subscribe((data) => modalTitle = data);
+    this.translationService.get('Hide text').subscribe((data) => modalText = data);
+
 
     const config: NotificationInterface = {
-      title: 'Приховати цей фільм назавжди?',
-      text: 'Цю дію не можна скасувати. Даний фільм буде приховано назавжди.',
+      title: modalTitle,
+      text: modalText,
       modalType: ModalTypeEnum.Error,
       icon: {
         src: './../../../../../assets/images/warning.svg',
@@ -146,7 +153,11 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     };
 
     this.notificationService.showModal(this.foreverModalContainer, config, id);
+
+    config.confirm$.subscribe(() => console.log('CONFIRM'));
   }
+
+
 
   private showAdultModal(): void {
     console.log('showAdultModal');

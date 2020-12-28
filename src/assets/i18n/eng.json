@@ -32,5 +32,7 @@
   "Zero favorite": "No films added to Favorite",
   "Search": "Search...",
   "No results": "No results...",
-  "Ok": "Ok"
+  "Ok": "Ok",
+  "Hide film": "Hide this film forever?",
+  "Hide text": "This action cannot be undone. This movie will be hidden forever"
 }

@@ -39,6 +39,11 @@ export class FilmService {
     private router: Router
   ) { }
 
+  public setFilmList(films): void {
+
+    this.filmList$.next(films);
+  }
+
   public initFilmList(): Observable<any> {
 
     const filmsFromStorage = JSON.parse(localStorage.getItem('filmListArray'));
@@ -147,6 +152,10 @@ export class FilmService {
 
   public getFilmObservable(): Observable<FilmListInterface> {
     return this.currentFilm$.asObservable();
+  }
+
+  public get getFilmListArray(): FilmListInterface[] {
+    return this.filmListArray;
   }
 
 }
