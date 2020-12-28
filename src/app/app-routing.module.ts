@@ -13,6 +13,7 @@ import { WelcomeComponent } from './welcome/components/welcome/welcome.component
 import { FilmDetailComponent } from './films/components/films-list/film-item/film-detail/film-detail.component';
 import { FavoriteFilmsComponent } from './films/components/favorite-films/favorite-films.component';
 import { FavoriteGuard } from './shared/guards/favorite.guard';
+import { ActorDetailComponent } from './actors/components/actors-list/actor-item/actor-detail/actor-detail.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,11 @@ const routes: Routes = [
     resolve: { data: FilmsResolver }
   },
   { path: 'films/:id', component: FilmDetailComponent},
-  { path: 'actors', component: ActorsListComponent, canActivate: [AuthGuard] },
+  {
+    path: 'actors',
+    component: ActorsListComponent
+  },
+  { path: 'actors/:id', component: ActorDetailComponent },
   { path: 'favorite-films', component: FavoriteFilmsComponent, resolve: { data: FilmsResolver }, canActivate: [FavoriteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
