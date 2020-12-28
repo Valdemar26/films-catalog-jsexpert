@@ -4,13 +4,14 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 
 import { FilmListInterface } from '../../films/interfaces/film-list.interface';
+import { FilmService } from '../../films/services/film.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteGuard implements CanActivate {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private filmService: FilmService) {
 
   }
 
@@ -18,7 +19,8 @@ export class FavoriteGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const films = JSON.parse(localStorage.getItem('filmListArray'));
+    const films = this.filmService.getFilmListArray;
+
     const favFilms = films.filter((film: FilmListInterface) => film.isFavorite);
 
     if (favFilms && favFilms.length) {

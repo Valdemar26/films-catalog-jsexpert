@@ -20,6 +20,19 @@ export class CloseModalComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+
+    this.modalConfig.confirm$.subscribe((confirmed: boolean) => {
+      console.log('confirmed: ', confirmed);
+
+      if (confirmed) {
+        // hide film forever
+        const hiddenFilms = [];
+        hiddenFilms.push(this.filteredFilmId);
+
+        localStorage.setItem('filteredFilmsId', JSON.stringify(hiddenFilms));
+      }
+    });
+
   }
 
   public close(): void {
@@ -28,22 +41,9 @@ export class CloseModalComponent implements OnInit {
 
   public acceptHide(): void {
 
-    const hiddenFilms = [];
-    hiddenFilms.push(this.filteredFilmId);
-
-    localStorage.setItem('filteredFilmsId', JSON.stringify(hiddenFilms));
-
     this.close();
-    this.router.navigate(['/main']);
 
-    // this.modalConfig.confirm$.subscribe((confirmed: boolean) => {
-    //   console.log('confirmed: ', confirmed);
-    //
-    //   if (confirmed) {
-    //     // hide film forever
-    //     console.log('HIDE');
-    //     localStorage.setItem('filteredFilmsId', JSON.stringify(this.filteredFilmId));
-    //   }
-    // });
+    this.modalConfig.confirm$.next(true);
+    this.router.navigate(['/main']);
   }
 }

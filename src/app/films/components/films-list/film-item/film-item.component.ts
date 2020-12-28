@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { from, Subscription } from 'rxjs';
 import { FilmListInterface } from '../../../interfaces/film-list.interface';
 import { FilmService } from '../../../services/film.service';
-import { filter, switchMap } from 'rxjs/operators';
+import {filter, switchMap, tap} from 'rxjs/operators';
 
 
 @Component({

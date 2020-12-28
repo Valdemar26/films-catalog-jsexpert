@@ -3,7 +3,7 @@ import { ModalTypeEnum, NotificationTypeEnum } from '../enum/notification-type.e
 import { Subject } from 'rxjs';
 
 export interface NotificationInterface {
-  title: string;
+  title: any;
   text: string;
   notificationType?: NotificationTypeEnum.Error;
   modalType?: ModalTypeEnum.Error;
