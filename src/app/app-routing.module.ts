@@ -29,7 +29,7 @@ const routes: Routes = [
     path: 'actors',
     component: ActorsListComponent
   },
-  { path: 'actors/:id', component: ActorDetailComponent },
+  { path: 'actor/:id', component: ActorDetailComponent },
   { path: 'favorite-films', component: FavoriteFilmsComponent, resolve: { data: FilmsResolver }, canActivate: [FavoriteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
