@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {of, Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { WelcomeService } from '../../services/welcome.service';
 import { FilmListInterface } from '../../../films/interfaces/film-list.interface';
@@ -36,6 +36,15 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/films/' + film.id]);
   }
 
+  public openActor(actor): void {
+    console.log(actor);
+    this.router.navigate(['/actor/' + actor.id]);
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   private initWelcomeFilms(): void {
 
     if (localStorage.getItem('popularMovie')) {
@@ -64,13 +73,5 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
       this.subscription.add(actorsSubscription);
     }
-  }
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  public openActor(actor): void {
-
   }
 }
