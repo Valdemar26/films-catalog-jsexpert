@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
+import { ActorService } from '../../services/actor.service';
+import { ActorListInterface } from '../../interfaces/actor-list.interface';
+
 @Component({
   selector: 'exp-actors-list',
   templateUrl: './actors-list.component.html',
@@ -7,9 +12,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActorsListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private actorService: ActorService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+  }
+
+  public get getActorList(): Observable<ActorListInterface[]> {
+    return this.actorService.getActorList;
+  }
+
+  public identify(index, item): number {
+    return item.id;
   }
 
 }

@@ -14,6 +14,7 @@ import { FilmDetailComponent } from './films/components/films-list/film-item/fil
 import { FavoriteFilmsComponent } from './films/components/favorite-films/favorite-films.component';
 import { FavoriteGuard } from './shared/guards/favorite.guard';
 import { ActorDetailComponent } from './actors/components/actors-list/actor-item/actor-detail/actor-detail.component';
+import { ActorResolver } from './actors/resolvers/actor.resolver';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'films/:id', component: FilmDetailComponent},
   {
     path: 'actors',
-    component: ActorsListComponent
+    component: ActorsListComponent,
+    resolve: { data: ActorResolver }
   },
   { path: 'actor/:id', component: ActorDetailComponent },
   { path: 'favorite-films', component: FavoriteFilmsComponent, resolve: { data: FilmsResolver }, canActivate: [FavoriteGuard] },

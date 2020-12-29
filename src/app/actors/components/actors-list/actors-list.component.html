@@ -1,1 +1,7 @@
-<p>actors-list works!</p>
+<div class="exp-actor-list-wrapper" *ngIf="getActorList | async as actorList">
+  <ng-container *ngFor="let actor of actorList; trackBy: identify">
+    <exp-actor-item [actorList]="actor"></exp-actor-item>
+  </ng-container>
+</div>
+
+

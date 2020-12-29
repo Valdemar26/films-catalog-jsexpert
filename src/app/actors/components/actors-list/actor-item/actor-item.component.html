@@ -1,1 +1,19 @@
-<p>actor-item works!</p>
+
+<div class="exp-actor-item-card">
+
+  <div class="exp-actor-item-photo">
+    <img [src]="actorImagePath" alt="film-item">
+
+    <img *ngIf="!actor.profile_path" src="../../../../../assets/images/not-available.jpg" alt="not-available">
+  </div>
+
+  <div class="exp-actor-item-info">
+    <h2>{{ actor.name }}</h2>
+
+    <div *ngFor="let known of actor.known_for">
+     <h4 *ngIf="known.title">{{ known.title.length > 25 ? (known.title | slice:0:25) + '...' : known.title }}</h4>
+    </div>
+
+  </div>
+
+</div>
