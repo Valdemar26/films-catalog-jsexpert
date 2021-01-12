@@ -18,7 +18,7 @@ export class ActorItemComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     console.log(this.actor);
     this.fetchPosterPath();
   }
