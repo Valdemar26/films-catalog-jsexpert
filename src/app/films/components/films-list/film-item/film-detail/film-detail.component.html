@@ -1,5 +1,5 @@
 <div class="exp-film-detail">
-  <div class="exp-film-detail-wrapper" *ngIf="filmDetail">
+  <div *ngIf="filmDetail" class="exp-film-detail-wrapper">
 
     <div class="poster" *ngIf="filmDetail.poster_path; else noPoster">
       <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">

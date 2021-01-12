@@ -1,1 +1,13 @@
-<p style="padding-top: 100px;">actor-detail works!</p> <!-- TODO remove this -->
+<div class="exp-actor-detail">
+  <div *ngIf="actorDetail" class="exp-actor-detail-wrapper">
+
+    <div *ngIf="actorDetail.profile_path" class="actor-poster; else noPoster">
+      <img [src]="imagePath + actorDetail.profile_path" alt="actor-poster">
+    </div>
+
+    <ng-template #noPoster>
+      <img src="../../../../../../assets/images/not-available.jpg" alt="no-poster">
+    </ng-template>
+
+  </div>
+</div>

@@ -31,7 +31,7 @@ const routes: Routes = [
     component: ActorsListComponent,
     resolve: { data: ActorResolver }
   },
-  { path: 'actor/:id', component: ActorDetailComponent },
+  { path: 'actors/:id', component: ActorDetailComponent },
   { path: 'favorite-films', component: FavoriteFilmsComponent, resolve: { data: FilmsResolver }, canActivate: [FavoriteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
