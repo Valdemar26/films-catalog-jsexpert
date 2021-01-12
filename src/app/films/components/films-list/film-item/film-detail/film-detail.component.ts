@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import {Subject, Subscription} from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
 import { FilmService } from '../../../../services/film.service';

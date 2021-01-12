@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ActorListInterface } from '../../../interfaces/actor-list.interface';
 
@@ -16,11 +17,16 @@ export class ActorItemComponent implements OnInit {
   public actor: ActorListInterface;
   public actorImagePath: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public ngOnInit(): void {
     console.log(this.actor);
     this.fetchPosterPath();
+  }
+
+  public openActor(actor: ActorListInterface): void {
+    console.log(actor);
+    this.router.navigate(['/actors/' + actor.id]);
   }
 
   private fetchPosterPath(): string {

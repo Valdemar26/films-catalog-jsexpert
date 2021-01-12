@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
 import { ActorListInterface } from '../interfaces/actor-list.interface';
 import {FilmListInterface} from "../../films/interfaces/film-list.interface";
 import {ActorInterface} from "../interfaces/actor.interface";
+import {Router} from '@angular/router';
 
 
 @Injectable({
@@ -20,11 +21,17 @@ export class ActorService {
   private apiKey = environment.movieDbApiKey;
   private popularActorUrl = `https://api.themoviedb.org/3/person/popular?api_key=${this.apiKey}&language=uk-UA&page=1`;
   private nextPagePopularActorUrl = `https://api.themoviedb.org/3/person/popular?api_key=${this.apiKey}&language=uk-UA&page=`;
+  private actorUrl = 'https://api.themoviedb.org/3/person/';
 
   public actorList$: BehaviorSubject<ActorListInterface[]> = new BehaviorSubject<ActorListInterface[]>(null);
   private actorListArray: ActorListInterface[] = [];
 
-  constructor(private http: HttpClient) { }
+  private currentActor$: Subject<ActorListInterface> = new Subject<ActorListInterface>();
+
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   public initActorList(): Observable<any> {
 
@@ -66,7 +73,26 @@ export class ActorService {
     return this.http.get(`${this.nextPagePopularActorUrl}${this.count}`);
   }
 
+  public getActorObservable(): Observable<ActorListInterface> {
+    return this.currentActor$.asObservable();
+  }
+
   public get getActorList(): Observable<ActorListInterface[]> {
     return this.actorList$.asObservable();
+  }
+
+  public getActorById(id: number): Observable<any> {
+
+    return this.http.get(`${this.actorUrl}${id}?api_key=${this.apiKey}&language=uk-UA`).pipe(
+      tap((currentActor: ActorListInterface) => {
+        this.currentActor$.next(currentActor);
+      }),
+      catchError( (error) => {
+        console.log('ERROR GET ACTOR');
+        this.router.navigate(['/', 'main']);
+        // TODO show error tooltip for few seconds and redirect to main page
+        return error;
+      })
+    );
   }
 }
