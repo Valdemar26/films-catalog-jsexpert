@@ -15,6 +15,14 @@ import { ActorsModule } from './actors/actors.module';
 import { FilmsInterceptor } from './interceptor/films.interceptor';
 import { WelcomeModule } from './welcome/welcome.module';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireStorageModule } from '@angular/fire/storage';  // TODO fix this line (StorageBucket)
+import { environment } from '../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+import {FormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
@@ -24,6 +32,7 @@ import { WelcomeModule } from './welcome/welcome.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     WelcomeModule,
     SharedModule,
     FilmsModule,
@@ -37,10 +46,16 @@ import { WelcomeModule } from './welcome/welcome.module';
           },
         deps: [HttpClient]
       }
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireStorageModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: FilmsInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: FilmsInterceptor, multi: true },
+    AngularFirestore,
+    // { provide: StorageBucket }
   ],
   bootstrap: [AppComponent]
 })
