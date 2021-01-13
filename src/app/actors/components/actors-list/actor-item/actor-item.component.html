@@ -1,12 +1,11 @@
 <div class="exp-actor-item-card">
 
   <div class="exp-actor-item-photo">
-    <img *ngIf="actor.profile_path" [src]="actorImagePath" alt="film-item" (click)="openActor(actor)">
+    <img *ngIf="actor.profile_path" [src]="actorImagePath" alt="film-item" (click)="openActor(actor)" class="exp-actor">
 
     <img *ngIf="!actor.profile_path" src="../../../../../assets/images/not-available.jpg"
          alt="not-available"
-         class="exp-actor-not-available"
-    >
+         class="exp-actor-not-available">
   </div>
 
   <div class="exp-actor-item-info">

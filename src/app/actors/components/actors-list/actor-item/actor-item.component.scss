@@ -12,6 +12,23 @@
   }
 
   .exp-actor-item-photo {
+    width: 235px;
+    height: 235px;
+    overflow: hidden;
+
+    .exp-actor {
+      cursor: pointer;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transition: 0.3s ease-in-out;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+      }
+    }
+
     .exp-actor-not-available {
       width: 235px;
       height: 235px;
@@ -31,6 +48,7 @@
       color: #000000;
       font-weight: bold;
       margin-bottom: 0;
+      cursor: pointer;
     }
 
     h4 {

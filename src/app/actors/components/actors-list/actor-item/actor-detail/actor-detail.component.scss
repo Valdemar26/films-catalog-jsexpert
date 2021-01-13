@@ -1,0 +1,17 @@
+.exp-actor-detail {
+  margin: 70px 50px 20px;
+
+  .exp-actor-detail-wrapper {
+    display: flex;
+
+    .exp-actor-short-info {
+      flex: 0 0 30%;
+      border: 1px solid #3498db;
+    }
+
+    .exp-actor-full-info {
+      flex: 0 0 70%;
+      border: 1px solid #20ff11;
+    }
+  }
+}
