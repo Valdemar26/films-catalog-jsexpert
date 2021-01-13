@@ -34,12 +34,8 @@ export class ActorDetailComponent implements OnInit, OnDestroy {
     window.scroll(0, 0);
 
     this.initActorSubscription();
-
     this.getActorIdFromUrl();
-
     this.initActorDetail();
-
-
   }
 
   public ngOnDestroy(): void {
@@ -60,6 +56,8 @@ export class ActorDetailComponent implements OnInit, OnDestroy {
       if (actor) {
         this.actorDetail = actor;
         this.loaderService.hide();
+
+        console.log('ACTOR: ', this.actorDetail);
       }
     });
 

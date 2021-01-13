@@ -1,14 +1,13 @@
-import {Injectable, OnInit} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment.prod';
 import { ActorListInterface } from '../interfaces/actor-list.interface';
-import {FilmListInterface} from "../../films/interfaces/film-list.interface";
-import {ActorInterface} from "../interfaces/actor.interface";
-import {Router} from '@angular/router';
+import { ActorInterface } from '../interfaces/actor.interface';
 
 
 @Injectable({
@@ -83,7 +82,7 @@ export class ActorService {
 
   public getActorById(id: number): Observable<any> {
 
-    return this.http.get(`${this.actorUrl}${id}?api_key=${this.apiKey}&language=uk-UA`).pipe(
+    return this.http.get(`${this.actorUrl}${id}?api_key=${this.apiKey}`).pipe(
       tap((currentActor: ActorListInterface) => {
         this.currentActor$.next(currentActor);
       }),
