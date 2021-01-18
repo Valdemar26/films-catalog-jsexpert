@@ -15,28 +15,9 @@ export class AppComponent implements OnInit {
 
   public isDarkTheme: Observable<boolean>;
 
-  public email: string;
-  public password: string;
-
-  constructor(private themeService: ThemesService, public authService: AuthService) {}
+  constructor(private themeService: ThemesService) {}
 
   public ngOnInit(): void {
     this.isDarkTheme = this.themeService.isDarkTheme;
   }
-
-  // AUTH
-  public signup(): any {
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
-  }
-
-  public login(): any {
-    this.authService.login(this.email, this.password);
-    this.email = this.password = '';
-  }
-
-  public logout(): any {
-    this.authService.logout();
-  }
-
 }

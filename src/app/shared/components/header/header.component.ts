@@ -3,7 +3,8 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { TranslateService } from '@ngx-translate/core';
 
 import { MenuItemInterface } from '../../interfaces/menu-item.interface';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../service/auth.service';
+
 
 
 @Component({
@@ -28,8 +29,8 @@ export class HeaderComponent implements OnInit {
     { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt', id: 1 },
     { path: '/actors', label: 'All Actors', active: 'button-active', icon: 'face', id: 2 },
     { path: '/favorite-films', label: 'Favorite', active: 'button-active', icon: 'stars', id: 3 },
-    // { path: '/login', label: 'LogIn', active: 'button-active', icon: 'login', id: 4 },
-    // { path: '/logout', label: 'LogOut', active: 'button-active', icon: '', id: 5 }
+    { path: '/login', label: 'LogIn', active: 'button-active', icon: 'login', id: 4 },
+    { path: '/logout', label: 'LogOut', active: 'button-active', icon: '', id: 5 }
   ];
 
   constructor(
@@ -55,7 +56,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.isLogged = this.authService.isLoggedIn();
   }
 
   public switchLanguage(lang: string): void {
