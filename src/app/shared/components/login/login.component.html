@@ -1,35 +1,69 @@
-<div class="login-wrapper">
+<!-- AUTH -->
+AUTH
+<div style="display: flex; color: #000000; margin: 100px auto;">
+  <!-- this header tag displays only when user is logged-in -->
+  <h1 *ngIf="authService.user | async">
+    Welcome User: {{ (authService.user | async)?.email }}!
+  </h1>
 
-  <form class="login" [formGroup]="loginForm">
-    <section class="title">
-      <h3 class="welcome">Login</h3>
-      <h5 class="hint">To get more functionality - you need to login</h5>
-    </section>
-    <div class="login-group">
+  <!-- this div displays only when user is not-logged-in -->
+  <div *ngIf="!(authService.user | async)">
+    <!-- these input fields takes email and password from user -->
+    <input type="text" [(ngModel)]="email" placeholder="Enter email"/>
+    <input type="password" [(ngModel)]="password" placeholder="Enter password"/>
 
-      <input
-        class="username"
-        type="text"
-        id="login_username"
-        placeholder="Username"
-        name="name"
-        formControlName="username">
+    <!-- user click this button to signup -->
+    <button (click)="signup()" [disabled]="!email || !password">
+      Signup
+    </button>
 
-      <input
-        class="password"
-        type="password"
-        id="login_password"
-        placeholder="Password"
-        name="password"
-        formControlName="password">
+    <!-- user click this button to login -->
+    <button (click)="login()" [disabled]="!email || !password">
+      Login
+    </button>
+  </div>
 
-      <div class="error active" *ngIf="errorMessage">
-        {{ errorMessage }}
-      </div>
-
-      <button type="submit" class="btn btn-primary" mat-raised-button color="primary" mat-button (click)="login()">Login</button>
-      <button class="btn btn-info" mat-raised-button color="primary" mat-button (click)="goToRegistration()">Register</button>
-    </div>
-  </form>
-
+  <!-- user click this button to logout -->
+  <!-- this button displays only when user is logged-in -->
+  <button (click)="logout()" *ngIf="authService.user | async">
+    Logout
+  </button>
 </div>
+
+
+
+<!--<div class="login-wrapper">-->
+
+<!--  <form class="login" [formGroup]="loginForm">-->
+<!--    <section class="title">-->
+<!--      <h3 class="welcome">Login</h3>-->
+<!--      <h5 class="hint">To get more functionality - you need to login</h5>-->
+<!--    </section>-->
+<!--    <div class="login-group">-->
+
+<!--      <input-->
+<!--        class="username"-->
+<!--        type="text"-->
+<!--        id="login_username"-->
+<!--        placeholder="Username"-->
+<!--        name="name"-->
+<!--        formControlName="username">-->
+
+<!--      <input-->
+<!--        class="password"-->
+<!--        type="password"-->
+<!--        id="login_password"-->
+<!--        placeholder="Password"-->
+<!--        name="password"-->
+<!--        formControlName="password">-->
+
+<!--      <div class="error active" *ngIf="errorMessage">-->
+<!--        {{ errorMessage }}-->
+<!--      </div>-->
+
+<!--      <button type="submit" class="btn btn-primary" mat-raised-button color="primary" mat-button (click)="login()">Login</button>-->
+<!--      <button class="btn btn-info" mat-raised-button color="primary" mat-button (click)="goToRegistration()">Register</button>-->
+<!--    </div>-->
+<!--  </form>-->
+
+<!--</div>-->
