@@ -7,4 +7,8 @@ export interface ActorListInterface {
   name: string;
   popularity: number;
   profile_path: string;
+  biography: string;
+  also_known_as: any;
+  birthday: string;
+  place_of_birth: string;
 }

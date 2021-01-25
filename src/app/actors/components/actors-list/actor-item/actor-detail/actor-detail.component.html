@@ -1,11 +1,10 @@
 <div class="exp-actor-detail">
 
-  actor: {{ actorDetail | json }}
   <div *ngIf="actorDetail" class="exp-actor-detail-wrapper">
 
     <div class="exp-actor-short-info">
 
-      <div *ngIf="actorDetail.profile_path" class="actor-poster; else noPoster">
+      <div *ngIf="actorDetail.profile_path; else noPoster" class="actor-poster">
         <img [src]="imagePath + actorDetail.profile_path" alt="actor-poster">
       </div>
 
@@ -13,10 +12,49 @@
         <img src="../../../../../../assets/images/not-available.jpg" alt="no-poster">
       </ng-template>
 
+      <h3>
+        <strong>Особиста інформація</strong>
+      </h3>
+
+      <p>
+        <strong>Відомий за</strong>
+        {{ actorDetail.known_for_department }}
+      </p>
+
+      <p>
+        <strong>Кількість зйомок</strong>
+      </p>
+
+      <p>
+        <strong>Стать</strong>
+        <ng-container *ngIf="actorDetail.gender === 1">Female</ng-container>
+        <ng-container *ngIf="actorDetail.gender === 2">Male</ng-container>
+      </p>
+
+      <p>
+        <strong>День народження</strong>
+        {{ actorDetail.birthday }}
+      </p>
+
+      <p>
+        <strong>Місце народження</strong>
+        {{ actorDetail.place_of_birth }}
+      </p>
+
+      <p>
+        <strong>Також відомий як</strong>
+      </p>
+      <ul *ngFor="let also of actorDetail.also_known_as">
+        <li>{{ also }}</li>
+      </ul>
+
     </div>
 
     <div class="exp-actor-full-info">
+      <h2>{{ actorDetail.name }}</h2>
 
+      <h4>Біографія</h4>
+      <p>{{ actorDetail.biography }}</p>
     </div>
 
 
