@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,9 +20,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { AngularFireStorageModule } from '@angular/fire/storage';  // TODO fix this line (StorageBucket)
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { AngularFirestore } from '@angular/fire/firestore';
-import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
