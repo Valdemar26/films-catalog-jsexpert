@@ -5,13 +5,24 @@
     display: flex;
 
     .exp-actor-short-info {
-      flex: 0 0 30%;
-      border: 1px solid #3498db;
+      flex: 0 0 25%;
+
+      .actor-poster {
+        img {
+          border-radius: 5px;
+        }
+      }
+
+      p {
+        strong {
+          display: block;
+        }
+      }
     }
 
     .exp-actor-full-info {
-      flex: 0 0 70%;
-      border: 1px solid #20ff11;
+      flex: 0 0 75%;
+      padding-left: 10px;
     }
   }
 }
