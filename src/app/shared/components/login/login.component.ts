@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,6 +11,8 @@ import { AuthService } from '../../../service/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild('toastContainer', { read: ViewContainerRef }) toastContainer;
 
   public loginForm: FormGroup;
   public errorMessage = '';
@@ -37,12 +39,12 @@ export class LoginComponent implements OnInit {
 
   // AUTH
   public signup(): any {
-    this.authService.signup(this.email, this.password);
+    this.authService.signup(this.email, this.password, this.toastContainer);
     this.email = this.password = '';
   }
 
   public login(): any {
-    this.authService.login(this.email, this.password);
+    this.authService.login(this.email, this.password, this.toastContainer);
     this.email = this.password = '';
   }
 

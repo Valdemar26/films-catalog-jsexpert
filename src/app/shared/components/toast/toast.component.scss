@@ -40,12 +40,17 @@
     background-color: silver;
   }
 
-  .exp-notification-toast-close-button {
-    display: block;
-    width: 12px;
-    height: 12px;
+  .exp-notification-toast-close-button-wrapper {
+    padding: 10px 0 10px 10px;
     cursor: pointer;
+
+    .exp-notification-toast-close-button {
+      display: block;
+      width: 12px;
+      height: 12px;
+    }
   }
+
 
 
   .exp-notification-toast-icon {
@@ -60,12 +65,12 @@
     .exp-notification-toast-title {
       font-size: 14px;
       font-weight: bold;
-      color: $dark;
+      color: $white;
     }
 
     .exp-notification-toast-text {
       font-size: 13px;
-      color: $dark-gray;
+      color: $light-gray;
     }
   }
 }
