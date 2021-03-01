@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -89,4 +89,7 @@ export class LoginComponent implements OnInit {
   //   this.router.navigate(['registration']);
   // }
 
+  public goToMainPage(): void {
+    this.router.navigate(['main']);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,6 +11,8 @@ import { AuthService } from '../../../service/auth.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+
+  @ViewChild('toastContainer', { read: ViewContainerRef }) toastContainer;
 
   public registerForm: FormGroup;
   public userRoles = ['admin', 'manager', 'HR'];
@@ -29,23 +31,24 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    // this.initRegisterForm();
-    //
+    this.initRegisterForm();
+
+    const isLogin = false;
     // const isLogin = this.authService.isLoggedIn();
-    //
-    // if (isLogin) {
-    //   this.router.navigate(['/main']);
-    // }
+
+    if (isLogin) {
+      this.router.navigate(['/main']);
+    }
   }
 
   // AUTH
-  public signup(): any {
-    this.authService.signup(this.email, this.password);
+  public registration(email, password): any {
+    this.authService.signup(email, password, this.toastContainer);
     this.email = this.password = '';
   }
 
   public login(): any {
-    this.authService.login(this.email, this.password);
+    this.authService.login(this.email, this.password, this.toastContainer);
     this.email = this.password = '';
   }
 
@@ -53,14 +56,14 @@ export class RegistrationComponent implements OnInit {
     this.authService.logout();
   }
 
-  // private initRegisterForm(): void {
-  //   this.registerForm = this.formBuilder.group({
-  //     username:    ['', Validators.required],
-  //     login:    ['', Validators.required],
-  //     password: ['', [Validators.required, Validators.minLength(4)]]
-  //   });
-  // }
-  //
+  private initRegisterForm(): void {
+    this.registerForm = this.formBuilder.group({
+      username:    ['', Validators.required],
+      email:    ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]]
+    });
+  }
+
   // registration(): void {
   //   console.log('REGISTRATION: ', this.registerForm.value.username, this.registerForm.value.login, this.registerForm.value.password);
   //
@@ -84,10 +87,10 @@ export class RegistrationComponent implements OnInit {
   //       }
   //     );
   // }
-  //
-  //
-  // public goToLogin(): void {
-  //   this.router.navigate(['/login']);
-  // }
+
+
+  public goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
 
 }

@@ -4,7 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
 import { NotificationsService } from '../shared/components/toast/notification/notifications.service';
-import {NotificationTypeEnum} from "../shared/components/toast/enum/notification-type.enum";
+import { NotificationTypeEnum } from '../shared/components/toast/enum/notification-type.enum';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,19 +25,52 @@ export class AuthService {
 
   constructor(
     private firebaseAuth: AngularFireAuth,
-    private notificationService: NotificationsService
+    private notificationService: NotificationsService,
+    private router: Router
   ) {
     this.user = firebaseAuth.authState;
   }
 
   public signup(email: string, password: string, toastContainer?): any {
+
     this.firebaseAuth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value);
+
+        if (toastContainer) {
+          const config = {
+            title: 'Registration Message',
+            text: 'You are successfully registered!',
+            notificationType: NotificationTypeEnum.Success,
+            icon: {
+              src: './assets/images/ok.svg',
+              alt: 'success-icon'
+            }
+          };
+
+          this.notificationService.showToast(toastContainer, config);
+        }
+
+        this.router.navigate(['login']);
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
+
+        if (toastContainer) {
+
+          const config = {
+            title: 'Error on Registration!',
+            text: err.message,
+            notificationType: NotificationTypeEnum.Error,
+            icon: {
+              src: 'https://cdn4.iconfinder.com/data/icons/rounded-white-basic-ui/139/Warning01-RoundedWhite-512.png',
+              alt: 'error-icon'
+            }
+          };
+
+          this.notificationService.showToast(toastContainer, config);
+        }
       });
   }
 
