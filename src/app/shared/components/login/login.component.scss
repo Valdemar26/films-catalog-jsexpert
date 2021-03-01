@@ -1,5 +1,30 @@
-.login-wrapper {
-  padding: 20px;
+@import './../../../../assets/scss/variables/variables';
+
+.exp-login-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 100px 20px 0;
+  color: $dark;
+  width: calc(100vw - 40px);
+  height: calc(100vh - 100px);
+
+  .exp-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid $dark;
+    border-radius: 5px;
+    max-width: 300px;
+
+    .exp-buttons-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        width: 100px;
+      }
+    }
+  }
 
   .btn {
     margin: 10px;

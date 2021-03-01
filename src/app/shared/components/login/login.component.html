@@ -1,26 +1,39 @@
 <!-- AUTH -->
-AUTH
-<div style="display: flex; color: #000000; margin: 100px auto;">
+
+<!--
+  email: test@ukr.net
+  passw: 1234
+-->
+
+<ng-container #toastContainer></ng-container>
+
+<div class="exp-login-wrapper">
   <!-- this header tag displays only when user is logged-in -->
+
+  <p>Login Form</p>
+
   <h1 *ngIf="authService.user | async">
     Welcome User: {{ (authService.user | async)?.email }}!
   </h1>
 
   <!-- this div displays only when user is not-logged-in -->
-  <div *ngIf="!(authService.user | async)">
+  <div *ngIf="!(authService.user | async)" class="exp-form-wrapper">
     <!-- these input fields takes email and password from user -->
     <input type="text" [(ngModel)]="email" placeholder="Enter email"/>
     <input type="password" [(ngModel)]="password" placeholder="Enter password"/>
 
-    <!-- user click this button to signup -->
-    <button (click)="signup()" [disabled]="!email || !password">
-      Signup
-    </button>
+    <div class="exp-buttons-wrapper">
+      <!-- user click this button to signup -->
+      <button (click)="signup()" [disabled]="!email || !password">
+        Signup
+      </button>
 
-    <!-- user click this button to login -->
-    <button (click)="login()" [disabled]="!email || !password">
-      Login
-    </button>
+      <!-- user click this button to login -->
+      <button (click)="login()" [disabled]="!email || !password">
+        Login
+      </button>
+    </div>
+
   </div>
 
   <!-- user click this button to logout -->
