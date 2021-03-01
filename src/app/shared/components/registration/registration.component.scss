@@ -1,5 +1,16 @@
+@import './../../../../assets/scss/variables/variables';
+@import './../../../../assets/scss/mixins/mixin-buttons';
+
 .login-wrapper {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 20px 0;
+  color: $dark;
+  width: calc(100vw - 40px);
+  height: calc(100vh - 100px);
+  background: linear-gradient(90deg, rgba(230,188,230,1) 0%, rgba(155,173,221,1) 100%);
 
   .login-group {
     display: flex;

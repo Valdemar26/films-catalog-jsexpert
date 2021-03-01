@@ -10,12 +10,13 @@
   color: white;
   border-radius: 10px;
   box-shadow: 0 0 12px 0 rgba(17, 89, 98, 0.36);
-  width: auto;
   position: absolute;
-  top: 200px;
-  left: 50%;
+  top: calc(50vh - 300px);
+  left: calc(50vw - 210px);
   animation-duration: 0.8s;
   animation-name: exp-notification-appear;
+  height: 150px;
+  width: 400px;
 
   &.exp-notification-toast-destroy {
     animation-duration: 0.8s;
@@ -63,13 +64,14 @@
     flex-direction: column;
 
     .exp-notification-toast-title {
-      font-size: 14px;
+      font-size: 20px;
       font-weight: bold;
       color: $white;
+      margin-bottom: 10px;
     }
 
     .exp-notification-toast-text {
-      font-size: 13px;
+      font-size: 16px;
       color: $light-gray;
     }
   }
