@@ -58,13 +58,19 @@
 }
 
 .exp-greet-wrapper {
+  position: absolute;
+  top: calc(50vh - 100px);
+  left: calc(50vw - 260px);
 
   h1 {
     color: $white;
-    font-size: 32px;
-    position: absolute;
-    top: calc(50vh - 20px);
-    left: calc(50vw - 100px);
+    font-size: 24px;
+    text-align: center;
+
+    span {
+      color: #95C124;
+      font-size: 22px;
+    }
   }
 
   .exp-button-wrapper {

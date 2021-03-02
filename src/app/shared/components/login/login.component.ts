@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    // this.initLoginForm();
+    this.initLoginForm();
     //
     // const isLogin = this.authService.isLoggedIn();
     //
@@ -38,13 +38,13 @@ export class LoginComponent implements OnInit {
   }
 
   // AUTH
-  public signup(): any {
-    this.authService.signup(this.email, this.password, this.toastContainer);
+  public register(): any {
+    this.authService.signup(this.loginForm.value.email, this.loginForm.value.password, this.toastContainer);
     this.email = this.password = '';
   }
 
   public login(): any {
-    this.authService.login(this.email, this.password, this.toastContainer);
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password, this.toastContainer);
     this.email = this.password = '';
   }
 
@@ -52,12 +52,12 @@ export class LoginComponent implements OnInit {
     this.authService.logout();
   }
 
-  // private initLoginForm(): void {
-  //   this.loginForm = this.formBuilder.group({
-  //     username:    ['', Validators.required],
-  //     password: ['', Validators.required]
-  //   });
-  // }
+  private initLoginForm(): void {
+    this.loginForm = this.formBuilder.group({
+      email:    ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
   //
   // public login(): void {
   //   this.errorMessage = '';
