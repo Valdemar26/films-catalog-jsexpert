@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private renderer: Renderer2,
-    private authService: AuthService,
+    public authService: AuthService,
     public translate: TranslateService,
     private router: Router
   ) {

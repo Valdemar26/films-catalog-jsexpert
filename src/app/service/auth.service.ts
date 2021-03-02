@@ -78,7 +78,6 @@ export class AuthService {
     this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
-        console.log('Nice, it worked!');
 
         if (toastContainer) {
           const config = {
@@ -92,11 +91,11 @@ export class AuthService {
           };
 
           this.notificationService.showToast(toastContainer, config);
+          setTimeout(() => this.router.navigate(['/main']), 3000);
         }
 
       })
       .catch(err => {
-        console.log('Something went wrong:', err.message);
 
         if (toastContainer) {
 
