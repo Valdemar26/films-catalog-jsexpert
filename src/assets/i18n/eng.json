@@ -34,5 +34,7 @@
   "No results": "No results...",
   "Ok": "Ok",
   "Hide film": "Hide this film forever?",
-  "Hide text": "This action cannot be undone. This movie will be hidden forever"
+  "Hide text": "This action cannot be undone. This movie will be hidden forever",
+  "LogIn": "LogIn",
+  "LogOut": "LogOut"
 }

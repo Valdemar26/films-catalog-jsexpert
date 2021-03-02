@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { MenuItemInterface } from '../../interfaces/menu-item.interface';
 import { AuthService } from '../../../service/auth.service';
+import {Router} from '@angular/router';
 
 
 
@@ -18,7 +19,6 @@ export class HeaderComponent implements OnInit {
   @ViewChild('backdropTemplate') backdropTemplate: ElementRef;
 
   public linkId = 0;
-  public isLogged: boolean;
   public isMenuOpened: boolean;
 
   public countries!: any;  // '!' mean that variable will be initialized in another function (scope)
@@ -28,15 +28,14 @@ export class HeaderComponent implements OnInit {
     { path: '/welcome', label: 'Main Page', active: 'button-active', icon: 'home', id: 0 },
     { path: '/films', label: 'All Films', active: 'button-active', icon: 'list_alt', id: 1 },
     { path: '/actors', label: 'All Actors', active: 'button-active', icon: 'face', id: 2 },
-    { path: '/favorite-films', label: 'Favorite', active: 'button-active', icon: 'stars', id: 3 },
-    { path: '/login', label: 'LogIn', active: 'button-active', icon: 'login', id: 4 },
-    { path: '/logout', label: 'LogOut', active: 'button-active', icon: '', id: 5 }
+    { path: '/favorite-films', label: 'Favorite', active: 'button-active', icon: 'stars', id: 3 }
   ];
 
   constructor(
     private renderer: Renderer2,
     private authService: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private router: Router
   ) {
 
     this.countries = {
@@ -78,6 +77,14 @@ export class HeaderComponent implements OnInit {
     this.checkboxTemplate.nativeElement.checked ?
       this.renderer.setStyle(this.backdropTemplate.nativeElement, 'display', 'block')
       : this.renderer.setStyle(this.backdropTemplate.nativeElement, 'display', 'none');
+  }
+
+  public login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  public logout(): void {
+    this.authService.logout();
   }
 
   private hideMenuAndBackdrop(): void {
