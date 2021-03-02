@@ -24,6 +24,8 @@ import { ReplyComponent } from './components/reply/reply.component';
 import { ToastComponent } from './components/toast/toast.component';
 import { CloseModalComponent } from './components/toast/close-modal/close-modal.component';
 import { ReversePipe } from './pipe/reverse.pipe';
+import { InputPasswordDirective } from './directives/input-password/input-password.directive';
+import { InputPasswordButtonComponent } from './directives/input-password/input-password-button/input-password-button.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { ReversePipe } from './pipe/reverse.pipe';
     ReplyComponent,
     ToastComponent,
     CloseModalComponent,
-    ReversePipe
+    ReversePipe,
+    InputPasswordDirective,
+    InputPasswordButtonComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +70,8 @@ import { ReversePipe } from './pipe/reverse.pipe';
     ToastComponent,
     CloseModalComponent,
     TranslateModule,
-    ReversePipe
+    ReversePipe,
+    InputPasswordDirective
   ],
   entryComponents: [ModalComponent, CloseModalComponent]
 })
