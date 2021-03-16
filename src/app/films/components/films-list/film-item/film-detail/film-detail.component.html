@@ -29,7 +29,7 @@
 
           <div class="budget" *ngIf="filmDetail.budget">
             <span class="material-icons">monetization_on</span>
-            <span>{{ filmDetail.budget | currency:'USD':'symbol'}}</span>
+            <span>{{ filmDetail.budget | currencyPipe: 1 }}</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@
           <span>{{ hero.character.toString().length ? hero.character : 'No Character Name' }}</span>
         </div>
 
-        <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path">
+        <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path" (click)="openActor(hero.id)">
         <img src="../../../../../../assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
       </div>
     </div>

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -26,6 +27,7 @@ import { NotificationsService } from '../../../../../shared/components/toast/not
 import { ModalTypeEnum } from '../../../../../shared/components/toast/enum/notification-type.enum';
 import { NotificationInterface } from '../../../../../shared/components/toast/interfaces/notification.interface';
 import { TranslateService } from '@ngx-translate/core';
+import {ActorListInterface} from '../../../../../actors/interfaces/actor-list.interface';
 
 
 @Component({
@@ -66,7 +68,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private resolver: ComponentFactoryResolver,
     private notificationService: NotificationsService,
-    private translationService: TranslateService
+    private translationService: TranslateService,
+    private cdr: ChangeDetectorRef
     ) { }
 
   public ngOnInit(): void {
@@ -221,9 +224,13 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.subscription.add(filmReviewsSubscription);
   }
 
-  public openFilm(film: FilmListInterface): any {
-    console.log(film.id);
+  public openFilm(film: FilmListInterface): void {
     this.router.navigate(['/films/' + film.id]);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
+
+  public openActor(id: number): void {
+    this.router.navigate(['/actors/' + id]);
   }
 
   public closeForever(id: number): void {

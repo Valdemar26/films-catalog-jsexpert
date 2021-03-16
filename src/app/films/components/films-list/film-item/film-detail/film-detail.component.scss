@@ -91,6 +91,10 @@
           .budget {
             display: flex;
             align-items: center;
+
+            span {
+              color: $light-gray;
+            }
           }
         }
 
