@@ -5,21 +5,22 @@
   padding-bottom: 100px;
 
   .exp-film-detail-wrapper {
-    padding: 100px 0;
+    padding: 100px 0 35px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     background: linear-gradient(to right, rgba(14.12%, 14.51%, 16.86%, 1.00) 150px, rgba(22.35%, 22.35%, 22.35%, 0.84) 100%);
 
     .poster {
+
       img {
         width: 100%;
-        height: auto;
+        height: 100%;
       }
     }
 
     .film-info {
       width: 100%;
-      height: calc(100% - 4px);
+      height: 100%;
       background-size: cover;
       background: 50% 50% no-repeat;
       position: relative;
@@ -31,7 +32,7 @@
       .film-info-content {
         width: calc(100% - 20px);
         height: 100%;
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(0, 0, 0, 0.7);
         padding-left: 20px;
 
         .film-info-content-wrapper {
@@ -45,7 +46,7 @@
             font-size: 40px;
             color: #fff;
             margin-bottom: 0;
-            background: -webkit-linear-gradient(#eee, #333);
+            background: -webkit-linear-gradient($dark-gray, $white);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
 
@@ -65,6 +66,7 @@
             padding: 10px;
             position: relative;
             transition: 0.3s ease-in;
+            background-color: $dark-gray;
 
             &:hover {
               cursor: pointer;
@@ -81,7 +83,7 @@
           align-items: center;
 
           h3 {
-            color: #696969;
+            color: $light-gray;
             font-size: 14px;
             margin: 0 20px 0 0;
           }
@@ -102,7 +104,7 @@
         p {
           font-size: 16px;
           line-height: 24px;
-          color: #101010;
+          color: $white;
           display: -webkit-box;
           -webkit-line-clamp: 6;
           -webkit-box-orient: vertical;
@@ -114,13 +116,11 @@
           margin-top: 20px;
 
           img {
-            width: 80px;
+            width: 65px;
             height: auto;
-            transition: 0.3s ease-in;
 
             &:hover {
               cursor: pointer;
-              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             }
           }
         }
