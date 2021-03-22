@@ -31,3 +31,8 @@ body {
 .button-success {
   @include button-success();
 }
+
+@font-face {
+  font-family: "Password";
+  src: url("./assets/font/password.woff2");
+}
