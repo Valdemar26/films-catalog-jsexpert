@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { CommentsInterface } from '../../interfaces/comments.interface';
-import { FilmDetailService } from '../../../films/services/film-detail.service';
+import { FilmDetailService } from '../../../modules/films/services/film-detail.service';
 import { AvatarService } from '../../services/avatar.service';
 import { ReplyComponent } from '../reply/reply.component';
 

@@ -1,0 +1,124 @@
+<div class="exp-film-detail">
+  <div *ngIf="filmDetail" class="exp-film-detail-wrapper">
+
+    <div class="poster" *ngIf="filmDetail.poster_path; else noPoster">
+      <img [src]="imagePath + filmDetail.poster_path" alt="film-poster">
+    </div>
+
+    <ng-template #noPoster>
+      <img src="../../../../../../../assets/images/not-available.jpg" alt="no-poster">
+    </ng-template>
+
+    <div class="film-info" [ngStyle]="{'background-image': 'url(' + backdropPath + filmDetail.backdrop_path + ')'}">
+      <div class="film-info-content">
+        <div class="film-info-content-wrapper">
+          <h2>
+            {{ filmDetail.title }}
+            <span>({{ filmDetail.release_date.slice(0,4) }})</span>
+          </h2>
+          <img
+            (click)="closeForever(filmDetail.id)"
+            class="exp-delete-forever"
+            src="../../../../../../../assets/images/visibility.svg"
+            alt="close-forever">
+        </div>
+
+
+        <div class="original-title">
+          <h3>{{ filmDetail.original_title }}</h3>
+
+          <div class="budget" *ngIf="filmDetail.budget">
+            <span class="material-icons">monetization_on</span>
+            <span>{{ filmDetail.budget | currencyPipe: 1 }}</span>
+          </div>
+        </div>
+
+        <exp-rating [filmDetail]="filmDetail"></exp-rating>
+
+        <div class="trailer" *ngIf="trailerPath; else noTrailer">
+          <img (click)="openTrailerModal()" src="../../../../../../../assets/images/video-player.png" alt="youtube">
+        </div>
+
+        <ng-template #noTrailer>
+          <span class="chips">No Trailer for this Movie yet!</span>
+        </ng-template>
+
+        <h4>{{ 'Description' | translate }}</h4>
+        <p>{{ filmDetail.overview.length ?
+          filmDetail.overview :
+          'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}</p>
+
+      </div>
+
+      <button class="exp-button-back" (click)="back()">{{ 'Back' | translate }}</button>
+    </div>
+
+  </div>
+
+  <div class="film-heroes" *ngIf="heroesList && heroesList.length; else noHeroesTemplate">
+    <h3>{{ 'Series Cast' | translate }}</h3>
+
+    <div class="hero-wrapper">
+      <div class="hero" *ngFor="let hero of heroesList">
+        <div class="hero-info">
+          <span class="actor-name">{{ hero.name.toString().length ? hero.name : 'No Actor Name' }}</span>
+          <span>{{ hero.character.toString().length ? hero.character : 'No Character Name' }}</span>
+        </div>
+
+        <img [src]="imagePath + hero.profile_path" alt="hero" *ngIf="hero.profile_path" (click)="openActor(hero.id)">
+        <img src="../../../../../../../assets/images/not-available.jpg" alt="hero" *ngIf="!hero.profile_path">
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #noHeroesTemplate>
+    <span class="chips">No Heroes for this Movie yet!</span>
+  </ng-template>
+
+  <div class="film-similar" *ngIf="similarList && similarList.length; else noSimilarTemplate">
+    <h3>{{ 'Similar Movies' | translate }}</h3>
+
+    <div class="film-similar-wrapper">
+
+      <div class="similar" *ngFor="let similar of similarList" (click)="openFilm(similar)">
+
+        <div class="similar-info">
+          <span>{{ similar.title }}</span>
+
+          <div class="similar-info-rating">
+            <exp-rating [filmDetail]="similar"></exp-rating>
+          </div>
+        </div>
+
+        <div class="poster">
+          <img [src]="imagePath + similar.poster_path" alt="similar-film-poster">
+
+          <div class="overview">
+            <span>{{ similar.overview }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-film-review" *ngIf="movieReview && movieReview.length">
+    <h3>{{ 'Movie Review' | translate }}</h3>
+    <p *ngFor="let review of movieReview"><span>{{ review.author }}:</span> {{ review.content }}</p>
+  </div>
+
+  <exp-comments [subjectId]="+filmId"></exp-comments>
+
+  <ng-template #noSimilarTemplate>
+    <span class="chips">{{ 'No similar movies' | translate }}</span>
+  </ng-template>
+
+  <ng-container #modalContainer></ng-container>
+
+  <ng-container #notificationContainer></ng-container>
+
+  <ng-container #foreverModalContainer></ng-container>
+</div>
+
+

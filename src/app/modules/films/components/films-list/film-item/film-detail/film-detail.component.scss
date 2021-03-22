@@ -1,0 +1,316 @@
+@import "../../../../../../../assets/scss/mixins/mixin-scroll";
+@import "../../../../../../../assets/scss/mixins/mixin-buttons";
+
+.exp-film-detail {
+  padding-bottom: 100px;
+
+  .exp-film-detail-wrapper {
+    padding: 100px 0 35px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background: linear-gradient(to right, rgba(14.12%, 14.51%, 16.86%, 1.00) 150px, rgba(22.35%, 22.35%, 22.35%, 0.84) 100%);
+
+    .poster {
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .film-info {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background: 50% 50% no-repeat;
+      position: relative;
+
+      .exp-button-back {
+        @include button-back();
+      }
+
+      .film-info-content {
+        width: calc(100% - 20px);
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding-left: 20px;
+
+        .film-info-content-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+
+          h2 {
+            padding-top: 20px;
+            font-size: 40px;
+            color: #fff;
+            margin-bottom: 0;
+            background: -webkit-linear-gradient($dark-gray, $white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            span {
+              color: #696969;
+              font-size: 16px;
+            }
+          }
+
+          .exp-delete-forever {
+            width: 20px;
+            height: 20px;
+            display: block;
+            margin-right: 20px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            padding: 10px;
+            position: relative;
+            transition: 0.3s ease-in;
+            background-color: $dark-gray;
+
+            &:hover {
+              cursor: pointer;
+              border: 1px solid #ccc;
+              box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+            }
+          }
+        }
+
+
+        .original-title {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          h3 {
+            color: $light-gray;
+            font-size: 14px;
+            margin: 0 20px 0 0;
+          }
+
+          .budget {
+            display: flex;
+            align-items: center;
+
+            span {
+              color: $light-gray;
+            }
+          }
+        }
+
+        h4 {
+          color: #fff;
+          font-size: 18px;
+          font-weight: bold;
+          margin: 16px 0 0 0;
+        }
+
+        p {
+          font-size: 16px;
+          line-height: 24px;
+          color: $white;
+          display: -webkit-box;
+          -webkit-line-clamp: 6;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .trailer {
+          display: flex;
+          margin-top: 20px;
+
+          img {
+            width: 65px;
+            height: auto;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      button {
+        position: absolute;
+        bottom: 10px;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .film-heroes, .film-similar {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    height: auto;
+    overflow-x: auto;
+    margin: 50px auto 100px;
+    @include scroll();
+
+    h3 {
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .hero-wrapper, .film-similar-wrapper {
+      display: flex;
+
+      .hero, .similar {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 10px;
+        border: 1px solid #ebebeb;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        position: relative;
+
+        .hero-info, .similar-info {
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+
+
+          .similar-info-rating {
+            position: absolute;
+            left: 0;
+            bottom: 70px;
+            z-index: 1;
+          }
+
+          span {
+            font-size: 13px;
+            color: #898989;
+            line-height: 24px;
+
+            &.actor-name {
+              font-size: 14px;
+              font-weight: bold;
+              color: #333;
+              transition: 0.3s ease-in;
+
+              &:hover {
+                color: #4056b5;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        .poster {
+          position: relative;
+          width: 100%;
+
+          &:hover {
+            .overview {
+              opacity: 1;
+              cursor: default;
+            }
+          }
+
+          img {
+            display: block;
+            width: 150px;
+            height: auto;
+          }
+
+          .overview {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: rgba(0, 0, 0, 0.6);
+
+            span {
+              width: 90%;
+              display:block;
+              text-overflow:ellipsis;
+              overflow:hidden;
+              max-height:200px;
+              display: -webkit-box;
+              -webkit-line-clamp: 9;
+              -webkit-box-orient: vertical;
+              color: white;
+              font-size: 13px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              -ms-transform: translate(-50%, -50%);
+            }
+          }
+        }
+
+
+        img {
+          width: 150px;
+          height: auto;
+          border-radius: 10px 10px 0 0;
+          transition: 0.3s ease-in;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(255,255,255,0.5);
+            opacity: 0.4;
+          }
+        }
+      }
+    }
+
+  }
+
+  .exp-film-review {
+    width: 70%;
+    margin: 0 20px;
+
+    h3 {
+      color: #333;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    p {
+      border-radius: 10px;
+      background-color: #F5F8F8;
+      padding: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-height: 21px;
+      max-height: 100px;
+      -webkit-line-clamp: 5;  // TODO on click - show all info
+      -webkit-box-orient: vertical;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  span.chips {
+    display: flex;
+    width: fit-content;
+    margin: 20px 10px;
+    font-weight: bold;
+    background-color: #f50;
+    color: #fff;
+    padding: 7px 12px;
+    align-items: center;
+    cursor: default;
+    transition: 0.3s ease-in;
+
+    &:hover {
+      background-color: darken(#f50, 10%);
+    }
+
+  }
+}
+
+

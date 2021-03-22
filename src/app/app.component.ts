@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { ThemesService } from './films/services/themes.service';
-
-import { AuthService } from './service/auth.service';
+import { ThemesService } from './modules/films/services/themes.service';
 
 @Component({
   selector: 'exp-root',

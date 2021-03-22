@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { ThemesService } from '../../../films/services/themes.service';
+import { ThemesService } from '../../../modules/films/services/themes.service';
 
 
 @Component({
