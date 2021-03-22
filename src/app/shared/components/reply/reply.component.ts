@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, ComponentRef, Input, OnInit, ViewC
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AvatarService } from '../../services/avatar.service';
-import { FilmDetailService } from '../../../films/services/film-detail.service';
+import { FilmDetailService } from '../../../modules/films/services/film-detail.service';
 import { NotificationsService } from '../toast/notification/notifications.service';
 import { ToastComponent } from '../toast/toast.component';
 import { NotificationTypeEnum } from '../toast/enum/notification-type.enum';

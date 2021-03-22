@@ -3,8 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 
 import { Observable } from 'rxjs';
 
-import { FilmListInterface } from '../../films/interfaces/film-list.interface';
-import { FilmService } from '../../films/services/film.service';
+import { FilmListInterface } from '../../modules/films/interfaces/film-list.interface';
+import { FilmService } from '../../modules/films/services/film.service';
 
 @Injectable({
   providedIn: 'root'

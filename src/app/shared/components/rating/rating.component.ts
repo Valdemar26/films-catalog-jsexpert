@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FilmListInterface } from '../../../films/interfaces/film-list.interface';
+import { FilmListInterface } from '../../../modules/films/interfaces/film-list.interface';
 
 @Component({
   selector: 'exp-rating',

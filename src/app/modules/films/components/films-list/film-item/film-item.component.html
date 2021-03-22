@@ -1,0 +1,43 @@
+<mat-card class="example-card">
+
+  <mat-card-header>
+    <mat-card-title [title]="film.title">
+      {{ film.title.length > 25 ? (film.title | slice:0:25) + '...' : film.title }}
+    </mat-card-title>
+
+    <exp-rating [filmDetail]="film"></exp-rating>
+
+    <mat-icon class="favorite"
+              [class.active]="film.isFavorite"
+              (click)="toggleFavoriteFilm(film)">favorite_border</mat-icon>
+
+  </mat-card-header>
+
+  <img mat-card-image
+       [src]="imagePath" alt="film-item">
+
+  <img *ngIf="!film.poster_path" src="../../../../../../assets/images/not-available.jpg" alt="not-available">
+
+  <span class="release">{{ film.release_date | reverse }}</span>
+
+  <div class="genres">
+    <span *ngFor="let genre of genres"
+          [class.active]="genre.id === genresId"
+          (click)="sortByGenres(genre.id)">{{ genre.name }}</span>
+  </div>
+
+
+  <mat-card-content>
+    <exp-details-inner>
+      {{ film.overview ? film.overview : 'Sorry, but this film have no overview yet! Keep calm and watch film trailer.' }}
+    </exp-details-inner>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button class="exp-button-open" (click)="openFilm(film)">
+      {{ 'Open' | translate }}
+    </button>
+
+  </mat-card-actions>
+
+</mat-card>
