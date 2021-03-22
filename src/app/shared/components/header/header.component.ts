@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 
 import { MenuItemInterface } from '../../interfaces/menu-item.interface';
 import { AuthService } from '../../../service/auth.service';
-import {Router} from '@angular/router';
-
 
 
 @Component({
@@ -13,7 +12,7 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @ViewChild('checkboxTemplate') checkboxTemplate: ElementRef;
   @ViewChild('backdropTemplate') backdropTemplate: ElementRef;
@@ -52,9 +51,6 @@ export class HeaderComponent implements OnInit {
 
     translate.addLangs(['ukr', 'eng', 'ger']);
     translate.setDefaultLang('ukr');
-  }
-
-  public ngOnInit(): void {
   }
 
   public switchLanguage(lang: string): void {

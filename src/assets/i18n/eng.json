@@ -36,5 +36,12 @@
   "Hide film": "Hide this film forever?",
   "Hide text": "This action cannot be undone. This movie will be hidden forever",
   "LogIn": "LogIn",
-  "LogOut": "LogOut"
+  "LogOut": "LogOut",
+  "Login Form": "Login Form",
+  "Register": "Register",
+  "Login": "Login",
+  "Email": "Email",
+  "Password": "Password",
+  "Welcome User": "Welcome User",
+  "Redirect": "You will be redirected to main page in 3 seconds!"
 }
