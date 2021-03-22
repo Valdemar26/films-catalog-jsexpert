@@ -2,36 +2,41 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FilmsResolver } from './films/resolvers/film.resolver';
-import { AuthGuard } from './shared/guards/auth-guard.service';
+import { AuthGuard } from './shared/guards/auth-guard.service';  // TODO use in some route
 
 import { LoginComponent } from './shared/components/login/login.component';
 import { RegistrationComponent } from './shared/components/registration/registration.component';
 
-import { FilmsListComponent } from './films/components/films-list/films-list.component';
-import { ActorsListComponent } from './actors/components/actors-list/actors-list.component';
-import { WelcomeComponent } from './welcome/components/welcome/welcome.component';
-import { FilmDetailComponent } from './films/components/films-list/film-item/film-detail/film-detail.component';
 import { FavoriteFilmsComponent } from './films/components/favorite-films/favorite-films.component';
 import { FavoriteGuard } from './shared/guards/favorite.guard';
-import { ActorDetailComponent } from './actors/components/actors-list/actor-item/actor-detail/actor-detail.component';
-import { ActorResolver } from './actors/resolvers/actor.resolver';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main' },
-  { path: 'main', component: WelcomeComponent },
+  {
+    path: 'main',
+    loadChildren: () => import('./welcome/welcome.module')
+      .then(m => {
+        console.log('Welcome Module');
+        return m.WelcomeModule;
+      })
+  },
   {
     path: 'films',
-    component: FilmsListComponent,
-    resolve: { data: FilmsResolver }
+    loadChildren: () => import('./films/films.module')
+      .then(m => {
+        console.log('Films Module');
+        return m.FilmsModule;
+      })
   },
-  { path: 'films/:id', component: FilmDetailComponent},
   {
     path: 'actors',
-    component: ActorsListComponent,
-    resolve: { data: ActorResolver }
+    loadChildren: () => import('./actors/actors.module')
+      .then(m => {
+        console.log('Actors Module');
+        return m.ActorsModule;
+      })
   },
-  { path: 'actors/:id', component: ActorDetailComponent },
   { path: 'favorite-films', component: FavoriteFilmsComponent, resolve: { data: FilmsResolver }, canActivate: [FavoriteGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },

@@ -23,6 +23,7 @@ import { FavoriteFilmsComponent } from './components/favorite-films/favorite-fil
 import { FavoriteFilmsPipe } from './pipes/favorite-films.pipe';
 import { HideFilmPipe } from './pipes/hide-film.pipe';
 import { CurrencyPipe } from './pipes/currency.pipe';
+import { FilmsRoutingModule } from './films-routing.module';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { CurrencyPipe } from './pipes/currency.pipe';
     MatButtonModule,
     MatGridListModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FilmsRoutingModule
   ],
   exports: [
     ToolbarComponent

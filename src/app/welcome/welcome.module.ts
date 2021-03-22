@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { WelcomeRoutingModule } from './welcome-routing.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     MatToolbarModule,
     MatSelectModule,
     MatIconModule,
-    TranslateModule
+    TranslateModule,
+    WelcomeRoutingModule
   ]
 })
 export class WelcomeModule { }

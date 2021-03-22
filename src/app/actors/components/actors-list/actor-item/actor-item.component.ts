@@ -20,12 +20,10 @@ export class ActorItemComponent implements OnInit {
   constructor(private router: Router) { }
 
   public ngOnInit(): void {
-    console.log(this.actor);
     this.fetchPosterPath();
   }
 
   public openActor(actor: ActorListInterface): void {
-    console.log(actor);
     this.router.navigate(['/actors/' + actor.id]);
   }
 
