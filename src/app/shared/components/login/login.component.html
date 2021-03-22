@@ -3,46 +3,42 @@
   pass:  11111111
 -->
 
-<!-- TODO add 'input-password' directive to show/hide password-->
-
 <ng-container #toastContainer></ng-container>
 
 <div class="exp-login-wrapper">
 
   <div class="exp-greet-wrapper" *ngIf="authService.user | async">
     <h1>
-      Welcome User <span>{{ (authService.user | async)?.email }}</span>.
-      <br>You will be redirected to main page in 3 seconds!
+      {{ 'Welcome User' | translate }} <span>{{ (authService.user | async)?.email }}</span>.
+      <br>{{ 'Redirect' | translate }}
     </h1>
 
     <div class="exp-button-wrapper">
-      <button (click)="logout()">Logout</button>
-      <button (click)="goToMainPage()">Main page!</button>
+      <button (click)="logout()">{{ 'LogOut' | translate }}</button>
+      <button (click)="goToMainPage()">{{ 'Main Page' | translate }}</button>
     </div>
   </div>
 
   <!-- this div displays only when user is not-logged-in -->
   <div *ngIf="!(authService.user | async)" class="exp-form-wrapper">
 
-    <h2>Login Form</h2>
+    <h2>{{ 'Login Form' | translate }}</h2>
 
     <form class="login" [formGroup]="loginForm">
       <div class="form-control">
-        <label for="email">Email</label>
+        <label for="email">{{ 'Email' | translate }}</label>
         <input type="text" id="email" placeholder="Enter email" formControlName="email" />
       </div>
 
       <div class="form-control">
-        <label for="password">Password</label>
+        <label for="password">{{ 'Password' | translate }}</label>
         <input id="password" formControlName="password" expInputPassword />
       </div>
 
       <div class="exp-buttons-wrapper">
-        <!-- user click this button to signup -->
-        <button (click)="register()" [disabled]="loginForm.value.email.invalid || loginForm.value.password.invalid">Register</button>
+        <button (click)="register()" [disabled]="loginForm.invalid">{{ 'Register' | translate }}</button>
 
-        <!-- user click this button to login -->
-        <button (click)="login()" [disabled]="loginForm.value.email.invalid || loginForm.value.password.invalid">Login</button>
+        <button (click)="login()" [disabled]="loginForm.invalid">{{ 'Login' | translate }}</button>
       </div>
 
     </form>

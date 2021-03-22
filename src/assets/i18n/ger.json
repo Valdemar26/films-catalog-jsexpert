@@ -36,5 +36,12 @@
   "Hide film": "Diesen Film für immer verstecken?",
   "Hide text": "Diese Aktion kann nicht rückgängig gemacht werden. Dieser Film wird für immer versteckt sein",
   "LogIn": "LogIn",
-  "LogOut": "LogOut"
+  "LogOut": "LogOut",
+  "Login Form": "Login Formular",
+  "Register": "Registrieren",
+  "Login": "Anmeldung",
+  "Email": "Email",
+  "Password": "Passwort",
+  "Welcome User": "Willkommen Benutzer",
+  "Redirect": "Sie werden in 3 Sekunden zur Hauptseite weitergeleitet!"
 }
